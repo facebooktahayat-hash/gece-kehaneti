@@ -38,13 +38,13 @@ export function HeroEffects() {
       </svg>
 
       {/* Side symbols exactly like small decorative Lovable feel */}
-      <span className="absolute left-[7%] top-[27%] text-3xl text-frost/55 drop-shadow-[0_0_12px_rgba(0,217,255,.75)] animate-symbol-float">☾</span>
+      <span className="absolute left-[7%] top-[27%] text-3xl text-ember/65 drop-shadow-[0_0_12px_rgba(255,0,184,.82)] animate-symbol-float">☾</span>
       <span className="absolute left-[10%] bottom-[28%] text-2xl text-violet/45 drop-shadow-[0_0_12px_rgba(124,29,255,.65)] animate-symbol-float">☽</span>
       <span className="absolute right-[8%] top-[30%] text-2xl text-ember/70 drop-shadow-[0_0_12px_rgba(255,0,184,.75)] animate-symbol-float">✦</span>
       <span className="absolute right-[12%] bottom-[22%] text-3xl text-poison/55 drop-shadow-[0_0_14px_rgba(183,0,255,.72)] animate-symbol-float">✧</span>
 
       {/* Soft fog clouds */}
-      <div className="absolute left-[8%] top-[15%] h-64 w-64 rounded-full bg-frost/7 blur-3xl animate-fog-left" />
+      <div className="absolute left-[8%] top-[15%] h-64 w-64 rounded-full bg-ember/8 blur-3xl animate-fog-left" />
       <div className="absolute right-[7%] top-[22%] h-72 w-72 rounded-full bg-ember/10 blur-3xl animate-fog-right" />
       <div className="absolute left-[36%] top-[4%] h-52 w-52 rounded-full bg-violet/10 blur-3xl animate-fog-left" />
       <div className="absolute right-[35%] bottom-[14%] h-56 w-56 rounded-full bg-poison/9 blur-3xl animate-fog-right" />

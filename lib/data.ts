@@ -2,14 +2,14 @@ import { Moon, Coffee, Heart, Briefcase, Sparkles, Eye, Star, Flame, CloudMoon, 
 export type Category={slug:string;title:string;icon:LucideIcon;intro:string;description:string;accent:string};
 export type Package={slug:string;name:string;price:number;delivery:string;level:string;description:string;includes:string[];categorySlug:string};
 export const categories:Category[]=[
-{slug:"tarot",title:"Tarot Falı",icon:Sparkles,intro:"Kartların gölgesinde saklanan mesajları çöz.",description:"İlişki, kariyer ve içsel kararlar için sezgisel tarot açılımları.",accent:"from-violet-500 to-fuchsia-500"},
-{slug:"kahve-fali",title:"Kahve Falı",icon:Coffee,intro:"Fincanın dibinde kalan sırları oku.",description:"Kahve fincanı görselin üzerinden sembol, yol ve enerji yorumları.",accent:"from-amber-400 to-red-500"},
-{slug:"ask-fali",title:"Aşk Falı",icon:Heart,intro:"Kalbin karanlıkta sakladığı cevabı hisset.",description:"İlişki, eski sevgili, yeni tanışma ve duygu analizi için yorumlar.",accent:"from-pink-500 to-red-500"},
-{slug:"kariyer-fali",title:"Kariyer Falı",icon:Briefcase,intro:"İş, para ve yön değişimi için sisin ardına bak.",description:"Kariyer yolları, fırsatlar ve karar dönemleri için sezgisel analiz.",accent:"from-cyan-400 to-violet-500"},
-{slug:"astroloji",title:"Astroloji Yorumu",icon:Moon,intro:"Gökyüzünün gece haritasını yorumla.",description:"Doğum tarihi ve burç enerjilerine göre kişisel farkındalık yorumu.",accent:"from-indigo-400 to-fuchsia-500"},
-{slug:"ruya-yorumu",title:"Rüya Yorumu",icon:CloudMoon,intro:"Rüyalarının sembollerini karanlıkta takip et.",description:"Rüyalardaki sembol, kişi ve duygu izlerini sezgisel olarak yorumlar.",accent:"from-sky-400 to-purple-600"},
-{slug:"numeroloji",title:"Numeroloji",icon:Star,intro:"Sayıların sessiz kehanetine yaklaş.",description:"İsim, doğum tarihi ve yaşam yolu sayılarına göre yorumlar.",accent:"from-yellow-300 to-fuchsia-500"},
-{slug:"enerji-bagi",title:"Enerji Bağı Analizi",icon:Flame,intro:"İki enerji arasındaki görünmeyen bağı hisset.",description:"Kişiler arası uyum, çekim ve mesafe enerjisi üzerine yorumlar.",accent:"from-red-500 to-violet-500"}
+{slug:"tarot",title:"Tarot Falı",icon:Sparkles,intro:"Kartların gölgesinde saklanan mesajları çöz.",description:"İlişki, kariyer ve içsel kararlar için sezgisel tarot açılımları.",accent:"from-ember to-poison"},
+{slug:"kahve-fali",title:"Kahve Falı",icon:Coffee,intro:"Fincanın dibinde kalan sırları oku.",description:"Kahve fincanı görselin üzerinden sembol, yol ve enerji yorumları.",accent:"from-ember to-blood"},
+{slug:"ask-fali",title:"Aşk Falı",icon:Heart,intro:"Kalbin karanlıkta sakladığı cevabı hisset.",description:"İlişki, eski sevgili, yeni tanışma ve duygu analizi için yorumlar.",accent:"from-ember to-blood"},
+{slug:"kariyer-fali",title:"Kariyer Falı",icon:Briefcase,intro:"İş, para ve yön değişimi için sisin ardına bak.",description:"Kariyer yolları, fırsatlar ve karar dönemleri için sezgisel analiz.",accent:"from-ember to-poison"},
+{slug:"astroloji",title:"Astroloji Yorumu",icon:Moon,intro:"Gökyüzünün gece haritasını yorumla.",description:"Doğum tarihi ve burç enerjilerine göre kişisel farkındalık yorumu.",accent:"from-violet to-ember"},
+{slug:"ruya-yorumu",title:"Rüya Yorumu",icon:CloudMoon,intro:"Rüyalarının sembollerini karanlıkta takip et.",description:"Rüyalardaki sembol, kişi ve duygu izlerini sezgisel olarak yorumlar.",accent:"from-ember to-violet"},
+{slug:"numeroloji",title:"Numeroloji",icon:Star,intro:"Sayıların sessiz kehanetine yaklaş.",description:"İsim, doğum tarihi ve yaşam yolu sayılarına göre yorumlar.",accent:"from-ember to-poison"},
+{slug:"enerji-bagi",title:"Enerji Bağı Analizi",icon:Flame,intro:"İki enerji arasındaki görünmeyen bağı hisset.",description:"Kişiler arası uyum, çekim ve mesafe enerjisi üzerine yorumlar.",accent:"from-blood to-ember"}
 ];
 const tpl=[
 {key:"kisa-yorum",name:"Kısa Yorum",price:149,delivery:"24 saat",level:"Hızlı başlangıç",description:"Tek konuya odaklı, net ve kısa sezgisel yorum.",includes:["1 ana soru","Kısa enerji yorumu","Net sonuç özeti"]},

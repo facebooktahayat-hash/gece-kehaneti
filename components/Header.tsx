@@ -21,7 +21,7 @@ export function Header() {
         <Link href="/" className="group flex items-center gap-3">
           <span className="relative grid h-9 w-9 place-items-center rounded-full border border-frost/20 bg-[#040009] shadow-frost">
             <span className="absolute inset-0 rounded-full bg-frost/8 blur-lg" />
-            <Moon className="relative h-5 w-5 text-frost drop-shadow-[0_0_10px_rgba(0,217,255,.95)]" />
+            <Moon className="relative h-5 w-5 text-frost drop-shadow-[0_0_10px_rgba(255,0,184,.95)]" />
           </span>
           <span>
             <span className="block text-[13px] font-semibold tracking-[0.30em] text-white">GECE KEHANETİ</span>

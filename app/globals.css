@@ -67,16 +67,16 @@ body {
 }
 
 .ritual-main {
-  stroke: rgba(255, 0, 184, .34);
+  stroke: rgba(255, 0, 184, .40);
   filter: drop-shadow(0 0 7px rgba(255,0,184,.44));
 }
 
 .ritual-soft {
-  stroke: rgba(124, 29, 255, .28);
-  filter: drop-shadow(0 0 8px rgba(124,29,255,.35));
+  stroke: rgba(183, 0, 255, .32);
+  filter: drop-shadow(0 0 8px rgba(183,0,255,.38));
 }
 
 .ritual-cyan {
-  stroke: rgba(0, 217, 255, .18);
-  filter: drop-shadow(0 0 6px rgba(0,217,255,.28));
+  stroke: rgba(255, 0, 184, .22);
+  filter: drop-shadow(0 0 6px rgba(255,0,184,.34));
 }

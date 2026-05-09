@@ -49,3 +49,8 @@ Video karşılaştırmasına göre hero alanı Lovable görünümüne daha çok 
 ## v4 Güncelleme
 
 Video karşılaştırmasına göre Lovable hero görünümü birebir-yakın yeniden yapıldı: büyük hareketli ritüel çemberi, ters yönde dönen ikinci çember, mor sis, küçük yan ay/yıldız sembolleri, üç satırlı serif başlık, neon pembe vurgu ve Lovable benzeri sayaç kartları.
+
+
+## v5 Pink Accent Update
+
+Tüm mavi/turkuaz vurgu renkleri ana sayfadaki 'Karanlık Yüzü' yazısındaki neon pembe/fuşya tonuna çekildi. Logo ayı, header yazıları, butonlar, ikonlar, kategori çizgileri ve ritüel efektlerinde pembe-mor renk bütünlüğü sağlandı.

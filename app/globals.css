@@ -647,3 +647,23 @@ body {
     letter-spacing: .18em !important;
   }
 }
+
+
+/* v16: orta hero yazısı tam beyaz ve net */
+.hero-readable-line {
+  color: rgba(255,255,255,.96) !important;
+  font-weight: 800 !important;
+  opacity: 1 !important;
+  text-shadow:
+    0 0 6px rgba(255,255,255,.35),
+    0 0 14px rgba(255,255,255,.18),
+    0 0 18px rgba(0,0,0,.75) !important;
+  background: linear-gradient(
+    90deg,
+    rgba(0,0,0,.10),
+    rgba(0,0,0,.72),
+    rgba(0,0,0,.10)
+  ) !important;
+  border-top: 1px solid rgba(255,255,255,.12) !important;
+  border-bottom: 1px solid rgba(255,255,255,.12) !important;
+}

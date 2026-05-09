@@ -104,3 +104,8 @@ Kırmızıyla işaretlenen iki küçük yazı daha belirgin hale getirildi. 'Gec
 ## v15 Visible Small Text
 
 Hero bölümündeki küçük metinler daha büyük, daha parlak ve daha okunur hale getirildi. Üst uyarı etiketi, orta kayan metin ve alt rozet artık daha belirgin.
+
+
+## v16 White Readable Line
+
+Ana sayfadaki 'fısıltılar yaklaşır · semboller belirir · kapılar aralanır' yazısı tam beyaz, daha kalın ve daha okunur hale getirildi.

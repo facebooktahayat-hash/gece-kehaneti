@@ -9,46 +9,46 @@ import { ArrowRight, Eye } from "lucide-react";
 export default function HomePage() {
   return (
     <>
-      <section className="relative min-h-[735px] overflow-hidden px-4 py-24 md:px-6 md:py-28">
+      <section className="relative min-h-[700px] overflow-hidden px-4 pb-24 pt-10 md:px-6 md:pb-24 md:pt-4">
         <HeroEffects />
 
         <div className="relative mx-auto max-w-7xl">
-          <div className="mx-auto max-w-5xl px-5 py-14 text-center md:py-[4.7rem]">
-            <div className="mx-auto mb-8 inline-flex items-center gap-2 rounded-full border border-ember/24 bg-black/42 px-5 py-2 text-[10px] font-semibold uppercase tracking-[0.42em] text-white/54 shadow-neon">
-              <span className="h-2 w-2 rounded-full bg-ember shadow-blood" />
+          <div className="mx-auto max-w-5xl px-5 pt-20 text-center md:pt-28">
+            <div className="mx-auto mb-8 inline-flex items-center gap-2 rounded-full border border-ember/30 bg-black/36 px-5 py-2 text-[10px] font-semibold uppercase tracking-[0.42em] text-white/58 shadow-[0_0_16px_rgba(255,0,184,.22)]">
+              <span className="h-2 w-2 rounded-full bg-ember shadow-[0_0_12px_rgba(255,0,184,.8)]" />
               Gece açıldığında, perde aralanır
             </div>
 
-            <h1 className="mx-auto max-w-4xl font-display text-[3.15rem] font-black leading-[1.03] tracking-tight text-white drop-shadow-[0_0_20px_rgba(255,255,255,.14)] md:text-[4.95rem]">
+            <h1 className="mx-auto max-w-4xl font-display text-[3.35rem] font-black leading-[1.02] tracking-tight text-white drop-shadow-[0_0_20px_rgba(255,255,255,.16)] md:text-[5.15rem]">
               <span className="block">Kaderin</span>
-              <span className="block text-ember drop-shadow-[0_0_22px_rgba(255,0,184,.78)]">
+              <span className="block text-ember drop-shadow-[0_0_24px_rgba(255,0,184,.88)]">
                 Karanlık Yüzü
               </span>
               <span className="block">Seni Bekliyor</span>
             </h1>
 
-            <p className="mx-auto mt-7 max-w-[690px] text-sm leading-7 text-white/52 md:text-[15px]">
+            <p className="mx-auto mt-7 max-w-[700px] text-base leading-8 text-white/54">
               Tarot, kahve falı, aşk yorumu, astroloji ve kadim sezgilerle geleceğin gölgelerini keşfet.
               Her okuma, gecenin sessizliğinde sana özel hazırlanır.
             </p>
 
-            <div className="mt-9 flex flex-col justify-center gap-4 sm:flex-row">
+            <div className="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
               <Link
                 href="#kategoriler"
-                className="rounded-full bg-gradient-to-r from-violet via-ember to-poison px-9 py-4 text-[11px] font-semibold uppercase tracking-[0.22em] text-white shadow-neon transition hover:scale-[1.02]"
+                className="rounded-full bg-gradient-to-r from-violet via-ember to-poison px-10 py-4 text-[12px] font-semibold uppercase tracking-[0.22em] text-white shadow-[0_0_28px_rgba(255,0,184,.42)] transition duration-200 hover:scale-[1.02] hover:shadow-[0_0_36px_rgba(255,0,184,.72)]"
               >
-                Fal Baktır
+                Fal Baktır →
               </Link>
               <Link
                 href="/#kategoriler"
-                className="rounded-full border border-white/12 bg-black/30 px-9 py-4 text-[11px] font-semibold uppercase tracking-[0.20em] text-white/70 transition hover:border-frost/30 hover:text-frost"
+                className="rounded-full border border-white/18 bg-black/28 px-10 py-4 text-[12px] font-semibold uppercase tracking-[0.20em] text-white/75 shadow-[0_0_16px_rgba(255,0,184,.08)] transition duration-200 hover:border-ember/50 hover:bg-ember/8 hover:text-white hover:shadow-[0_0_26px_rgba(255,0,184,.36)]"
               >
                 Karanlık Kategorileri Keşfet
               </Link>
             </div>
           </div>
 
-          <div className="mx-auto -mt-5 max-w-6xl">
+          <div className="mx-auto mt-10 max-w-6xl">
             <Stats />
           </div>
         </div>
@@ -91,7 +91,7 @@ export default function HomePage() {
             ["03", "Yorumun hazırlansın", "Seçtiğin pakete göre kişiye özel yorumun panelinde görüntülensin."]
           ].map(([no, title, text]) => (
             <div key={no} className="glass rounded-3xl p-7">
-              <div className="mb-5 text-4xl font-black text-frost/70">{no}</div>
+              <div className="mb-5 text-4xl font-black text-ember/70">{no}</div>
               <h3 className="mb-3 text-xl font-semibold text-white">{title}</h3>
               <p className="text-sm leading-6 text-white/60">{text}</p>
             </div>
@@ -105,7 +105,7 @@ export default function HomePage() {
             const Icon = item.icon;
             return (
               <div key={item.title} className="rounded-3xl border border-white/10 bg-white/[0.04] p-5 text-center">
-                <Icon className="mx-auto mb-3 h-7 w-7 text-frost" />
+                <Icon className="mx-auto mb-3 h-7 w-7 text-ember" />
                 <h3 className="text-sm font-semibold text-white">{item.title}</h3>
                 <p className="mt-2 text-xs leading-5 text-white/55">{item.description}</p>
               </div>
@@ -132,8 +132,8 @@ export default function HomePage() {
       </Section>
 
       <section className="px-4 py-20 md:px-6">
-        <div className="mx-auto max-w-5xl overflow-hidden rounded-[2rem] border border-frost/20 bg-gradient-to-r from-violet-950/80 to-abyss p-10 text-center shadow-neon">
-          <Eye className="mx-auto mb-5 h-12 w-12 text-frost" />
+        <div className="mx-auto max-w-5xl overflow-hidden rounded-[2rem] border border-ember/20 bg-gradient-to-r from-violet-950/80 to-abyss p-10 text-center shadow-[0_0_28px_rgba(255,0,184,.24)]">
+          <Eye className="mx-auto mb-5 h-12 w-12 text-ember" />
           <h2 className="text-3xl font-black text-white md:text-5xl">
             Perdenin Ardındakini Görmeye Hazır mısın?
           </h2>

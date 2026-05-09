@@ -54,3 +54,8 @@ Video karşılaştırmasına göre Lovable hero görünümü birebir-yakın yeni
 ## v5 Pink Accent Update
 
 Tüm mavi/turkuaz vurgu renkleri ana sayfadaki 'Karanlık Yüzü' yazısındaki neon pembe/fuşya tonuna çekildi. Logo ayı, header yazıları, butonlar, ikonlar, kategori çizgileri ve ritüel efektlerinde pembe-mor renk bütünlüğü sağlandı.
+
+
+## v6 Hero Match Update
+
+Hero alanı Lovable görünüme daha çok yaklaştırıldı: çember büyütüldü ve yukarı taşındı, header ile hero arası boşluk azaltıldı, buton hover neon efektleri güçlendirildi, küçük yan semboller konumlandırıldı ve ilk ekran daha dolu/premium hale getirildi.

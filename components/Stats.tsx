@@ -14,7 +14,7 @@ export function Stats() {
       {items.map((item) => (
         <div
           key={item.label}
-          className="rounded-[1.35rem] border border-ember/18 bg-[#170024]/76 p-6 text-center shadow-[0_0_22px_rgba(255,0,184,.22)] backdrop-blur-xl"
+          className="rounded-[1.35rem] border border-ember/20 bg-[#14001f]/72 p-6 text-center shadow-[0_0_22px_rgba(255,0,184,.24)] backdrop-blur-xl transition hover:shadow-[0_0_30px_rgba(255,0,184,.34)]"
         >
           <div className="text-[2rem] font-black text-white drop-shadow-[0_0_13px_rgba(255,255,255,.14)] md:text-[2.35rem]">
             {item.value}

@@ -468,3 +468,120 @@ body {
   position: relative;
   z-index: 1;
 }
+
+
+/* v14: okunabilirlik + daha sert korku hareketi */
+@keyframes omenShock {
+  0%, 100% {
+    transform: translateY(0) translateX(0) scale(1);
+    opacity: .92;
+    letter-spacing: .36em;
+    filter: blur(0);
+    text-shadow:
+      0 0 10px rgba(255,255,255,.10),
+      0 0 14px rgba(124,28,255,.25),
+      0 0 20px rgba(0,215,255,.10);
+  }
+  8% {
+    transform: translateY(-2px) translateX(1px) scale(1.01);
+    opacity: 1;
+  }
+  14% {
+    transform: translateY(1px) translateX(-2px) scale(.995);
+    opacity: .72;
+    filter: blur(.35px);
+  }
+  18% {
+    transform: translateY(-4px) translateX(2px) scale(1.015);
+    opacity: 1;
+    letter-spacing: .43em;
+    text-shadow:
+      0 0 12px rgba(255,255,255,.18),
+      0 0 22px rgba(0,215,255,.18),
+      0 0 26px rgba(255,0,184,.20);
+  }
+  22% {
+    transform: translateY(0) translateX(0) scale(1);
+    opacity: .88;
+  }
+  38% {
+    transform: translateY(-3px) translateX(-1px) scale(1.006);
+    opacity: 1;
+  }
+  42% {
+    transform: translateY(2px) translateX(2px) scale(.998);
+    opacity: .66;
+    filter: blur(.45px);
+  }
+  45% {
+    transform: translateY(-4px) translateX(-2px) scale(1.014);
+    opacity: 1;
+    text-shadow:
+      0 0 14px rgba(255,255,255,.16),
+      0 0 26px rgba(124,28,255,.24),
+      0 0 30px rgba(255,0,184,.18);
+  }
+  70% {
+    transform: translateY(-2px) translateX(1px) scale(1.005);
+    opacity: .95;
+  }
+  74% {
+    transform: translateY(1px) translateX(-1px) scale(.998);
+    opacity: .78;
+  }
+  78% {
+    transform: translateY(-5px) translateX(2px) scale(1.018);
+    opacity: 1;
+  }
+}
+
+.omen-shock {
+  animation: omenShock 3.2s steps(2, end) infinite;
+  will-change: transform, opacity, letter-spacing, filter, text-shadow;
+}
+
+.hero-readable-line {
+  color: rgba(222, 202, 235, .72) !important;
+  text-shadow:
+    0 0 10px rgba(255,255,255,.08),
+    0 0 18px rgba(124,28,255,.24),
+    0 0 22px rgba(255,0,184,.10);
+  background: linear-gradient(90deg, transparent, rgba(8,0,18,.42), transparent);
+  border-block: 1px solid rgba(255,255,255,.035);
+  padding-block: .55rem;
+}
+
+.ritual-tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(124,28,255,.22);
+  background: rgba(6,0,14,.48);
+  padding: .55rem .95rem;
+  border-radius: 9999px;
+  color: rgba(226, 210, 238, .74) !important;
+  text-shadow:
+    0 0 10px rgba(255,255,255,.08),
+    0 0 16px rgba(124,28,255,.20);
+  box-shadow:
+    0 0 16px rgba(124,28,255,.08),
+    inset 0 1px 0 rgba(255,255,255,.035);
+}
+
+@media (max-width: 640px) {
+  .hero-readable-line {
+    padding-block: .45rem;
+    letter-spacing: .20em !important;
+    font-size: 9px !important;
+  }
+
+  .ritual-tag {
+    letter-spacing: .22em !important;
+    font-size: 9px !important;
+    padding: .5rem .75rem;
+  }
+
+  .omen-shock {
+    letter-spacing: .22em !important;
+  }
+}

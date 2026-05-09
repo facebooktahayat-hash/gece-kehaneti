@@ -94,3 +94,8 @@ Ana sayfadaki 'Tarot, kahve falı...' paragrafı kaldırıldı. Tüm paket fiyat
 ## v13 Text Fix + Neon Categories
 
 Ana sayfada sadece ilk cümle kaldırıldı; ikinci cümle geri eklendi. 'Gece açıldığında, perde aralanır' etiketi gerçekten hareketlendirilip daha korkutucu hale getirildi. Kategori sembolleri daha somut ve her biri farklı neon tona sahip olacak şekilde güncellendi.
+
+
+## v14 Readable Omen
+
+Kırmızıyla işaretlenen iki küçük yazı daha belirgin hale getirildi. 'Gece açıldığında, perde aralanır' etiketi için daha sert, korkutucu, sürekli titreşimli omen-shock animasyonu eklendi.

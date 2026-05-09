@@ -19,13 +19,14 @@ export default function CategoryPage({ params }: { params: { slug: string } }) {
           <div className="occult-panel p-8 md:p-12">
             <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-violet-500/20 blur-3xl" />
             <Icon className="mb-5 h-12 w-12 text-ember drop-shadow-[0_0_14px_rgba(255,0,184,.45)]" />
-            <h1 className="font-display text-4xl font-black text-[#f4ebfb] md:text-6xl">{c.title}</h1>
-            <p className="mt-3 text-sm italic tracking-[0.08em] text-ember/82">{c.intro}</p>
-            <p className="mt-5 max-w-2xl text-lg leading-8 text-whisper">{c.description}</p>
+            <p className="eyebrow-rune mb-4">Gizli kategori</p>
+            <h1 className="font-display text-[2.8rem] font-black leading-tight text-[#f4ebfb] md:text-[4.4rem]">{c.title}</h1>
+            <p className="mt-3 text-sm italic tracking-[0.08em] text-ember/82 animate-occult-flicker">{c.intro}</p>
+            <p className="mt-5 max-w-2xl text-[16px] leading-8 text-whisper md:text-lg">{c.description}</p>
           </div>
         </div>
       </section>
-      <Section title="Paketler" text="İhtiyacına uygun yorum derinliğini seç.">
+      <Section eyebrow="Paketler" title="Kendine en yakın derinliği seç" text="Her paket, aynı karanlık atmosferi daha farklı yoğunlukta sunar.">
         <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">{items.map((i) => <PackageCard key={i.slug} item={i} />)}</div>
       </Section>
     </div>

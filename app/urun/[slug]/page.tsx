@@ -16,14 +16,15 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
         <div className="grid gap-8 lg:grid-cols-[1.2fr_.8fr]">
           <div className="occult-panel p-8 md:p-10">
             {Icon && <Icon className="mb-5 h-12 w-12 text-ember drop-shadow-[0_0_14px_rgba(255,0,184,.45)]" />}
-            <p className="mb-3 text-sm uppercase tracking-[0.35em] text-ember">{c?.title}</p>
-            <h1 className="font-display text-4xl font-black text-[#f4ebfb] md:text-6xl">{item.name}</h1>
-            <p className="mt-6 text-lg leading-8 text-whisper">{item.description}</p>
+            <p className="eyebrow-rune mb-4">Ritüel paket</p>
+            <h1 className="font-display text-[2.7rem] font-black leading-tight text-[#f4ebfb] md:text-[4.1rem]">{item.name}</h1>
+            <p className="mt-3 text-sm uppercase tracking-[0.35em] text-ember/84">{c?.title}</p>
+            <p className="mt-6 text-[16px] leading-8 text-whisper md:text-lg">{item.description}</p>
             <div className="mt-8 grid gap-4 md:grid-cols-2">
               <div className="occult-card p-5"><Clock3 className="mb-3 h-6 w-6 text-ember" /><div className="text-sm text-white/45">Teslim süresi</div><div className="font-display text-xl font-semibold text-[#f3ebfa]">{item.delivery}</div></div>
               <div className="occult-card p-5"><div className="mb-3 text-2xl text-ember">✦</div><div className="text-sm text-white/45">Seviye</div><div className="font-display text-xl font-semibold text-[#f3ebfa]">{item.level}</div></div>
             </div>
-            <h2 className="mt-10 font-display text-2xl font-bold text-[#f4ebfb]">Neler dahil?</h2>
+            <h2 className="mt-10 font-display text-[1.9rem] font-bold text-[#f4ebfb]">Neler dahil?</h2>
             <ul className="mt-5 grid gap-3">{item.includes.map((inc) => <li key={inc} className="flex items-center gap-3 text-whisper"><CheckCircle2 className="h-5 w-5 text-ember" /> {inc}</li>)}</ul>
           </div>
           <aside className="occult-panel h-fit p-7">

@@ -14,9 +14,9 @@ export default function OrderPage({ params }: { params: { slug: string } }) {
       <div className="mx-auto max-w-5xl">
         <Link href={`/urun/${item.slug}`} className="mb-8 inline-flex items-center gap-2 text-sm text-ember transition hover:text-[#ff6bd2] hover:drop-shadow-[0_0_14px_rgba(255,0,184,.7)]"><ArrowLeft className="h-4 w-4" /> Pakete dön</Link>
         <div className="occult-panel p-7 md:p-10">
-          <p className="text-sm uppercase tracking-[0.35em] text-ember">{c?.title}</p>
-          <h1 className="mt-3 font-display text-4xl font-black text-[#f4ebfb]">Sipariş Formu</h1>
-          <p className="mt-4 text-whisper">{item.name} · {item.price} TL</p>
+          <p className="eyebrow-rune mb-4">Bilgilerini bırak</p>
+          <h1 className="mt-3 font-display text-[2.6rem] font-black text-[#f4ebfb] md:text-[3.7rem]">Sipariş Formu</h1>
+          <p className="mt-4 text-whisper">{item.name} · {item.price} TL · {c?.title}</p>
           <form className="mt-10 grid gap-5">
             <div className="grid gap-5 md:grid-cols-2">
               <Field label="Ad Soyad" placeholder="Adınız Soyadınız" />

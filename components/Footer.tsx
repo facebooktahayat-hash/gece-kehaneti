@@ -8,7 +8,7 @@ export function Footer() {
         <div>
           <div className="mb-4 flex items-center gap-3">
             <Moon className="h-7 w-7 text-frost drop-shadow-[0_0_12px_rgba(0,215,255,.7)]" />
-            <span className="font-display text-sm font-bold tracking-[0.28em] text-ember drop-shadow-[0_0_14px_rgba(255,0,184,.55)]">GECE KEHANETİ</span>
+            <span className="font-display text-sm font-bold tracking-[0.30em] text-ember drop-shadow-[0_0_14px_rgba(255,0,184,.55)]">GECE KEHANETİ</span>
           </div>
           <p className="max-w-xl text-sm leading-7 text-whisper">Bu hizmet eğlence, sezgisel yorum ve kişisel farkındalık amaçlıdır. Kesin gelecek garantisi, sağlık, hukuk veya yatırım danışmanlığı sunmaz.</p>
         </div>

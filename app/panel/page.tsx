@@ -7,7 +7,8 @@ export default function PanelPage() {
       <div className="mx-auto max-w-5xl">
         <div className="occult-panel p-8 md:p-12">
           <LockKeyhole className="mb-5 h-12 w-12 text-ember drop-shadow-[0_0_14px_rgba(255,0,184,.35)]" />
-          <h1 className="font-display text-4xl font-black text-[#f4ebfb]">Panelim</h1>
+          <p className="eyebrow-rune mb-4">Karanlık panel</p>
+          <h1 className="font-display text-[2.7rem] font-black text-[#f4ebfb] md:text-[4rem]">Panelim</h1>
           <p className="mt-5 max-w-2xl text-whisper">Gerçek kullanıcı girişi Supabase bağlandığında aktif edilecek. Şimdilik panel giriş ekranı gösteriliyor.</p>
           <div className="mt-8 grid gap-5 md:grid-cols-2"><input placeholder="E-posta" className="occult-input" /><input placeholder="Şifre" type="password" className="occult-input" /></div>
           <button className="occult-button mt-6 px-8 py-4 font-semibold text-white"><span className="relative z-10">Giriş Yap</span></button>

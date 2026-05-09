@@ -69,3 +69,8 @@ Video karelerine göre ana sayfa yeniden eşleştirildi: cyan ay + pembe logo si
 ## v8 Occult Upgrade
 
 Daha ürkütücü/gizemli görünüm için koyu panel sistemi, daha dekoratif tipografi, daha az düz beyaz metin, hover glow efektli butonlar, mistik kart hoverları ve daha karanlık atmosfer eklendi.
+
+
+## v9 Hypnotic Horror
+
+Daha büyüleyici ve profesyonel görünüm için daha zengin tipografi, hareketli ve ürkütücü mikro yazılar, hover glow efektleri, daha katmanlı paneller, geliştirilmiş başlık boyutları ve iç sayfalarda daha güçlü korku/gizem atmosferi eklendi.

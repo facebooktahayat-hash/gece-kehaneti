@@ -17,7 +17,7 @@ export default function HomePage() {
 
         <div className="relative mx-auto max-w-7xl">
           <div className="mx-auto max-w-5xl px-5 pt-[58px] text-center md:pt-[88px]">
-            <div className="omen-shock mx-auto mb-7 inline-flex items-center gap-2 rounded-full border border-violet/42 bg-black/42 px-5 py-2 text-[10px] font-semibold uppercase tracking-[0.34em] text-bone shadow-[0_0_18px_rgba(124,28,255,.20)] md:mb-8 md:text-[11px] md:tracking-[0.42em]">
+            <div className="omen-shock mx-auto mb-7 inline-flex items-center gap-2 rounded-full border border-white/12 bg-black/52 px-5 py-2.5 text-[11px] font-semibold uppercase text-bone shadow-[0_0_18px_rgba(124,28,255,.20)] md:mb-8 md:text-[12px]">
               <span className="h-2 w-2 rounded-full bg-ember shadow-[0_0_12px_rgba(255,0,184,.8)]" />
               Gece açıldığında, perde aralanır
             </div>
@@ -32,7 +32,7 @@ export default function HomePage() {
               Her okuma, gecenin sessizliğinde sana özel hazırlanır; her cümle, perde arkasındaki işareti açığa çıkarır.
             </p>
 
-            <div className="ghost-line hero-readable-line mt-7 text-[11px] uppercase tracking-[0.30em] md:text-[12px] md:tracking-[0.32em]">fısıltılar yaklaşır · semboller belirir · kapılar aralanır</div>
+            <div className="ghost-line hero-readable-line mt-7 text-[13px] uppercase md:text-[14px]">fısıltılar yaklaşır · semboller belirir · kapılar aralanır</div>
 
             <div className="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
               <Link href="#kategoriler" className="occult-button px-10 py-4 text-[12px] font-semibold uppercase tracking-[0.22em] text-white">
@@ -43,7 +43,7 @@ export default function HomePage() {
               </Link>
             </div>
 
-            <div className="ritual-tag mt-12 text-[10px] uppercase tracking-[0.36em]">gizli · sezgisel · ritüel · kişiye özel</div>
+            <div className="ritual-tag mt-12 text-[11px] uppercase md:text-[12px]">gizli · sezgisel · ritüel · kişiye özel</div>
           </div>
         </div>
       </section>

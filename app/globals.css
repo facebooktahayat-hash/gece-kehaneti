@@ -585,3 +585,65 @@ body {
     letter-spacing: .22em !important;
   }
 }
+
+
+/* v15 stronger readability for hero microcopy */
+.hero-readable-line {
+  color: rgba(241, 231, 248, .94) !important;
+  font-weight: 700;
+  letter-spacing: .24em !important;
+  text-shadow:
+    0 0 6px rgba(255,255,255,.12),
+    0 0 14px rgba(255,255,255,.08),
+    0 0 18px rgba(124,28,255,.28),
+    0 0 24px rgba(255,0,184,.14) !important;
+  background: linear-gradient(90deg, rgba(14,0,24,.18), rgba(14,0,24,.72), rgba(14,0,24,.18)) !important;
+  border-top: 1px solid rgba(255,255,255,.08) !important;
+  border-bottom: 1px solid rgba(255,255,255,.08) !important;
+  padding: .75rem 1rem !important;
+  border-radius: 9999px;
+  display: inline-block;
+  max-width: 100%;
+}
+
+.ritual-tag {
+  color: rgba(241, 231, 248, .92) !important;
+  font-weight: 700;
+  letter-spacing: .28em !important;
+  background: rgba(8,0,16,.72) !important;
+  border: 1px solid rgba(255,255,255,.08) !important;
+  box-shadow:
+    0 0 18px rgba(124,28,255,.12),
+    inset 0 1px 0 rgba(255,255,255,.06) !important;
+  text-shadow:
+    0 0 6px rgba(255,255,255,.12),
+    0 0 14px rgba(124,28,255,.22) !important;
+  padding: .7rem 1.15rem !important;
+}
+
+.omen-shock {
+  color: rgba(246, 238, 250, .96) !important;
+  font-weight: 700;
+  letter-spacing: .30em !important;
+  text-shadow:
+    0 0 8px rgba(255,255,255,.12),
+    0 0 18px rgba(124,28,255,.26),
+    0 0 22px rgba(0,215,255,.12) !important;
+}
+
+@media (max-width: 640px) {
+  .hero-readable-line {
+    font-size: 10px !important;
+    letter-spacing: .14em !important;
+    padding: .58rem .7rem !important;
+  }
+  .ritual-tag {
+    font-size: 9px !important;
+    letter-spacing: .16em !important;
+    padding: .55rem .75rem !important;
+  }
+  .omen-shock {
+    font-size: 10px !important;
+    letter-spacing: .18em !important;
+  }
+}

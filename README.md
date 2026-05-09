@@ -99,3 +99,8 @@ Ana sayfada sadece ilk cümle kaldırıldı; ikinci cümle geri eklendi. 'Gece a
 ## v14 Readable Omen
 
 Kırmızıyla işaretlenen iki küçük yazı daha belirgin hale getirildi. 'Gece açıldığında, perde aralanır' etiketi için daha sert, korkutucu, sürekli titreşimli omen-shock animasyonu eklendi.
+
+
+## v15 Visible Small Text
+
+Hero bölümündeki küçük metinler daha büyük, daha parlak ve daha okunur hale getirildi. Üst uyarı etiketi, orta kayan metin ve alt rozet artık daha belirgin.

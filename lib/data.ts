@@ -109,11 +109,11 @@ export const categories: Category[] = [
 ];
 
 const packageTemplates = [
-  { key: "kisa-yorum", name: "Kısa Yorum", price: 149, delivery: "24 saat", level: "Hızlı başlangıç", description: "Tek konuya odaklı, net ve kısa sezgisel yorum.", includes: ["1 ana soru", "Kısa enerji yorumu", "Net sonuç özeti"] },
-  { key: "derin-yorum", name: "Derin Yorum", price: 299, delivery: "24-48 saat", level: "En çok seçilen", description: "Konuya daha derin bakan, sembol ve enerji odaklı kapsamlı yorum.", includes: ["3 ana soru", "Detaylı analiz", "Kişisel öneri notları"] },
-  { key: "kabus-gibi-detayli-yorum", name: "Kabus Gibi Detaylı Yorum", price: 499, delivery: "48 saat", level: "Yoğun analiz", description: "Karanlık detayları, gizli işaretleri ve olası yönleri daha geniş yorumlar.", includes: ["5 ana soru", "Derin sembol okuması", "Geniş sonuç raporu"] },
-  { key: "acil-kehanet", name: "Acil Kehanet", price: 699, delivery: "Aynı gün", level: "Öncelikli", description: "Acil cevap bekleyen konular için öncelikli hazırlanır.", includes: ["Öncelikli teslim", "Hızlı değerlendirme", "Kişisel sonuç mesajı"] },
-  { key: "premium-rituel-yorum", name: "Premium Ritüel Yorum", price: 999, delivery: "48-72 saat", level: "Premium", description: "Kapsamlı, katmanlı ve kişiye özel hazırlanmış premium yorum.", includes: ["7 ana soru", "Kapsamlı analiz", "Özel kapanış yorumu", "Premium rapor"] }
+  { key: "kisa-yorum", name: "Kısa Yorum", price: 596, delivery: "24 saat", level: "Hızlı başlangıç", description: "Tek konuya odaklı, net ve kısa sezgisel yorum.", includes: ["1 ana soru", "Kısa enerji yorumu", "Net sonuç özeti"] },
+  { key: "derin-yorum", name: "Derin Yorum", price: 1196, delivery: "24-48 saat", level: "En çok seçilen", description: "Konuya daha derin bakan, sembol ve enerji odaklı kapsamlı yorum.", includes: ["3 ana soru", "Detaylı analiz", "Kişisel öneri notları"] },
+  { key: "kabus-gibi-detayli-yorum", name: "Kabus Gibi Detaylı Yorum", price: 1996, delivery: "48 saat", level: "Yoğun analiz", description: "Karanlık detayları, gizli işaretleri ve olası yönleri daha geniş yorumlar.", includes: ["5 ana soru", "Derin sembol okuması", "Geniş sonuç raporu"] },
+  { key: "acil-kehanet", name: "Acil Kehanet", price: 2796, delivery: "Aynı gün", level: "Öncelikli", description: "Acil cevap bekleyen konular için öncelikli hazırlanır.", includes: ["Öncelikli teslim", "Hızlı değerlendirme", "Kişisel sonuç mesajı"] },
+  { key: "premium-rituel-yorum", name: "Premium Ritüel Yorum", price: 3996, delivery: "48-72 saat", level: "Premium", description: "Kapsamlı, katmanlı ve kişiye özel hazırlanmış premium yorum.", includes: ["7 ana soru", "Kapsamlı analiz", "Özel kapanış yorumu", "Premium rapor"] }
 ];
 
 export const packages: Package[] = categories.flatMap((category) =>

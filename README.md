@@ -84,3 +84,8 @@ Beyaz yazılar azaltıldı; mobil hero boşlukları sıkılaştırıldı; büyü
 ## v11 Balanced Horror
 
 Neon pembe normal yazılardan azaltıldı. Pembe artık sadece ana vurgu, ana başlık ve buton glowlarında kullanılıyor. Beyaz yerine soluk kemik, mor-gri, soğuk kül tonları kullanıldı.
+
+
+## v12 Lightning Prices
+
+Ana sayfadaki 'Tarot, kahve falı...' paragrafı kaldırıldı. Tüm paket fiyatları 4 kat artırıldı. 'Karanlık Yüzü' başlığına daha sert, yıldırım çarpması hissi veren hareket eklendi. 'Gece açıldığında, perde aralanır' etiketi yukarı alınıp hareketlendirildi.

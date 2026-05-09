@@ -16,22 +16,17 @@ export default function HomePage() {
         <div className="horror-whisper left-[12%] bottom-[20%] [animation-delay:3.2s]">fısıltı geri döner</div>
 
         <div className="relative mx-auto max-w-7xl">
-          <div className="mx-auto max-w-5xl px-5 pt-[72px] text-center md:pt-[102px]">
-            <div className="mx-auto mb-8 inline-flex items-center gap-2 rounded-full border border-violet/42 bg-black/42 px-5 py-2 text-[11px] font-semibold uppercase tracking-[0.42em] text-mourning shadow-[0_0_18px_rgba(255,0,184,.18)]">
+          <div className="mx-auto max-w-5xl px-5 pt-[58px] text-center md:pt-[88px]">
+            <div className="mx-auto mb-7 inline-flex md:mb-8 items-center gap-2 rounded-full border border-violet/42 bg-black/42 px-5 py-2 text-[11px] font-semibold uppercase tracking-[0.42em] text-mourning shadow-[0_0_18px_rgba(255,0,184,.18)]">
               <span className="h-2 w-2 rounded-full bg-ember shadow-[0_0_12px_rgba(255,0,184,.8)]" />
               Gece açıldığında, perde aralanır
             </div>
 
             <h1 className="mx-auto max-w-4xl font-display text-[2.85rem] font-black leading-[0.98] tracking-tight text-bone drop-shadow-[0_0_18px_rgba(255,255,255,.12)] md:text-[5.25rem]">
               <span className="block">Kaderin</span>
-              <span className="block title-ember cursed-glitch">Karanlık Yüzü</span>
+              <span className="block title-ember hero-lightning">Karanlık Yüzü</span>
               <span className="block">Seni Bekliyor</span>
             </h1>
-
-            <p className="mx-auto mt-8 max-w-[780px] text-[16px] leading-8 text-mourning md:text-[17px]">
-              Tarot, kahve falı, aşk yorumu, astroloji ve kadim sezgilerle geleceğin gölgelerini keşfet.
-              Her okuma, gecenin sessizliğinde sana özel hazırlanır; her cümle, perde arkasındaki işareti açığa çıkarır.
-            </p>
 
             <div className="ghost-line mt-7 text-[11px] uppercase tracking-[0.30em] text-mourning-dim md:text-[12px] md:tracking-[0.32em]">fısıltılar yaklaşır · semboller belirir · kapılar aralanır</div>
 

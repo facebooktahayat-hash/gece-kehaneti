@@ -334,3 +334,82 @@ body {
   color: rgba(222, 198, 235, .95);
   text-shadow: 0 0 14px rgba(124,28,255,.35);
 }
+
+
+/* v12: lightning hero motion */
+@keyframes lightningStrike {
+  0%, 84%, 100% {
+    transform: translate(0,0);
+    opacity: 1;
+    text-shadow:
+      0 0 12px rgba(255,0,184,.22),
+      0 0 30px rgba(255,0,184,.16);
+  }
+  85% {
+    transform: translate(-2px, 1px);
+    opacity: .92;
+    text-shadow:
+      0 0 16px rgba(255,255,255,.18),
+      0 0 34px rgba(0,215,255,.16),
+      0 0 46px rgba(255,0,184,.28);
+  }
+  86% {
+    transform: translate(3px, -2px);
+    opacity: .68;
+    text-shadow:
+      0 0 4px rgba(255,255,255,.24),
+      0 0 44px rgba(255,255,255,.16),
+      0 0 58px rgba(255,0,184,.36);
+  }
+  87% {
+    transform: translate(-4px, 2px);
+    opacity: 1;
+  }
+  88% {
+    transform: translate(2px, -1px);
+    opacity: .78;
+  }
+  89% {
+    transform: translate(0,0);
+    opacity: 1;
+  }
+  93% {
+    transform: translate(1px, 0);
+    opacity: .88;
+  }
+  94% {
+    transform: translate(-1px, 0);
+    opacity: 1;
+  }
+}
+
+@keyframes omenFloat {
+  0%,100% {
+    transform: translateY(0);
+    opacity: .75;
+    letter-spacing: .42em;
+    text-shadow: 0 0 12px rgba(124,28,255,.18);
+  }
+  50% {
+    transform: translateY(-6px);
+    opacity: 1;
+    letter-spacing: .48em;
+    text-shadow: 0 0 16px rgba(0,215,255,.16), 0 0 18px rgba(124,28,255,.18);
+  }
+}
+
+.hero-lightning {
+  animation: lightningStrike 6s infinite;
+  will-change: transform, opacity, text-shadow;
+}
+
+.hero-omen {
+  animation: omenFloat 4.8s ease-in-out infinite;
+  will-change: transform, opacity, text-shadow;
+}
+
+@media (max-width: 640px) {
+  .hero-omen {
+    letter-spacing: .26em;
+  }
+}

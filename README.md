@@ -34,3 +34,18 @@ Sonra tarayıcıda: `http://localhost:3000`
 - DePay kripto ödeme linki veya button entegrasyonu
 - Gerçek dosya yükleme
 - Gerçek müşteri yorumları ve sipariş sayaçları
+
+
+## v2 Güncelleme
+
+Ana renkler Lovable görünümüne yaklaştırıldı. Hero bölümüne hareketli ritüel çemberi, sis/parçacık efekti, neon ay ve karanlık sinematik arka plan eklendi.
+
+
+## v3 Güncelleme
+
+Video karşılaştırmasına göre hero alanı Lovable görünümüne daha çok yaklaştırıldı: büyük ortadaki ay kaldırıldı, karanlık ritüel çemberi, mor/pembe glow, üç satırlı başlık, koyu header ve Lovable benzeri sayaç kartları eklendi.
+
+
+## v4 Güncelleme
+
+Video karşılaştırmasına göre Lovable hero görünümü birebir-yakın yeniden yapıldı: büyük hareketli ritüel çemberi, ters yönde dönen ikinci çember, mor sis, küçük yan ay/yıldız sembolleri, üç satırlı serif başlık, neon pembe vurgu ve Lovable benzeri sayaç kartları.

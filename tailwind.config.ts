@@ -1,11 +1,40 @@
 import type { Config } from "tailwindcss";
+
 const config: Config = {
-  content: ["./app/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./lib/**/*.{ts,tsx}"],
-  theme: { extend: {
-    colors: { abyss:"#05020a", night:"#0b0615", blood:"#6f1230", violet:"#7c3aed", frost:"#38bdf8", ember:"#ff2d75", gold:"#f5c76a" },
-    boxShadow: { neon:"0 0 30px rgba(168,85,247,.45)", frost:"0 0 28px rgba(56,189,248,.35)", blood:"0 0 28px rgba(255,45,117,.35)" },
-    backgroundImage: { "radial-ritual":"radial-gradient(circle at top,rgba(124,58,237,.25),transparent 34%),radial-gradient(circle at bottom right,rgba(255,45,117,.16),transparent 30%),linear-gradient(135deg,#05020a 0%,#0b0615 44%,#16071f 100%)" }
-  }},
+  content: [
+    "./app/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./lib/**/*.{ts,tsx}"
+  ],
+  theme: {
+    extend: {
+      colors: {
+        abyss: "#020006",
+        night: "#080010",
+        void: "#000000",
+        ritual: "#150021",
+        blood: "#5a0022",
+        violet: "#7f1dff",
+        frost: "#00d9ff",
+        ember: "#ff00b8",
+        poison: "#b700ff",
+        gold: "#f7c86b"
+      },
+      boxShadow: {
+        neon: "0 0 26px rgba(255, 0, 184, 0.42)",
+        frost: "0 0 22px rgba(0, 217, 255, 0.28)",
+        blood: "0 0 28px rgba(255, 0, 120, 0.32)",
+        ritual: "0 0 80px rgba(160, 0, 255, 0.30)"
+      },
+      fontFamily: {
+        display: ["Georgia", "Times New Roman", "serif"]
+      },
+      backgroundImage: {
+        "radial-ritual": "radial-gradient(circle at 50% 18%, rgba(55,0,86,.36), transparent 28%), radial-gradient(circle at 50% 48%, rgba(255,0,184,.10), transparent 38%), linear-gradient(180deg, #020006 0%, #080010 48%, #020006 100%)"
+      }
+    }
+  },
   plugins: []
 };
+
 export default config;

@@ -1,1 +1,82 @@
-@tailwind base;@tailwind components;@tailwind utilities;:root{color-scheme:dark}html{scroll-behavior:smooth}body{min-height:100vh;background:#05020a;color:white}::selection{background:rgba(124,58,237,.6);color:white}@keyframes mist{0%,100%{transform:translate3d(0,0,0) scale(1);opacity:.45}50%{transform:translate3d(20px,-12px,0) scale(1.08);opacity:.72}}@keyframes mistDelayed{0%,100%{transform:translate3d(0,0,0) scale(1);opacity:.35}50%{transform:translate3d(-18px,16px,0) scale(1.06);opacity:.64}}.animate-mist{animation:mist 9s ease-in-out infinite}.animate-mist-delayed{animation:mistDelayed 11s ease-in-out infinite}.glass{border:1px solid rgba(255,255,255,.1);background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.025));backdrop-filter:blur(18px)}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { color-scheme: dark; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  min-height: 100vh;
+  background: #020006;
+  color: white;
+}
+
+::selection {
+  background: rgba(255, 0, 184, .55);
+  color: white;
+}
+
+@keyframes ritualRotate {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes ritualReverse {
+  from { transform: translate(-50%, -50%) rotate(360deg); }
+  to { transform: translate(-50%, -50%) rotate(0deg); }
+}
+
+@keyframes violetBreath {
+  0%, 100% { opacity: .55; transform: translate(-50%, -50%) scale(1); }
+  50% { opacity: .92; transform: translate(-50%, -50%) scale(1.075); }
+}
+
+@keyframes fogLeft {
+  0%, 100% { transform: translate3d(0,0,0) scale(1); opacity: .18; }
+  50% { transform: translate3d(32px,-12px,0) scale(1.08); opacity: .38; }
+}
+
+@keyframes fogRight {
+  0%, 100% { transform: translate3d(0,0,0) scale(1); opacity: .14; }
+  50% { transform: translate3d(-28px,16px,0) scale(1.07); opacity: .32; }
+}
+
+@keyframes tinyTwinkle {
+  0%, 100% { opacity: .18; transform: scale(.7); }
+  50% { opacity: .85; transform: scale(1.08); }
+}
+
+@keyframes symbolFloat {
+  0%, 100% { transform: translateY(0); opacity: .48; }
+  50% { transform: translateY(-12px); opacity: .9; }
+}
+
+.animate-ritual-rotate { animation: ritualRotate 52s linear infinite; }
+.animate-ritual-reverse { animation: ritualReverse 68s linear infinite; }
+.animate-violet-breath { animation: violetBreath 7.5s ease-in-out infinite; }
+.animate-fog-left { animation: fogLeft 9s ease-in-out infinite; }
+.animate-fog-right { animation: fogRight 11s ease-in-out infinite; }
+.animate-tiny-twinkle { animation: tinyTwinkle 4.2s ease-in-out infinite; }
+.animate-symbol-float { animation: symbolFloat 5.8s ease-in-out infinite; }
+
+.glass {
+  border: 1px solid rgba(255,255,255,.085);
+  background: linear-gradient(180deg, rgba(255,255,255,.052), rgba(255,255,255,.016));
+  backdrop-filter: blur(18px);
+}
+
+.ritual-main {
+  stroke: rgba(255, 0, 184, .34);
+  filter: drop-shadow(0 0 7px rgba(255,0,184,.44));
+}
+
+.ritual-soft {
+  stroke: rgba(124, 29, 255, .28);
+  filter: drop-shadow(0 0 8px rgba(124,29,255,.35));
+}
+
+.ritual-cyan {
+  stroke: rgba(0, 217, 255, .18);
+  filter: drop-shadow(0 0 6px rgba(0,217,255,.28));
+}

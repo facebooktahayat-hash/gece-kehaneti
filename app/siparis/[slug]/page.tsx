@@ -15,8 +15,8 @@ export default function OrderPage({ params }: { params: { slug: string } }) {
         <Link href={`/urun/${item.slug}`} className="mb-8 inline-flex items-center gap-2 text-sm text-ember transition hover:text-[#ff6bd2] hover:drop-shadow-[0_0_14px_rgba(255,0,184,.7)]"><ArrowLeft className="h-4 w-4" /> Pakete dön</Link>
         <div className="occult-panel p-7 md:p-10">
           <p className="eyebrow-rune mb-4">Bilgilerini bırak</p>
-          <h1 className="mt-3 font-display text-[2.6rem] font-black text-[#f4ebfb] md:text-[3.7rem]">Sipariş Formu</h1>
-          <p className="mt-4 text-whisper">{item.name} · {item.price} TL · {c?.title}</p>
+          <h1 className="mt-3 font-display text-[2.25rem] font-black text-bone md:text-[3.7rem]">Sipariş Formu</h1>
+          <p className="mt-4 text-mourning">{item.name} · {item.price} TL · {c?.title}</p>
           <form className="mt-10 grid gap-5">
             <div className="grid gap-5 md:grid-cols-2">
               <Field label="Ad Soyad" placeholder="Adınız Soyadınız" />
@@ -25,15 +25,15 @@ export default function OrderPage({ params }: { params: { slug: string } }) {
               <Field label="Doğum tarihi" placeholder="GG/AA/YYYY" />
             </div>
             <label className="grid gap-2">
-              <span className="text-sm text-white/72">{isCoffee ? "Fincan fotoğrafı yükleme alanı" : "Sormak istediğin ana konu"}</span>
+              <span className="text-sm text-mourning">{isCoffee ? "Fincan fotoğrafı yükleme alanı" : "Sormak istediğin ana konu"}</span>
               {isCoffee ? (
-                <div className="occult-card p-8 text-center text-whisper">Kahve falı için fincan görseli yükleme alanı. Gerçek backend bağlanınca dosya yükleme aktif edilecek.</div>
+                <div className="occult-card p-8 text-center text-mourning">Kahve falı için fincan görseli yükleme alanı. Gerçek backend bağlanınca dosya yükleme aktif edilecek.</div>
               ) : (
                 <textarea className="occult-textarea min-h-36" placeholder="Sorunu, hislerini ve bilmemi istediğin detayları yaz." />
               )}
             </label>
-            <label className="grid gap-2"><span className="text-sm text-white/72">Ek not</span><textarea className="occult-textarea min-h-28" placeholder="İsteğe bağlı ek not..." /></label>
-            <label className="occult-card flex items-start gap-3 p-4 text-sm text-whisper"><input type="checkbox" className="mt-1" />Bu hizmetin eğlence ve kişisel farkındalık amaçlı olduğunu, kesin gelecek garantisi sunmadığını kabul ediyorum.</label>
+            <label className="grid gap-2"><span className="text-sm text-mourning">Ek not</span><textarea className="occult-textarea min-h-28" placeholder="İsteğe bağlı ek not..." /></label>
+            <label className="occult-card flex items-start gap-3 p-4 text-sm text-mourning"><input type="checkbox" className="mt-1" />Bu hizmetin eğlence ve kişisel farkındalık amaçlı olduğunu, kesin gelecek garantisi sunmadığını kabul ediyorum.</label>
             <Link href={`/odeme?paket=${item.slug}`} className="occult-button px-8 py-4 text-center font-semibold text-white"><span className="relative z-10">Ödeme Adımına Geç</span></Link>
           </form>
         </div>
@@ -43,5 +43,5 @@ export default function OrderPage({ params }: { params: { slug: string } }) {
 }
 
 function Field({ label, placeholder, type = "text" }: { label: string; placeholder: string; type?: string }) {
-  return <label className="grid gap-2"><span className="text-sm text-white/72">{label}</span><input type={type} placeholder={placeholder} className="occult-input" /></label>;
+  return <label className="grid gap-2"><span className="text-sm text-mourning">{label}</span><input type={type} placeholder={placeholder} className="occult-input" /></label>;
 }

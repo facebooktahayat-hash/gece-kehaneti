@@ -74,3 +74,13 @@ Daha ürkütücü/gizemli görünüm için koyu panel sistemi, daha dekoratif ti
 ## v9 Hypnotic Horror
 
 Daha büyüleyici ve profesyonel görünüm için daha zengin tipografi, hareketli ve ürkütücü mikro yazılar, hover glow efektleri, daha katmanlı paneller, geliştirilmiş başlık boyutları ve iç sayfalarda daha güçlü korku/gizem atmosferi eklendi.
+
+
+## v10 Mobile Horror Text
+
+Beyaz yazılar azaltıldı; mobil hero boşlukları sıkılaştırıldı; büyük ritüel çemberi yukarı taşındı; ana sayfaya hareketli korku/fısıltı yazıları, kayan uğursuz metin şeridi, glitch/flicker efektleri ve mobil uyumlu tipografi eklendi.
+
+
+## v11 Balanced Horror
+
+Neon pembe normal yazılardan azaltıldı. Pembe artık sadece ana vurgu, ana başlık ve buton glowlarında kullanılıyor. Beyaz yerine soluk kemik, mor-gri, soğuk kül tonları kullanıldı.

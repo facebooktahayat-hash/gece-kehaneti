@@ -8,29 +8,29 @@ export function Footer() {
         <div>
           <div className="mb-4 flex items-center gap-3">
             <Moon className="h-7 w-7 text-frost drop-shadow-[0_0_12px_rgba(0,215,255,.7)]" />
-            <span className="font-display text-sm font-bold tracking-[0.30em] text-ember drop-shadow-[0_0_14px_rgba(255,0,184,.55)]">GECE KEHANETİ</span>
+            <span className="font-display text-sm font-bold tracking-[0.30em] text-[#c9a6df] drop-shadow-[0_0_12px_rgba(124,28,255,.3)]">GECE KEHANETİ</span>
           </div>
-          <p className="max-w-xl text-sm leading-7 text-whisper">Bu hizmet eğlence, sezgisel yorum ve kişisel farkındalık amaçlıdır. Kesin gelecek garantisi, sağlık, hukuk veya yatırım danışmanlığı sunmaz.</p>
+          <p className="max-w-xl text-sm leading-7 text-mourning">Bu hizmet eğlence, sezgisel yorum ve kişisel farkındalık amaçlıdır. Kesin gelecek garantisi, sağlık, hukuk veya yatırım danışmanlığı sunmaz.</p>
         </div>
         <div>
-          <h3 className="mb-4 font-display text-sm font-semibold tracking-[0.18em] text-[#f2e8fb]">Sayfalar</h3>
-          <div className="grid gap-2 text-sm text-whisper">
-            <Link href="/hakkimizda" className="transition hover:text-ember">Hakkımızda</Link>
-            <Link href="/iletisim" className="transition hover:text-ember">İletişim</Link>
-            <Link href="/panel" className="transition hover:text-ember">Panelim</Link>
-            <Link href="/admin" className="transition hover:text-ember">Yönetici Paneli</Link>
+          <h3 className="mb-4 font-display text-sm font-semibold tracking-[0.18em] text-bone">Sayfalar</h3>
+          <div className="grid gap-2 text-sm text-mourning">
+            <Link href="/hakkimizda" className="transition hover:text-bone">Hakkımızda</Link>
+            <Link href="/iletisim" className="transition hover:text-bone">İletişim</Link>
+            <Link href="/panel" className="transition hover:text-bone">Panelim</Link>
+            <Link href="/admin" className="transition hover:text-bone">Yönetici Paneli</Link>
           </div>
         </div>
         <div>
-          <h3 className="mb-4 font-display text-sm font-semibold tracking-[0.18em] text-[#f2e8fb]">Hukuki</h3>
-          <div className="grid gap-2 text-sm text-whisper">
-            <Link href="/gizlilik" className="transition hover:text-ember">Gizlilik Politikası</Link>
-            <Link href="/kullanim-sartlari" className="transition hover:text-ember">Kullanım Şartları</Link>
-            <Link href="/iade" className="transition hover:text-ember">İade ve İptal</Link>
+          <h3 className="mb-4 font-display text-sm font-semibold tracking-[0.18em] text-bone">Hukuki</h3>
+          <div className="grid gap-2 text-sm text-mourning">
+            <Link href="/gizlilik" className="transition hover:text-bone">Gizlilik Politikası</Link>
+            <Link href="/kullanim-sartlari" className="transition hover:text-bone">Kullanım Şartları</Link>
+            <Link href="/iade" className="transition hover:text-bone">İade ve İptal</Link>
           </div>
         </div>
       </div>
-      <div className="mx-auto mt-10 max-w-7xl border-t border-white/10 pt-6 text-sm text-white/35">© 2026 Gece Kehaneti. Tüm hakları saklıdır. In umbra veritas.</div>
+      <div className="mx-auto mt-10 max-w-7xl border-t border-white/10 pt-6 text-sm text-mourning-dim">© 2026 Gece Kehaneti. Tüm hakları saklıdır. In umbra veritas.</div>
     </footer>
   );
 }

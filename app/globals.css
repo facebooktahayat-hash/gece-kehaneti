@@ -213,3 +213,124 @@ body {
 .text-eerie { color: rgba(235, 226, 244, .72); }
 .text-whisper { color: rgba(215, 196, 230, .58); }
 .text-faded { color: rgba(215, 196, 230, .42); }
+
+
+/* v10 horror text + mobile tightening */
+@keyframes hauntedWhisper {
+  0% { transform: translateX(-8%) translateY(0); opacity: .12; filter: blur(.2px); }
+  35% { opacity: .34; }
+  70% { opacity: .20; }
+  100% { transform: translateX(8%) translateY(-6px); opacity: .12; filter: blur(.6px); }
+}
+
+@keyframes crawlWhisper {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes ghostPulse {
+  0%,100% { opacity: .20; letter-spacing: .42em; text-shadow: 0 0 8px rgba(255,0,184,.14); }
+  50% { opacity: .48; letter-spacing: .50em; text-shadow: 0 0 18px rgba(255,0,184,.35), 0 0 10px rgba(0,215,255,.12); }
+}
+
+@keyframes cursedGlitch {
+  0%, 100% { transform: translate(0,0); opacity: .92; }
+  8% { transform: translate(1px,-1px); opacity: .74; }
+  10% { transform: translate(-1px,1px); opacity: .9; }
+  12% { transform: translate(0,0); opacity: .78; }
+  60% { transform: translate(0,0); opacity: .92; }
+  62% { transform: translate(1px,0); opacity: .65; }
+  64% { transform: translate(-1px,0); opacity: .88; }
+}
+
+.horror-whisper {
+  pointer-events: none;
+  position: absolute;
+  white-space: nowrap;
+  font-size: 11px;
+  letter-spacing: .42em;
+  text-transform: uppercase;
+  color: rgba(255, 0, 184, .22);
+  text-shadow: 0 0 16px rgba(255,0,184,.25);
+  animation: hauntedWhisper 10s ease-in-out infinite alternate;
+}
+
+.horror-crawl {
+  overflow: hidden;
+  border-block: 1px solid rgba(255,255,255,.05);
+  background: linear-gradient(90deg, transparent, rgba(255,0,184,.045), transparent);
+}
+
+.horror-crawl-track {
+  display: flex;
+  width: max-content;
+  animation: crawlWhisper 28s linear infinite;
+}
+
+.horror-crawl span {
+  padding-right: 4rem;
+  font-size: 10px;
+  letter-spacing: .36em;
+  text-transform: uppercase;
+  color: rgba(211, 174, 231, .42);
+  text-shadow: 0 0 12px rgba(255,0,184,.18);
+}
+
+.ghost-line {
+  animation: ghostPulse 6.5s ease-in-out infinite;
+}
+
+.cursed-glitch {
+  animation: cursedGlitch 5.4s steps(2, end) infinite;
+}
+
+.text-ash { color: rgba(207, 188, 222, .70); }
+.text-ash-soft { color: rgba(190, 165, 209, .56); }
+.text-ash-dim { color: rgba(174, 143, 196, .42); }
+
+@media (max-width: 640px) {
+  .horror-whisper { font-size: 9px; letter-spacing: .26em; opacity: .7; }
+  .horror-crawl span { font-size: 8px; letter-spacing: .24em; padding-right: 2rem; }
+  .occult-card { border-radius: 1.15rem; }
+  .occult-panel { border-radius: 1.2rem; }
+}
+
+
+/* v11 balanced horror palette: pink is accent, not body text */
+.text-bone { color: rgba(232, 221, 240, .86); }
+.text-mourning { color: rgba(184, 160, 205, .64); }
+.text-cold { color: rgba(156, 205, 218, .54); }
+.text-blood-dim { color: rgba(173, 79, 117, .58); }
+
+.eyebrow-rune {
+  color: rgba(184, 160, 205, .66);
+  text-shadow: 0 0 10px rgba(124,28,255,.18);
+}
+.eyebrow-rune::before, .eyebrow-rune::after {
+  color: rgba(0,215,255,.55);
+  text-shadow: 0 0 10px rgba(0,215,255,.35);
+}
+
+.title-ember {
+  color: #ff35bf;
+  text-shadow: 0 0 18px rgba(255,0,184,.32), 0 0 28px rgba(255,0,184,.16);
+}
+
+.occult-card h3,
+.occult-panel h1,
+.occult-panel h2 {
+  color: rgba(232, 221, 240, .88);
+}
+
+.occult-card p,
+.occult-panel p {
+  color: rgba(190, 165, 209, .58);
+}
+
+.occult-link {
+  color: rgba(184, 160, 205, .66);
+}
+.occult-link:hover {
+  color: rgba(222, 198, 235, .95);
+  text-shadow: 0 0 14px rgba(124,28,255,.35);
+}

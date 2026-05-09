@@ -3,7 +3,7 @@ export function HeroEffects() {
 
   return (
     <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden bg-[#020006]">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_36%,rgba(92,0,142,.40),transparent_17%),radial-gradient(circle_at_50%_48%,rgba(255,0,184,.18),transparent_29%),radial-gradient(circle_at_50%_12%,rgba(28,0,52,.70),transparent_36%),linear-gradient(90deg,#020006_0%,#0b0015_50%,#020006_100%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_36%,rgba(92,0,142,.46),transparent_17%),radial-gradient(circle_at_50%_48%,rgba(255,0,184,.20),transparent_29%),radial-gradient(circle_at_50%_12%,rgba(28,0,52,.72),transparent_36%),radial-gradient(circle_at_50%_70%,rgba(120,0,50,.12),transparent_20%),linear-gradient(90deg,#000000_0%,#090012_50%,#000000_100%)]" />
 
       <div className="absolute left-1/2 top-[45%] h-[560px] w-[560px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-poison/16 blur-[90px] animate-breathe-purple" />
       <div className="absolute left-1/2 top-[50%] h-[250px] w-[250px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-ember/13 blur-[58px] animate-breathe-purple" />
@@ -33,6 +33,7 @@ export function HeroEffects() {
       <div className="absolute right-[8%] top-[22%] h-72 w-72 rounded-full bg-ember/10 blur-3xl animate-fog-b" />
       <div className="absolute left-[36%] top-[4%] h-56 w-56 rounded-full bg-violet/10 blur-3xl animate-fog-a" />
       <div className="absolute right-[34%] bottom-[12%] h-56 w-56 rounded-full bg-poison/9 blur-3xl animate-fog-b" />
+      <div className="absolute left-[44%] top-[30%] h-80 w-80 rounded-full bg-blood/10 blur-[110px] animate-fog-a" />
 
       {stars.map((_, index) => (
         <span

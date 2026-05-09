@@ -64,3 +64,8 @@ Hero alanı Lovable görünüme daha çok yaklaştırıldı: çember büyütüld
 ## v7 Lovable Match
 
 Video karelerine göre ana sayfa yeniden eşleştirildi: cyan ay + pembe logo sistemi, Lovable tarzı header, çok büyük hareketli ritüel çemberi, sol cyan ay ve sağ pembe yıldız, 3 kolonlu 'Karanlık kapılar' kartları, KAPIYI ARALA metni, daha derin karanlık/premium efektler.
+
+
+## v8 Occult Upgrade
+
+Daha ürkütücü/gizemli görünüm için koyu panel sistemi, daha dekoratif tipografi, daha az düz beyaz metin, hover glow efektli butonlar, mistik kart hoverları ve daha karanlık atmosfer eklendi.

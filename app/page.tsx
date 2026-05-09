@@ -17,7 +17,7 @@ export default function HomePage() {
 
         <div className="relative mx-auto max-w-7xl">
           <div className="mx-auto max-w-5xl px-5 pt-[58px] text-center md:pt-[88px]">
-            <div className="mx-auto mb-7 inline-flex md:mb-8 items-center gap-2 rounded-full border border-violet/42 bg-black/42 px-5 py-2 text-[11px] font-semibold uppercase tracking-[0.42em] text-mourning shadow-[0_0_18px_rgba(255,0,184,.18)]">
+            <div className="hero-omen mx-auto mb-7 inline-flex items-center gap-2 rounded-full border border-violet/42 bg-black/42 px-5 py-2 text-[10px] font-semibold uppercase tracking-[0.34em] text-mourning shadow-[0_0_18px_rgba(124,28,255,.18)] md:mb-8 md:text-[11px] md:tracking-[0.42em]">
               <span className="h-2 w-2 rounded-full bg-ember shadow-[0_0_12px_rgba(255,0,184,.8)]" />
               Gece açıldığında, perde aralanır
             </div>
@@ -28,7 +28,11 @@ export default function HomePage() {
               <span className="block">Seni Bekliyor</span>
             </h1>
 
-            <div className="ghost-line mt-7 text-[11px] uppercase tracking-[0.30em] text-mourning-dim md:text-[12px] md:tracking-[0.32em]">fısıltılar yaklaşır · semboller belirir · kapılar aralanır</div>
+            <p className="mx-auto mt-7 max-w-[720px] text-[15px] leading-8 text-mourning md:text-[16px]">
+              Her okuma, gecenin sessizliğinde sana özel hazırlanır; her cümle, perde arkasındaki işareti açığa çıkarır.
+            </p>
+
+            <div className="ghost-line mt-7 text-[11px] uppercase tracking-[0.30em] text-blood-dim md:text-[12px] md:tracking-[0.32em]">fısıltılar yaklaşır · semboller belirir · kapılar aralanır</div>
 
             <div className="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
               <Link href="#kategoriler" className="occult-button px-10 py-4 text-[12px] font-semibold uppercase tracking-[0.22em] text-white">
@@ -39,7 +43,7 @@ export default function HomePage() {
               </Link>
             </div>
 
-            <div className="mt-12 text-[10px] uppercase tracking-[0.36em] text-mourning-dim">gizli · sezgisel · ritüel · kişiye özel</div>
+            <div className="mt-12 text-[10px] uppercase tracking-[0.36em] text-blood-dim">gizli · sezgisel · ritüel · kişiye özel</div>
           </div>
         </div>
       </section>

@@ -1,11 +1,13 @@
 import {
-  Moon,
+  Coffee,
   Heart,
   Sparkles,
   Eye,
-  Star,
+  Orbit,
+  MoonStar,
+  Binary,
   Flame,
-  CloudMoon,
+  Map,
   ShieldCheck,
   Clock3,
   LockKeyhole,
@@ -45,7 +47,7 @@ export const categories: Category[] = [
   {
     slug: "kahve-fali",
     title: "Kahve Falı",
-    icon: Moon,
+    icon: Coffee,
     intro: "Telvedeki sessiz uyarı",
     description: "Fincanın dibindeki sembollerden kişisel kehanetin çıkarılır.",
     accent: "from-violet to-ember"
@@ -69,7 +71,7 @@ export const categories: Category[] = [
   {
     slug: "astroloji",
     title: "Astroloji Yorumu",
-    icon: Star,
+    icon: Orbit,
     intro: "Yıldızların kişisel haritası",
     description: "Doğum haritan üzerinden geleceğin enerjik akışı yorumlanır.",
     accent: "from-violet to-poison"
@@ -77,7 +79,7 @@ export const categories: Category[] = [
   {
     slug: "ruya-yorumu",
     title: "Rüya Yorumu",
-    icon: Moon,
+    icon: MoonStar,
     intro: "Bilinçaltının sansürsüz mesajı",
     description: "Rüyandaki sembollerin gerçek anlamı ve sana verdiği uyarı.",
     accent: "from-ember to-violet"
@@ -85,7 +87,7 @@ export const categories: Category[] = [
   {
     slug: "numeroloji",
     title: "Numeroloji",
-    icon: Sparkles,
+    icon: Binary,
     intro: "Sayıların gizli dili",
     description: "İsmin ve doğum tarihinle taşınan kader kodlarını keşfet.",
     accent: "from-poison to-ember"
@@ -101,7 +103,7 @@ export const categories: Category[] = [
   {
     slug: "kader-acilimi",
     title: "Kader Açılımı",
-    icon: CloudMoon,
+    icon: Map,
     intro: "Önündeki yolların karanlık haritası",
     description: "Yakın dönem kararların ve ihtimallerin gölgeli yol haritası.",
     accent: "from-violet to-ember"

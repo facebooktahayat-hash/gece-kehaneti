@@ -1,69 +1,56 @@
-
 export function HeroEffects() {
-  const stars = Array.from({ length: 36 });
+  const stars = Array.from({ length: 38 });
 
   return (
     <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden bg-[#020006]">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_34%,rgba(90,0,145,.42),transparent_17%),radial-gradient(circle_at_50%_46%,rgba(255,0,184,.18),transparent_28%),radial-gradient(circle_at_50%_18%,rgba(24,0,44,.78),transparent_36%),linear-gradient(90deg,#020006_0%,#0b0014_48%,#020006_100%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_36%,rgba(92,0,142,.40),transparent_17%),radial-gradient(circle_at_50%_48%,rgba(255,0,184,.18),transparent_29%),radial-gradient(circle_at_50%_12%,rgba(28,0,52,.70),transparent_36%),linear-gradient(90deg,#020006_0%,#0b0015_50%,#020006_100%)]" />
 
-      <div className="absolute left-1/2 top-[38%] h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#8d13ff]/16 blur-[86px] animate-violet-breath" />
-      <div className="absolute left-1/2 top-[45%] h-[230px] w-[230px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#ff00b8]/12 blur-[55px] animate-violet-breath" />
+      <div className="absolute left-1/2 top-[45%] h-[560px] w-[560px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-poison/16 blur-[90px] animate-breathe-purple" />
+      <div className="absolute left-1/2 top-[50%] h-[250px] w-[250px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-ember/13 blur-[58px] animate-breathe-purple" />
 
-      {/* Main huge ritual circle */}
-      <svg
-        className="absolute left-1/2 top-[41%] h-[980px] w-[980px] animate-ritual-rotate opacity-[.84]"
-        viewBox="0 0 1000 1000"
-        fill="none"
-      >
-        <circle cx="500" cy="500" r="382" className="ritual-main" strokeWidth="1" />
-        <circle cx="500" cy="500" r="336" className="ritual-soft" strokeWidth=".75" />
-        <circle cx="500" cy="500" r="279" className="ritual-main" strokeWidth=".4" strokeDasharray="5 16" opacity=".6" />
-        <circle cx="500" cy="500" r="214" className="ritual-soft" strokeWidth=".6" />
-        <circle cx="500" cy="500" r="118" className="ritual-main" strokeWidth=".7" opacity=".75" />
-        <path d="M500 126 L602 382 L876 382 L654 537 L738 820 L500 651 L262 820 L346 537 L124 382 L398 382 Z" className="ritual-main" strokeWidth=".78" />
-        <path d="M500 166 C674 201 812 329 812 500 C812 671 674 799 500 834 C326 799 188 671 188 500 C188 329 326 201 500 166Z" className="ritual-soft" strokeWidth=".55" />
-        <path d="M214 214 L786 786 M786 214 L214 786 M500 118 L500 882 M118 500 L882 500" className="ritual-soft" strokeWidth=".36" />
+      <svg className="absolute left-1/2 top-[52%] h-[1040px] w-[1040px] animate-ring-clockwise opacity-[.83]" viewBox="0 0 1000 1000" fill="none">
+        <circle cx="500" cy="500" r="398" className="ritual-purple" strokeWidth="1" />
+        <circle cx="500" cy="500" r="344" className="ritual-pink" strokeWidth=".75" />
+        <circle cx="500" cy="500" r="286" className="ritual-purple" strokeWidth=".42" strokeDasharray="5 14" />
+        <circle cx="500" cy="500" r="218" className="ritual-cyan" strokeWidth=".62" />
+        <circle cx="500" cy="500" r="122" className="ritual-pink" strokeWidth=".55" opacity=".7" />
+        <path d="M500 122 L604 383 L882 383 L657 541 L742 827 L500 655 L258 827 L343 541 L118 383 L396 383 Z" className="ritual-pink" strokeWidth=".76" />
+        <path d="M500 164 C678 200 815 326 815 500 C815 674 678 800 500 836 C322 800 185 674 185 500 C185 326 322 200 500 164Z" className="ritual-purple" strokeWidth=".55" />
+        <path d="M214 214 L786 786 M786 214 L214 786 M500 118 L500 882 M118 500 L882 500" className="ritual-cyan" strokeWidth=".36" />
       </svg>
 
-      {/* Inner opposite spin circle */}
-      <svg
-        className="absolute left-1/2 top-[41%] h-[740px] w-[740px] animate-ritual-reverse opacity-[.53]"
-        viewBox="0 0 1000 1000"
-        fill="none"
-      >
-        <circle cx="500" cy="500" r="385" className="ritual-soft" strokeWidth=".45" strokeDasharray="18 18" />
-        <circle cx="500" cy="500" r="248" className="ritual-main" strokeWidth=".42" strokeDasharray="9 17" />
-        <path d="M500 244 L683 683 L317 683 Z" className="ritual-soft" strokeWidth=".42" />
-        <path d="M500 756 L683 317 L317 317 Z" className="ritual-main" strokeWidth=".4" />
-        <path d="M500 350 C582 350 650 418 650 500 C650 582 582 650 500 650 C418 650 350 582 350 500 C350 418 418 350 500 350Z" className="ritual-soft" strokeWidth=".38" />
+      <svg className="absolute left-1/2 top-[52%] h-[750px] w-[750px] animate-ring-counter opacity-[.55]" viewBox="0 0 1000 1000" fill="none">
+        <circle cx="500" cy="500" r="388" className="ritual-pink" strokeWidth=".42" strokeDasharray="17 20" />
+        <circle cx="500" cy="500" r="252" className="ritual-cyan" strokeWidth=".42" strokeDasharray="8 17" />
+        <path d="M500 244 L684 684 L316 684 Z" className="ritual-purple" strokeWidth=".42" />
+        <path d="M500 756 L684 316 L316 316 Z" className="ritual-pink" strokeWidth=".4" />
       </svg>
 
-      {/* side decorative icons */}
-      <span className="absolute left-[7.2%] top-[35%] text-[3rem] text-ember/36 drop-shadow-[0_0_15px_rgba(255,0,184,.85)] animate-symbol-float">☾</span>
-      <span className="absolute right-[8.8%] top-[38%] text-[2.3rem] text-ember/72 drop-shadow-[0_0_15px_rgba(255,0,184,.85)] animate-symbol-float">✦</span>
+      <span className="absolute left-[8.5%] top-[26%] text-[3.15rem] text-frost/55 drop-shadow-[0_0_16px_rgba(0,215,255,.85)] animate-float-icon">☾</span>
+      <span className="absolute right-[8.5%] top-[36%] text-[2.45rem] text-ember/76 drop-shadow-[0_0_16px_rgba(255,0,184,.85)] animate-float-icon">✦</span>
 
-      <div className="absolute left-[8%] top-[17%] h-72 w-72 rounded-full bg-ember/8 blur-3xl animate-fog-left" />
-      <div className="absolute right-[9%] top-[22%] h-72 w-72 rounded-full bg-poison/10 blur-3xl animate-fog-right" />
-      <div className="absolute left-[37%] top-[7%] h-52 w-52 rounded-full bg-violet/10 blur-3xl animate-fog-left" />
-      <div className="absolute right-[34%] bottom-[16%] h-56 w-56 rounded-full bg-ember/8 blur-3xl animate-fog-right" />
+      <div className="absolute left-[7%] top-[15%] h-72 w-72 rounded-full bg-frost/7 blur-3xl animate-fog-a" />
+      <div className="absolute right-[8%] top-[22%] h-72 w-72 rounded-full bg-ember/10 blur-3xl animate-fog-b" />
+      <div className="absolute left-[36%] top-[4%] h-56 w-56 rounded-full bg-violet/10 blur-3xl animate-fog-a" />
+      <div className="absolute right-[34%] bottom-[12%] h-56 w-56 rounded-full bg-poison/9 blur-3xl animate-fog-b" />
 
       {stars.map((_, index) => (
         <span
           key={index}
-          className="absolute h-1 w-1 rounded-full bg-white/75 animate-tiny-twinkle"
+          className="absolute h-1 w-1 rounded-full bg-white/70 animate-star-twinkle"
           style={{
-            left: "{4 + (index * 8.2) % 92}%",
-            top: "{11 + (index * 5.7) % 78}%",
-            animationDelay: "{index * 0.17}s",
-            animationDuration: "{3.1 + (index % 6) * 0.65}s",
+            left: `${4 + (index * 8.2) % 92}%`,
+            top: `${10 + (index * 5.8) % 79}%`,
+            animationDelay: `${index * 0.17}s`,
+            animationDuration: `${3.1 + (index % 6) * 0.68}s`
           }}
         />
       ))}
 
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_28%_24%,rgba(255,255,255,.08)_1px,transparent_1px)] [background-size:40px_40px] opacity-[.11]" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_42%,transparent_0%,rgba(0,0,0,.16)_42%,rgba(0,0,0,.72)_100%)]" />
-      <div className="absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-abyss via-abyss/84 to-transparent" />
-      <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-black/68 to-transparent" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_28%_24%,rgba(255,255,255,.075)_1px,transparent_1px)] [background-size:40px_40px] opacity-[.11]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_46%,transparent_0%,rgba(0,0,0,.12)_42%,rgba(0,0,0,.74)_100%)]" />
+      <div className="absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-abyss via-abyss/86 to-transparent" />
+      <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-black/60 to-transparent" />
     </div>
   );
 }

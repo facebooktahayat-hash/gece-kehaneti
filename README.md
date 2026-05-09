@@ -59,3 +59,8 @@ Tüm mavi/turkuaz vurgu renkleri ana sayfadaki 'Karanlık Yüzü' yazısındaki 
 ## v6 Hero Match Update
 
 Hero alanı Lovable görünüme daha çok yaklaştırıldı: çember büyütüldü ve yukarı taşındı, header ile hero arası boşluk azaltıldı, buton hover neon efektleri güçlendirildi, küçük yan semboller konumlandırıldı ve ilk ekran daha dolu/premium hale getirildi.
+
+
+## v7 Lovable Match
+
+Video karelerine göre ana sayfa yeniden eşleştirildi: cyan ay + pembe logo sistemi, Lovable tarzı header, çok büyük hareketli ritüel çemberi, sol cyan ay ve sağ pembe yıldız, 3 kolonlu 'Karanlık kapılar' kartları, KAPIYI ARALA metni, daha derin karanlık/premium efektler.

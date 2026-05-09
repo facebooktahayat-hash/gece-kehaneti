@@ -3,80 +3,34 @@
 @tailwind utilities;
 
 :root { color-scheme: dark; }
-
 html { scroll-behavior: smooth; }
 
-body {
-  min-height: 100vh;
-  background: #020006;
-  color: white;
-}
+body { min-height: 100vh; background: #020006; color: white; }
 
-::selection {
-  background: rgba(255, 0, 184, .55);
-  color: white;
-}
+::selection { background: rgba(255, 0, 184, .55); color: white; }
 
-@keyframes ritualRotate {
-  from { transform: translate(-50%, -50%) rotate(0deg); }
-  to { transform: translate(-50%, -50%) rotate(360deg); }
-}
+@keyframes ringClockwise { from { transform: translate(-50%, -50%) rotate(0deg); } to { transform: translate(-50%, -50%) rotate(360deg); } }
+@keyframes ringCounter { from { transform: translate(-50%, -50%) rotate(360deg); } to { transform: translate(-50%, -50%) rotate(0deg); } }
+@keyframes breathePurple { 0%,100% { transform: translate(-50%, -50%) scale(1); opacity:.52; } 50% { transform: translate(-50%, -50%) scale(1.08); opacity:.9; } }
+@keyframes fogMoveA { 0%,100% { transform: translate3d(0,0,0) scale(1); opacity:.14; } 50% { transform: translate3d(30px,-14px,0) scale(1.08); opacity:.35; } }
+@keyframes fogMoveB { 0%,100% { transform: translate3d(0,0,0) scale(1); opacity:.13; } 50% { transform: translate3d(-26px,18px,0) scale(1.07); opacity:.32; } }
+@keyframes starTwinkle { 0%,100% { opacity:.16; transform:scale(.72); } 50% { opacity:.86; transform:scale(1.12); } }
+@keyframes floatIcon { 0%,100% { transform:translateY(0); opacity:.52; } 50% { transform:translateY(-12px); opacity:.92; } }
 
-@keyframes ritualReverse {
-  from { transform: translate(-50%, -50%) rotate(360deg); }
-  to { transform: translate(-50%, -50%) rotate(0deg); }
-}
-
-@keyframes violetBreath {
-  0%, 100% { opacity: .55; transform: translate(-50%, -50%) scale(1); }
-  50% { opacity: .92; transform: translate(-50%, -50%) scale(1.075); }
-}
-
-@keyframes fogLeft {
-  0%, 100% { transform: translate3d(0,0,0) scale(1); opacity: .18; }
-  50% { transform: translate3d(32px,-12px,0) scale(1.08); opacity: .38; }
-}
-
-@keyframes fogRight {
-  0%, 100% { transform: translate3d(0,0,0) scale(1); opacity: .14; }
-  50% { transform: translate3d(-28px,16px,0) scale(1.07); opacity: .32; }
-}
-
-@keyframes tinyTwinkle {
-  0%, 100% { opacity: .18; transform: scale(.7); }
-  50% { opacity: .85; transform: scale(1.08); }
-}
-
-@keyframes symbolFloat {
-  0%, 100% { transform: translateY(0); opacity: .48; }
-  50% { transform: translateY(-12px); opacity: .9; }
-}
-
-.animate-ritual-rotate { animation: ritualRotate 52s linear infinite; }
-.animate-ritual-reverse { animation: ritualReverse 68s linear infinite; }
-.animate-violet-breath { animation: violetBreath 7.5s ease-in-out infinite; }
-.animate-fog-left { animation: fogLeft 9s ease-in-out infinite; }
-.animate-fog-right { animation: fogRight 11s ease-in-out infinite; }
-.animate-tiny-twinkle { animation: tinyTwinkle 4.2s ease-in-out infinite; }
-.animate-symbol-float { animation: symbolFloat 5.8s ease-in-out infinite; }
+.animate-ring-clockwise { animation: ringClockwise 58s linear infinite; }
+.animate-ring-counter { animation: ringCounter 76s linear infinite; }
+.animate-breathe-purple { animation: breathePurple 8s ease-in-out infinite; }
+.animate-fog-a { animation: fogMoveA 9s ease-in-out infinite; }
+.animate-fog-b { animation: fogMoveB 11s ease-in-out infinite; }
+.animate-star-twinkle { animation: starTwinkle 4s ease-in-out infinite; }
+.animate-float-icon { animation: floatIcon 6s ease-in-out infinite; }
 
 .glass {
-  border: 1px solid rgba(255,255,255,.085);
-  background: linear-gradient(180deg, rgba(255,255,255,.052), rgba(255,255,255,.016));
+  border: 1px solid rgba(255,255,255,.075);
+  background: linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.014));
   backdrop-filter: blur(18px);
 }
 
-.ritual-main {
-  stroke: rgba(255, 0, 184, .40);
-  filter: drop-shadow(0 0 7px rgba(255,0,184,.44));
-}
-
-.ritual-soft {
-  stroke: rgba(183, 0, 255, .32);
-  filter: drop-shadow(0 0 8px rgba(183,0,255,.38));
-}
-
-.ritual-cyan {
-  stroke: rgba(255, 0, 184, .22);
-  filter: drop-shadow(0 0 6px rgba(255,0,184,.34));
-}
+.ritual-pink { stroke: rgba(255, 0, 184, .34); filter: drop-shadow(0 0 8px rgba(255,0,184,.44)); }
+.ritual-purple { stroke: rgba(124, 28, 255, .28); filter: drop-shadow(0 0 8px rgba(124,28,255,.32)); }
+.ritual-cyan { stroke: rgba(0, 215, 255, .20); filter: drop-shadow(0 0 7px rgba(0,215,255,.26)); }

@@ -14,12 +14,12 @@ export function Stats() {
       {items.map((item) => (
         <div
           key={item.label}
-          className="rounded-[1.35rem] border border-ember/20 bg-[#14001f]/72 p-6 text-center shadow-[0_0_22px_rgba(255,0,184,.24)] backdrop-blur-xl transition hover:shadow-[0_0_30px_rgba(255,0,184,.34)]"
+          className="rounded-2xl border border-violet/22 bg-[#080010]/72 p-6 text-center shadow-[0_0_22px_rgba(255,0,184,.18)] backdrop-blur-xl transition hover:border-ember/35 hover:shadow-[0_0_32px_rgba(255,0,184,.32)]"
         >
-          <div className="text-[2rem] font-black text-white drop-shadow-[0_0_13px_rgba(255,255,255,.14)] md:text-[2.35rem]">
+          <div className="text-[2rem] font-black text-ember drop-shadow-[0_0_14px_rgba(255,0,184,.55)] md:text-[2.35rem]">
             {item.value}
           </div>
-          <div className="mt-2 text-[10px] text-white/42">{item.label}</div>
+          <div className="mt-2 text-[10px] uppercase tracking-[0.16em] text-white/42">{item.label}</div>
         </div>
       ))}
     </div>

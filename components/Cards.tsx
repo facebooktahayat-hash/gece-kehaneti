@@ -105,7 +105,7 @@ export function PackageCard({ item }: { item: Package }) {
         ))}
       </ul>
       <span className="occult-button mt-auto px-5 py-3 text-center text-sm font-semibold text-bone">
-        <span className="relative z-10">{isLegendary ? "Kehanet Ödemesine Geç" : "Şimdi Fal Baktır"}</span>
+        <span className="relative z-10">{isLegendary ? "Kehanet Formuna Geç" : "Önce Formu Doldur"}</span>
       </span>
     </>
   );

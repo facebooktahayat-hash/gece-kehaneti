@@ -144,3 +144,20 @@ Mobilde kürenin üst kısmını boğan koyu üst katman hafifletildi. Kürenin 
 ## v23 Ghost Line Reveal
 
 Hero içindeki “fısıltılar yaklaşır · semboller belirir · kapılar aralanır” satırına tüm platformlarda çalışan yavaş soyutlaşma ve tekrar belirginleşme efekti eklendi.
+
+## v24 Form First + Email Flow
+
+Tüm ürünlerde doğrudan ödeme yolu kaldırıldı. Ürün kartı ve ürün detay sayfaları sipariş formuna yönlendirir; DePay ödeme penceresi yalnızca sipariş formu zorunlu alanları doldurulup form e-posta ile gönderildikten sonra açılır. Kahve falı ürünlerinde fincan görselleri zorunlu dosya alanı olarak eklendi.
+
+İletişim formu artık `/api/contact` üzerinden e-posta gönderir. Sipariş formu da `/api/order` üzerinden ürün, müşteri bilgisi, soru/not ve kahve falı görsellerini `gecekehaneti@gmail.com` adresine iletir.
+
+Vercel Environment Variables alanına şunlar eklenmelidir:
+
+```env
+RESEND_API_KEY=re_xxxxxxxxxxxxxxxxxxxxxxxxx
+CONTACT_FROM_EMAIL="Gece Kehaneti <noreply@senin-domainin.com>"
+CONTACT_TO_EMAIL=gecekehaneti@gmail.com
+ORDER_TO_EMAIL=gecekehaneti@gmail.com
+```
+
+Not: `CONTACT_FROM_EMAIL` için Resend üzerinde doğrulanmış domain kullanılması önerilir. API anahtarı eklenmeden iletişim ve sipariş e-postaları gönderilemez.

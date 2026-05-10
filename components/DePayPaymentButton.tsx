@@ -21,6 +21,8 @@ type DePayPaymentButtonProps = {
   priceTl: number;
   className?: string;
   children?: React.ReactNode;
+  validateBeforePayment?: () => boolean | Promise<boolean>;
+  getPayload?: () => Record<string, unknown>;
 };
 
 function loadDePayWidget() {
@@ -58,7 +60,9 @@ export function DePayPaymentButton({
   productName,
   priceTl,
   className = "",
-  children
+  children,
+  validateBeforePayment,
+  getPayload
 }: DePayPaymentButtonProps) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -68,11 +72,20 @@ export function DePayPaymentButton({
     setError("");
 
     try {
+      if (validateBeforePayment) {
+        const canContinue = await validateBeforePayment();
+        if (!canContinue) {
+          return;
+        }
+      }
+
       await loadDePayWidget();
 
       if (!window.DePayWidgets?.Payment) {
         throw new Error("DePay ödeme penceresi açılamadı.");
       }
+
+      const extraPayload = getPayload ? getPayload() : {};
 
       window.DePayWidgets.Payment({
         integration: depayIntegrationId,
@@ -80,7 +93,8 @@ export function DePayPaymentButton({
           productSlug,
           productName,
           priceTl,
-          source: "gece-kehaneti"
+          source: "gece-kehaneti",
+          ...extraPayload
         }
       });
     } catch (paymentError) {

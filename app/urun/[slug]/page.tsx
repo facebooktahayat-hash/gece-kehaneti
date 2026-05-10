@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getCategory, getPackage } from "@/lib/data";
-import { DePayPaymentButton } from "@/components/DePayPaymentButton";
 import { ArrowLeft, CheckCircle2, Clock3 } from "lucide-react";
 
 export default function ProductPage({ params }: { params: { slug: string } }) {
@@ -38,17 +37,10 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
           <aside className="occult-panel h-fit p-7">
             <div className="text-sm text-mourning-dim">Paket fiyatı</div>
             <div className="mt-2 font-display text-5xl font-black text-ember drop-shadow-[0_0_16px_rgba(255,0,184,.35)]">{item.price.toLocaleString("tr-TR")} TL</div>
-            <DePayPaymentButton
-              productSlug={item.slug}
-              productName={item.name}
-              priceTl={item.price}
-              className="occult-button mt-7 flex w-full px-6 py-4 text-center font-semibold text-white"
-            >
-              {isLegendary ? "DePay ile Kripto Ödeme Yap" : "DePay ile Kripto Öde"}
-            </DePayPaymentButton>
-            {!isLegendary && (
-              <Link href={`/siparis/${item.slug}`} className="occult-button-ghost mt-3 flex px-6 py-3 text-center text-sm font-semibold text-mourning"><span className="relative z-10">Önce Sipariş Formu Doldur</span></Link>
-            )}
+            <Link href={`/siparis/${item.slug}`} className="occult-button mt-7 flex w-full px-6 py-4 text-center font-semibold text-white">
+              <span className="relative z-10">Önce Sipariş Formu Doldur</span>
+            </Link>
+            <p className="mt-3 text-xs leading-5 text-mourning-dim">Tüm ürünlerde ödeme öncesi sipariş formu zorunludur.</p>
             <p className="mt-5 text-xs leading-6 text-mourning-dim">Fal hizmeti eğlence ve kişisel farkındalık amaçlıdır. Kesin sonuç, sağlık, hukuk veya yatırım danışmanlığı sunmaz.</p>
           </aside>
         </div>

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Category, Package, gumroadLinks } from "@/lib/data";
+import { Category, Package } from "@/lib/data";
 import { ArrowRight, Clock3, Gem, Star } from "lucide-react";
 
 const categoryIconStyles: Record<string, { icon: string; shell: string; glow: string }> = {
@@ -112,9 +112,9 @@ export function PackageCard({ item }: { item: Package }) {
 
   if (isLegendary) {
     return (
-      <a href={gumroadLinks.kehanet} target="_blank" rel="noopener noreferrer" className={cardClassName}>
+      <Link href={`/urun/${item.slug}`} className={cardClassName}>
         {cardContent}
-      </a>
+      </Link>
     );
   }
 

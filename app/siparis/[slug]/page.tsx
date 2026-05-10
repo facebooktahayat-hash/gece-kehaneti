@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getCategory, getPackage, gumroadLinks } from "@/lib/data";
+import { getCategory, getPackage } from "@/lib/data";
+import { DePayPaymentButton } from "@/components/DePayPaymentButton";
 import { ArrowLeft } from "lucide-react";
 
 export default function OrderPage({ params }: { params: { slug: string } }) {
@@ -34,11 +35,14 @@ export default function OrderPage({ params }: { params: { slug: string } }) {
             </label>
             <label className="grid gap-2"><span className="text-sm text-mourning">Ek not</span><textarea className="occult-textarea min-h-28" placeholder="İsteğe bağlı ek not..." /></label>
             <label className="occult-card flex items-start gap-3 p-4 text-sm text-mourning"><input type="checkbox" className="mt-1" />Bu hizmetin eğlence ve kişisel farkındalık amaçlı olduğunu, kesin gelecek garantisi sunmadığını kabul ediyorum.</label>
-            {isLegendary ? (
-              <a href={gumroadLinks.kehanet} target="_blank" rel="noopener noreferrer" className="occult-button px-8 py-4 text-center font-semibold text-white"><span className="relative z-10">Kehanet Ödemesine Geç</span></a>
-            ) : (
-              <Link href={`/odeme?paket=${item.slug}`} className="occult-button px-8 py-4 text-center font-semibold text-white"><span className="relative z-10">Ödeme Adımına Geç</span></Link>
-            )}
+            <DePayPaymentButton
+              productSlug={item.slug}
+              productName={item.name}
+              priceTl={item.price}
+              className="occult-button px-8 py-4 text-center font-semibold text-white"
+            >
+              DePay Kripto Ödemesine Geç
+            </DePayPaymentButton>
           </form>
         </div>
       </div>

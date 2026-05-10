@@ -119,9 +119,9 @@ const packageTemplates = [
 ];
 
 
-export const gumroadLinks = {
-  kehanet: "https://2883749444859.gumroad.com/l/kehanet?wanted=true"
-};
+export const depayIntegrationId = "7f734e74-bf0d-43b8-bf53-1e1913dc42b5";
+
+export const depayEndpointPath = "/api/depay/payment";
 
 export const legendaryPackage: Package = {
   slug: "kehanet",

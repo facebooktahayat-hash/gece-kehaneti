@@ -31,7 +31,7 @@ export function Footer() {
             <Link href="/iade" className="transition hover:text-bone">İade ve İptal</Link>
           </div>
         </div>
-        <div>
+        <div className="lg:-mt-1 lg:self-start">
           <PaymentLogos compact />
         </div>
       </div>

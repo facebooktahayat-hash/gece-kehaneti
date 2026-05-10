@@ -3,8 +3,8 @@ import type { ReactNode } from "react";
 
 function CompactLogoPill({ children }: { children: ReactNode }) {
   return (
-    <div className="flex h-11 min-w-[70px] items-center justify-center rounded-xl border border-white/12 bg-white px-3 shadow-[0_8px_20px_rgba(0,0,0,.22)]">
-      {children}
+    <div className="flex h-11 w-[108px] shrink-0 items-center justify-center rounded-xl border border-white/12 bg-white px-3 shadow-[0_8px_20px_rgba(0,0,0,.22)] sm:w-[112px]">
+      <div className="max-w-full scale-[0.96] sm:scale-100">{children}</div>
     </div>
   );
 }
@@ -92,28 +92,30 @@ type PaymentLogosProps = {
 export function PaymentLogos({ compact = false }: PaymentLogosProps) {
   if (compact) {
     return (
-      <div className="rounded-[1.1rem] border border-white/10 bg-black/35 p-4 shadow-[0_0_24px_rgba(124,28,255,.08)]">
+      <div className="rounded-[1.1rem] border border-white/10 bg-black/35 px-4 pb-3 pt-3 shadow-[0_0_24px_rgba(124,28,255,.08)] lg:pt-2.5">
         <div className="mb-3 flex items-center gap-2.5">
-          <span className="grid h-8 w-8 place-items-center rounded-full border border-frost/20 bg-frost/10 shadow-[0_0_16px_rgba(0,215,255,.14)]">
+          <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-frost/20 bg-frost/10 shadow-[0_0_16px_rgba(0,215,255,.14)]">
             <ShieldCheck className="h-4.5 w-4.5 text-frost" />
           </span>
           <div>
-            <h3 className="font-display text-sm font-semibold uppercase tracking-[0.16em] text-bone">Güvenli Alışveriş</h3>
-            <p className="mt-0.5 text-[11px] leading-4 text-mourning">Ödeme altyapısı destek logoları.</p>
+            <h3 className="font-display text-[13px] font-semibold uppercase tracking-[0.14em] text-bone sm:text-sm sm:tracking-[0.16em]">Güvenli Alışveriş</h3>
+            <p className="mt-0.5 text-[10px] leading-4 text-mourning sm:text-[11px]">Ödeme altyapısı destek logoları.</p>
           </div>
         </div>
 
-        <div className="flex flex-wrap gap-2.5">
-          <CompactLogoPill><MastercardMark small /></CompactLogoPill>
-          <CompactLogoPill><AmexMark small /></CompactLogoPill>
-          <CompactLogoPill><VisaMark small /></CompactLogoPill>
-          <CompactLogoPill><TroyMark small /></CompactLogoPill>
-          <CompactLogoPill><PaypalMark small /></CompactLogoPill>
-          <CompactLogoPill><StripeMark small /></CompactLogoPill>
-          <CompactLogoPill><BitcoinMark small /></CompactLogoPill>
+        <div className="overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:overflow-visible">
+          <div className="flex w-max gap-2.5 md:w-full md:flex-wrap">
+            <CompactLogoPill><MastercardMark small /></CompactLogoPill>
+            <CompactLogoPill><AmexMark small /></CompactLogoPill>
+            <CompactLogoPill><VisaMark small /></CompactLogoPill>
+            <CompactLogoPill><TroyMark small /></CompactLogoPill>
+            <CompactLogoPill><PaypalMark small /></CompactLogoPill>
+            <CompactLogoPill><StripeMark small /></CompactLogoPill>
+            <CompactLogoPill><BitcoinMark small /></CompactLogoPill>
+          </div>
         </div>
 
-        <div className="mt-3 flex items-center gap-2 text-[10px] uppercase tracking-[0.18em] text-mourning-dim">
+        <div className="mt-3 flex flex-wrap items-center gap-2 text-[10px] uppercase tracking-[0.16em] text-mourning-dim">
           <LockKeyhole className="h-3.5 w-3.5 text-ember" />
           Güvenli ödeme bildirimi
         </div>

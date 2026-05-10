@@ -77,6 +77,7 @@ export function CategoryCard({ category }: { category: Category }) {
 
 export function PackageCard({ item }: { item: Package }) {
   const isLegendary = item.slug === "kehanet";
+  const isPopular = item.level === "En çok seçilen" || item.slug.includes("derin-yorum");
   const cardClassName = `occult-card group flex h-full flex-col p-6 ${isLegendary ? "legendary-product-card" : ""}`;
   const cardContent = (
     <>
@@ -87,7 +88,12 @@ export function PackageCard({ item }: { item: Package }) {
           <div className="pointer-events-none absolute left-6 top-6 text-[9px] font-black uppercase tracking-[0.35em] text-gold/80 drop-shadow-[0_0_12px_rgba(247,200,107,.28)]">En Efsane Ürün</div>
         </>
       )}
-      <div className={`mb-4 flex items-center justify-between ${isLegendary ? "mt-7" : ""}`}>
+      {!isLegendary && isPopular && (
+        <div className="mb-4 inline-flex w-fit rounded-full border border-gold/35 bg-gold/10 px-3 py-1 text-[10px] font-black uppercase tracking-[0.18em] text-gold shadow-[0_0_14px_rgba(247,200,107,.12)]">
+          En Çok Tercih Edilen
+        </div>
+      )}
+      <div className={`mb-4 flex items-center justify-between ${isLegendary ? "mt-7" : ""} ${!isLegendary && isPopular ? "" : ""}`}>
         <span className={`rounded-full border px-3 py-1 text-xs ${isLegendary ? "border-gold/35 bg-gold/10 text-gold" : "border-ember/20 bg-ember/10 text-[#c9a6df]"}`}>{item.level}</span>
         <Gem className={`h-5 w-5 drop-shadow-[0_0_10px_rgba(247,200,107,.35)] ${isLegendary ? "text-ember" : "text-gold"}`} />
       </div>

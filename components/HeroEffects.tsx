@@ -5,10 +5,10 @@ export function HeroEffects() {
     <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden bg-[#020006]">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_36%,rgba(92,0,142,.46),transparent_17%),radial-gradient(circle_at_50%_48%,rgba(255,0,184,.20),transparent_29%),radial-gradient(circle_at_50%_12%,rgba(28,0,52,.72),transparent_36%),radial-gradient(circle_at_50%_70%,rgba(120,0,50,.12),transparent_20%),linear-gradient(90deg,#000000_0%,#090012_50%,#000000_100%)]" />
 
-      <div className="absolute left-1/2 top-[33%] h-[430px] w-[450px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-poison/12 blur-[78px] animate-breathe-purple md:top-[36%] md:h-[640px] md:w-[660px] md:bg-poison/16 md:blur-[96px]" />
-      <div className="absolute left-1/2 top-[36%] h-[170px] w-[190px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-ember/10 blur-[42px] animate-breathe-purple md:top-[40%] md:h-[300px] md:w-[320px] md:bg-ember/13 md:blur-[60px]" />
+      <div className="absolute left-1/2 top-[30%] h-[430px] w-[450px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-poison/12 blur-[78px] animate-breathe-purple md:top-[36%] md:h-[640px] md:w-[660px] md:bg-poison/16 md:blur-[96px]" />
+      <div className="absolute left-1/2 top-[33%] h-[170px] w-[190px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-ember/10 blur-[42px] animate-breathe-purple md:top-[40%] md:h-[300px] md:w-[320px] md:bg-ember/13 md:blur-[60px]" />
 
-      <svg className="absolute left-1/2 top-[35%] h-[730px] w-[730px] animate-ring-clockwise opacity-[.58] drop-shadow-[0_0_14px_rgba(255,0,184,.10)] md:top-[40%] md:h-[1120px] md:w-[1120px] md:opacity-[.96] md:drop-shadow-[0_0_24px_rgba(255,0,184,.16)]" viewBox="0 0 1000 1000" fill="none">
+      <svg className="absolute left-1/2 top-[32%] h-[730px] w-[730px] animate-ring-clockwise opacity-[.58] drop-shadow-[0_0_14px_rgba(255,0,184,.10)] md:top-[40%] md:h-[1120px] md:w-[1120px] md:opacity-[.96] md:drop-shadow-[0_0_24px_rgba(255,0,184,.16)]" viewBox="0 0 1000 1000" fill="none">
         <circle cx="500" cy="500" r="398" className="ritual-purple" strokeWidth="1.25" />
         <circle cx="500" cy="500" r="344" className="ritual-pink" strokeWidth="1.0" />
         <circle cx="500" cy="500" r="286" className="ritual-purple" strokeWidth=".72" strokeDasharray="5 14" />
@@ -19,7 +19,7 @@ export function HeroEffects() {
         <path d="M214 214 L786 786 M786 214 L214 786 M500 118 L500 882 M118 500 L882 500" className="ritual-cyan" strokeWidth=".36" />
       </svg>
 
-      <svg className="absolute left-1/2 top-[37%] h-[500px] w-[500px] animate-ring-counter opacity-[.24] md:top-[43%] md:h-[740px] md:w-[740px] md:opacity-[.57]" viewBox="0 0 1000 1000" fill="none">
+      <svg className="absolute left-1/2 top-[34%] h-[500px] w-[500px] animate-ring-counter opacity-[.24] md:top-[43%] md:h-[740px] md:w-[740px] md:opacity-[.57]" viewBox="0 0 1000 1000" fill="none">
         <circle cx="500" cy="500" r="388" className="ritual-pink" strokeWidth=".72" strokeDasharray="17 20" />
         <circle cx="500" cy="500" r="252" className="ritual-cyan" strokeWidth=".72" strokeDasharray="8 17" />
         <path d="M500 244 L684 684 L316 684 Z" className="ritual-purple" strokeWidth=".72" />

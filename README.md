@@ -129,3 +129,8 @@ Hover glow tema renklerinde daha görünür yapıldı. Mobilde hareketli metin a
 ## v20 Mobile Sphere Tuned
 
 Mobilde hero ritüel küresi küçültüldü, opaklığı azaltıldı ve yazılarla daha az çakışacak şekilde geri çekildi. Desktop görünüm korunur.
+
+
+## v21 Mobile Sphere Up
+
+Mobil hero küresi biraz daha yukarı taşındı. Desktop görünüm korunur.

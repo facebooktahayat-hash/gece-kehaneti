@@ -6,6 +6,7 @@
 html { scroll-behavior: smooth; }
 body {
   min-height: 100vh;
+  overflow-x: hidden;
   background:
     radial-gradient(circle at 50% 10%, rgba(127, 0, 181, .18), transparent 24%),
     radial-gradient(circle at 12% 18%, rgba(0, 215, 255, .06), transparent 16%),
@@ -232,6 +233,14 @@ body {
   0%,100% { opacity: .20; letter-spacing: .42em; text-shadow: 0 0 8px rgba(255,0,184,.14); }
   50% { opacity: .48; letter-spacing: .50em; text-shadow: 0 0 18px rgba(255,0,184,.35), 0 0 10px rgba(0,215,255,.12); }
 }
+
+
+@keyframes paymentLogoMarquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(-50% - 0.3125rem)); }
+}
+
+.payment-logo-marquee { animation: paymentLogoMarquee 16s linear infinite; }
 
 @keyframes cursedGlitch {
   0%, 100% { transform: translate(0,0); opacity: .92; }

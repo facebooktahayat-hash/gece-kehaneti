@@ -3,8 +3,8 @@ import type { ReactNode } from "react";
 
 function CompactLogoPill({ children }: { children: ReactNode }) {
   return (
-    <div className="flex h-11 w-[108px] shrink-0 items-center justify-center rounded-xl border border-white/12 bg-white px-3 shadow-[0_8px_20px_rgba(0,0,0,.22)] sm:w-[112px]">
-      <div className="max-w-full scale-[0.96] sm:scale-100">{children}</div>
+    <div className="flex h-11 w-[96px] shrink-0 items-center justify-center rounded-xl border border-white/12 bg-white px-3 shadow-[0_8px_20px_rgba(0,0,0,.22)] sm:w-[104px]">
+      <div className="max-w-full scale-[0.95] sm:scale-100">{children}</div>
     </div>
   );
 }
@@ -85,6 +85,16 @@ function BitcoinMark({ small = false }: { small?: boolean }) {
   );
 }
 
+const mobileLogoItems = [
+  { key: "mastercard", node: <MastercardMark small /> },
+  { key: "amex", node: <AmexMark small /> },
+  { key: "visa", node: <VisaMark small /> },
+  { key: "troy", node: <TroyMark small /> },
+  { key: "paypal", node: <PaypalMark small /> },
+  { key: "stripe", node: <StripeMark small /> },
+  { key: "bitcoin", node: <BitcoinMark small /> },
+];
+
 type PaymentLogosProps = {
   compact?: boolean;
 };
@@ -103,16 +113,22 @@ export function PaymentLogos({ compact = false }: PaymentLogosProps) {
           </div>
         </div>
 
-        <div className="overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:overflow-visible">
-          <div className="flex w-max gap-2.5 md:w-full md:flex-wrap">
-            <CompactLogoPill><MastercardMark small /></CompactLogoPill>
-            <CompactLogoPill><AmexMark small /></CompactLogoPill>
-            <CompactLogoPill><VisaMark small /></CompactLogoPill>
-            <CompactLogoPill><TroyMark small /></CompactLogoPill>
-            <CompactLogoPill><PaypalMark small /></CompactLogoPill>
-            <CompactLogoPill><StripeMark small /></CompactLogoPill>
-            <CompactLogoPill><BitcoinMark small /></CompactLogoPill>
+        <div className="relative md:hidden">
+          <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-8 bg-gradient-to-r from-black/70 to-transparent" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-8 bg-gradient-to-l from-black/70 to-transparent" />
+          <div className="overflow-hidden">
+            <div className="payment-logo-marquee flex w-max gap-2.5">
+              {[...mobileLogoItems, ...mobileLogoItems].map((item, index) => (
+                <CompactLogoPill key={`${item.key}-${index}`}>{item.node}</CompactLogoPill>
+              ))}
+            </div>
           </div>
+        </div>
+
+        <div className="hidden flex-wrap gap-2.5 md:flex">
+          {mobileLogoItems.map((item) => (
+            <CompactLogoPill key={item.key}>{item.node}</CompactLogoPill>
+          ))}
         </div>
 
         <div className="mt-3 flex flex-wrap items-center gap-2 text-[10px] uppercase tracking-[0.16em] text-mourning-dim">

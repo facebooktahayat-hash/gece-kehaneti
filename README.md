@@ -109,3 +109,13 @@ Hero bölümündeki küçük metinler daha büyük, daha parlak ve daha okunur h
 ## v16 White Readable Line
 
 Ana sayfadaki 'fısıltılar yaklaşır · semboller belirir · kapılar aralanır' yazısı tam beyaz, daha kalın ve daha okunur hale getirildi.
+
+
+## v17 Dark Hover Glow
+
+Buton ve tıklanabilir kart hover efektleri pembe yerine koyu mor/lacivert/cyan temalı geniş glow efektiyle güncellendi. Hover ışığı daha geniş yayılıyor ve arka taraftan parlıyor.
+
+
+## v18 Header Logo Match
+
+Header, referanstaki gibi sadeleştirildi: sadece ay logosu ve GECE KEHANETİ kaldı. Alt küçük slogan kaldırıldı. Ay logosunun içi buğulu, renk dolu ve daha premium glowlu hale getirildi.

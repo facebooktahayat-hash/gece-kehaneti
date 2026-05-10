@@ -667,3 +667,67 @@ body {
   border-top: 1px solid rgba(255,255,255,.12) !important;
   border-bottom: 1px solid rgba(255,255,255,.12) !important;
 }
+
+
+/* v17: pembe olmayan koyu tema hover ışığı */
+.occult-button,
+.occult-button-ghost {
+  overflow: visible !important;
+  isolation: isolate;
+}
+
+.occult-button::after,
+.occult-button-ghost::after {
+  inset: -14px !important;
+  z-index: -1 !important;
+  border-radius: 9999px;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(0, 215, 255, .22), transparent 32%),
+    radial-gradient(circle at 50% 50%, rgba(80, 38, 180, .42), transparent 48%),
+    radial-gradient(circle at 50% 50%, rgba(7, 0, 30, .72), transparent 72%) !important;
+  filter: blur(22px) !important;
+  opacity: 0 !important;
+  transition: opacity .25s ease, transform .25s ease, filter .25s ease !important;
+}
+
+.occult-button:hover,
+.occult-button-ghost:hover {
+  border-color: rgba(0, 215, 255, .34) !important;
+  background:
+    linear-gradient(90deg, rgba(18, 0, 55, .96), rgba(56, 22, 130, .92), rgba(6, 15, 40, .96)) !important;
+  box-shadow:
+    0 0 24px rgba(0, 215, 255, .14),
+    0 0 46px rgba(74, 31, 160, .36),
+    0 0 86px rgba(10, 0, 35, .76),
+    inset 0 1px 0 rgba(255,255,255,.10) !important;
+}
+
+.occult-button:hover::after,
+.occult-button-ghost:hover::after {
+  opacity: 1 !important;
+  transform: scale(1.08);
+  filter: blur(28px) !important;
+}
+
+.occult-card:hover {
+  border-color: rgba(0, 215, 255, .24) !important;
+  box-shadow:
+    0 0 22px rgba(0, 215, 255, .08),
+    0 0 48px rgba(74, 31, 160, .28),
+    0 0 88px rgba(6, 0, 28, .64),
+    inset 0 1px 0 rgba(255,255,255,.045) !important;
+}
+
+.occult-card:hover::before {
+  color: rgba(0, 215, 255, .34) !important;
+  text-shadow:
+    0 0 10px rgba(0,215,255,.28),
+    0 0 18px rgba(74,31,160,.24) !important;
+}
+
+.occult-link:hover {
+  color: rgba(218, 232, 255, .95) !important;
+  text-shadow:
+    0 0 12px rgba(0,215,255,.22),
+    0 0 18px rgba(74,31,160,.35) !important;
+}

@@ -192,9 +192,9 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
 
             <div className="mt-4 rounded-[1.15rem] border border-[#c9a6df]/18 bg-[#7c1cff]/10 p-4">
               <div className="mb-2 flex items-center gap-2 font-display text-[1.15rem] font-semibold text-bone">
-                <ShieldCheck className="h-5 w-5 text-[#c9a6df]" /> İlk kez kripto ödeme yapacaklar için
+                <ShieldCheck className="h-5 w-5 text-[#c9a6df]" /> Polygon USDC ödeme bilgisi
               </div>
-              <p className="text-xs leading-6 text-mourning-dim">Ödeme adımı güvenli kripto ödeme ekranına yönlendirir. İlk kez işlem yapacaksan, ödeme sırasında bilen birinden destek alman önerilir.</p>
+              <p className="text-xs leading-6 text-mourning-dim">Ödeme yalnızca Polygon ağı üzerindeki USDC ile alınır. İlk kez kripto ödeme yapacaksan, işlem sırasında bilen birinden destek alman önerilir.</p>
             </div>
 
             <p className="mt-5 text-xs leading-6 text-mourning-dim">Fal hizmeti eğlence ve kişisel farkındalık amaçlıdır. Kesin sonuç, sağlık, hukuk veya yatırım danışmanlığı sunmaz.</p>

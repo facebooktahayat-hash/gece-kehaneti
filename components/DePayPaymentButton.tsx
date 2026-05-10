@@ -89,6 +89,15 @@ export function DePayPaymentButton({
 
       window.DePayWidgets.Payment({
         integration: depayIntegrationId,
+        title: "Gece Kehaneti — Polygon USDC Ödemesi",
+        style: {
+          colors: {
+            primary: "#c71967",
+            text: "#f8eaff",
+            buttonText: "#ffffff",
+            icons: "#d9c4ff"
+          }
+        },
         payload: {
           productSlug,
           productName,

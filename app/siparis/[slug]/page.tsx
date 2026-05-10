@@ -20,7 +20,7 @@ export default function OrderPage({ params }: { params: { slug: string } }) {
           <h1 className="mt-3 font-display text-[2.25rem] font-black text-bone md:text-[3.7rem]">Sipariş Formu</h1>
           <p className="mt-4 text-mourning">{item.name} · {item.price.toLocaleString("tr-TR")} TL · {c?.title}</p>
           <p className="mt-3 text-sm leading-6 text-mourning-dim">
-            Soruların, kişisel bilgilerin ve varsa kahve falı görsellerin bu formdan alınır. Form gönderilmeden ödeme penceresi açılmaz.
+            Soruların, kişisel bilgilerin ve varsa kahve falı görsellerin bu formdan alınır. Form gönderilmeden ödeme penceresi açılmaz. Ödeme yalnızca Polygon ağı üzerindeki USDC ile yapılır.
           </p>
           <OrderForm item={item} categoryTitle={c?.title} />
         </div>

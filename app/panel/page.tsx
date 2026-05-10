@@ -317,9 +317,7 @@ export default function PanelPage() {
                 </div>
 
                 {authMode === "login" ? (
-                  <form onSubmit={handleLogin} autoComplete="new-password">
-                    <input aria-hidden="true" className="pointer-events-none absolute h-0 w-0 opacity-0" tabIndex={-1} name="username" autoComplete="username" />
-                    <input aria-hidden="true" className="pointer-events-none absolute h-0 w-0 opacity-0" tabIndex={-1} name="password" type="password" autoComplete="current-password" />
+                  <form onSubmit={handleLogin} autoComplete="off">
                     <div className="mb-5 flex items-center justify-between gap-4">
                       <div>
                         <h2 className="font-display text-2xl font-black text-bone">Giriş Yap</h2>
@@ -336,7 +334,7 @@ export default function PanelPage() {
                         className="occult-input"
                         placeholder="Kullanıcı adınızı yazın"
                         name="gece-kehaneti-panel-kimlik"
-                        autoComplete="new-password"
+                        autoComplete="off"
                       />
                     </label>
 
@@ -349,7 +347,7 @@ export default function PanelPage() {
                         placeholder="Parolanızı yazın"
                         type="password"
                         name="gece-kehaneti-panel-gizli-anahtar"
-                        autoComplete="new-password"
+                        autoComplete="off"
                       />
                     </label>
 
@@ -427,7 +425,8 @@ export default function PanelPage() {
                           className="occult-input"
                           placeholder="Parolanızı yazın"
                           type="password"
-                          autoComplete="new-password"
+                          name="gece-kehaneti-yeni-gizli-anahtar"
+                          autoComplete="off"
                         />
                       </label>
 
@@ -439,7 +438,8 @@ export default function PanelPage() {
                           className="occult-input"
                           placeholder="Parolayı tekrar yazın"
                           type="password"
-                          autoComplete="new-password"
+                          name="gece-kehaneti-yeni-gizli-anahtar-tekrar"
+                          autoComplete="off"
                         />
                       </label>
                     </div>

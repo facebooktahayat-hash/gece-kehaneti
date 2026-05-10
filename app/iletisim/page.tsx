@@ -6,7 +6,7 @@ import { Moon, Send, Sparkles } from "lucide-react";
 const contactNotes = [
   "Yanıt süresi: 12 saat içinde",
   "Çalışma: Her gün, 7/24",
-  "Mesajlar: gecekehaneti@gmail.com adresine düşer"
+  "Tüm memnuniyet, şikayet ve önerilerinizi bize bildirin."
 ];
 
 type ContactResponse = {

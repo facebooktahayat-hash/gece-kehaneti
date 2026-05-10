@@ -7,6 +7,7 @@ import { Menu, X, Moon } from "lucide-react";
 const nav = [
   { href: "/", label: "Ana Sayfa" },
   { href: "/#kategoriler", label: "Kategoriler" },
+  { href: "/hakkimizda", label: "Hakkımızda" },
   { href: "/urun/kehanet", label: "Kehanet" },
   { href: "/panel", label: "Panelim" },
   { href: "/iletisim", label: "İletişim" }
@@ -31,7 +32,7 @@ export function Header() {
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-7 md:flex">
+        <nav className="hidden items-center gap-5 md:flex lg:gap-7">
           {nav.map((item) => (
             <Link
               key={item.href}

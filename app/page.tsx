@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { categories, legendaryPackage, testimonials, trustBadges } from "@/lib/data";
 import { CategoryCard, PackageCard } from "@/components/Cards";
+import { PaymentLogos } from "@/components/PaymentLogos";
 import { Section } from "@/components/Section";
 import { Stats } from "@/components/Stats";
 import { HeroEffects } from "@/components/HeroEffects";
@@ -129,6 +130,9 @@ export default function HomePage() {
               </div>
             );
           })}
+        </div>
+        <div className="mt-6">
+          <PaymentLogos />
         </div>
       </Section>
 

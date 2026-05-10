@@ -1,10 +1,11 @@
 import Link from "next/link";
 import { Moon } from "lucide-react";
+import { PaymentLogos } from "@/components/PaymentLogos";
 
 export function Footer() {
   return (
     <footer className="border-t border-white/10 bg-black px-4 py-10">
-      <div className="mx-auto grid max-w-7xl gap-8 md:grid-cols-[1.4fr_.8fr_.8fr]">
+      <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[1.25fr_.7fr_.75fr_1fr]">
         <div>
           <div className="mb-4 flex items-center gap-3">
             <Moon className="h-7 w-7 text-frost drop-shadow-[0_0_12px_rgba(0,215,255,.7)]" />
@@ -29,6 +30,9 @@ export function Footer() {
             <Link href="/kullanim-sartlari" className="transition hover:text-bone">Kullanım Şartları</Link>
             <Link href="/iade" className="transition hover:text-bone">İade ve İptal</Link>
           </div>
+        </div>
+        <div>
+          <PaymentLogos compact />
         </div>
       </div>
       <div className="mx-auto mt-10 max-w-7xl border-t border-white/10 pt-6 text-sm text-mourning-dim">© 2026 Gece Kehaneti. Tüm hakları saklıdır. In umbra veritas.</div>

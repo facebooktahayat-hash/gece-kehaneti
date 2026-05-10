@@ -76,16 +76,24 @@ export function CategoryCard({ category }: { category: Category }) {
 }
 
 export function PackageCard({ item }: { item: Package }) {
+  const isLegendary = item.slug === "kehanet";
+
   return (
-    <Link href={`/urun/${item.slug}`} className="occult-card group flex h-full flex-col p-6">
-      <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-ember/12 blur-3xl opacity-70 transition group-hover:opacity-100" />
-      <div className="mb-4 flex items-center justify-between">
-        <span className="rounded-full border border-ember/20 bg-ember/10 px-3 py-1 text-xs text-[#c9a6df]">{item.level}</span>
-        <Gem className="h-5 w-5 text-gold drop-shadow-[0_0_10px_rgba(247,200,107,.35)]" />
+    <Link href={`/urun/${item.slug}`} className={`occult-card group flex h-full flex-col p-6 ${isLegendary ? "legendary-product-card" : ""}`}>
+      <div className={`absolute -right-10 -top-10 h-32 w-32 rounded-full blur-3xl opacity-70 transition group-hover:opacity-100 ${isLegendary ? "bg-ember/28" : "bg-ember/12"}`} />
+      {isLegendary && (
+        <>
+          <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-ember to-transparent shadow-[0_0_18px_rgba(255,0,184,.55)]" />
+          <div className="pointer-events-none absolute left-6 top-6 text-[9px] font-black uppercase tracking-[0.35em] text-gold/80 drop-shadow-[0_0_12px_rgba(247,200,107,.28)]">En Efsane Ürün</div>
+        </>
+      )}
+      <div className={`mb-4 flex items-center justify-between ${isLegendary ? "mt-7" : ""}`}>
+        <span className={`rounded-full border px-3 py-1 text-xs ${isLegendary ? "border-gold/35 bg-gold/10 text-gold" : "border-ember/20 bg-ember/10 text-[#c9a6df]"}`}>{item.level}</span>
+        <Gem className={`h-5 w-5 drop-shadow-[0_0_10px_rgba(247,200,107,.35)] ${isLegendary ? "text-ember" : "text-gold"}`} />
       </div>
-      <h3 className="font-display text-[1.55rem] font-semibold leading-tight text-bone md:text-[1.9rem]">{item.name}</h3>
+      <h3 className={`font-display text-[1.55rem] font-semibold leading-tight text-bone md:text-[1.9rem] ${isLegendary ? "drop-shadow-[0_0_14px_rgba(255,0,184,.32)]" : ""}`}>{item.name}</h3>
       <p className="mt-3 min-h-14 text-sm leading-6 text-mourning">{item.description}</p>
-      <div className="my-5 font-display text-[1.85rem] font-bold text-[#c9a6df] drop-shadow-[0_0_10px_rgba(124,28,255,.25)] md:text-3xl">{item.price} TL</div>
+      <div className={`my-5 font-display text-[1.85rem] font-bold drop-shadow-[0_0_10px_rgba(124,28,255,.25)] md:text-3xl ${isLegendary ? "text-ember" : "text-[#c9a6df]"}`}>{item.price.toLocaleString("tr-TR")} TL</div>
       <div className="mb-5 flex items-center gap-2 text-sm text-mourning">
         <Clock3 className="h-4 w-4 text-[#c9a6df]" /> {item.delivery}
       </div>
@@ -97,7 +105,7 @@ export function PackageCard({ item }: { item: Package }) {
         ))}
       </ul>
       <span className="occult-button mt-auto px-5 py-3 text-center text-sm font-semibold text-bone">
-        <span className="relative z-10">Şimdi Fal Baktır</span>
+        <span className="relative z-10">{isLegendary ? "Kehanet Kapısını Aç" : "Şimdi Fal Baktır"}</span>
       </span>
     </Link>
   );

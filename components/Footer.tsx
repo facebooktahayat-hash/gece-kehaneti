@@ -18,6 +18,7 @@ export function Footer() {
             <Link href="/hakkimizda" className="transition hover:text-bone">Hakkımızda</Link>
             <Link href="/iletisim" className="transition hover:text-bone">İletişim</Link>
             <Link href="/panel" className="transition hover:text-bone">Panelim</Link>
+            <Link href="/urun/kehanet" className="transition hover:text-bone">Kehanet</Link>
             <Link href="/admin" className="transition hover:text-bone">Yönetici Paneli</Link>
           </div>
         </div>

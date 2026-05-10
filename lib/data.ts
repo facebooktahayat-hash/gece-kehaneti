@@ -118,13 +118,33 @@ const packageTemplates = [
   { key: "premium-rituel-yorum", name: "Premium Ritüel Yorum", price: 3996, delivery: "48-72 saat", level: "Premium", description: "Kapsamlı, katmanlı ve kişiye özel hazırlanmış premium yorum.", includes: ["7 ana soru", "Kapsamlı analiz", "Özel kapanış yorumu", "Premium rapor"] }
 ];
 
-export const packages: Package[] = categories.flatMap((category) =>
-  packageTemplates.map((item) => ({
-    slug: `${category.slug}-${item.key}`,
-    categorySlug: category.slug,
-    ...item
-  }))
-);
+export const legendaryPackage: Package = {
+  slug: "kehanet",
+  categorySlug: "gece-kehaneti",
+  name: "Kehanet",
+  price: 50000,
+  delivery: "Gece ritüeli sonrası",
+  level: "En efsane ürün",
+  description:
+    "Rüyanızda belirecek kadın ya da erkek, Hintli geleneksel kıyafetli yaşlı bir rehbere; rüyadan uyanana kadar aklınızdaki soruları sorduğunuz en karanlık, en ürkütücü ve en gizemli premium deneyim.",
+  includes: [
+    "Rüya eşiği için özel kehanet hazırlığı",
+    "Geleneksel Hint siluetli yaşlı rehber anlatısı",
+    "Uyanana kadar soru sorma temalı premium yorum",
+    "En gizli, en karanlık kapanış notu"
+  ]
+};
+
+export const packages: Package[] = [
+  legendaryPackage,
+  ...categories.flatMap((category) =>
+    packageTemplates.map((item) => ({
+      slug: `${category.slug}-${item.key}`,
+      categorySlug: category.slug,
+      ...item
+    }))
+  )
+];
 
 export const testimonials = [
   { name: "Eylül K.", category: "Tarot Falı", rating: 5, text: "Yorum net, özenli ve düşündürücüydü. Özellikle ilişki konusunda kendimi daha sakin hissettim." },
@@ -155,15 +175,30 @@ export function packagesByCategory(slug: string) {
   return packages.filter((item) => item.categorySlug === slug);
 }
 
+function seededRange(seed: number, min: number, max: number) {
+  const raw = Math.sin(seed * 9301 + 49297) * 233280;
+  const fraction = raw - Math.floor(raw);
+  return Math.floor(fraction * (max - min + 1)) + min;
+}
+
+function sumSeededRange(count: number, seedOffset: number, min: number, max: number) {
+  let total = 0;
+  for (let index = 1; index <= count; index += 1) {
+    total += seededRange(index + seedOffset, min, max);
+  }
+  return total;
+}
+
 export function dailyStats() {
-  const start = new Date("2026-05-09T00:00:00Z").getTime();
-  const today = new Date();
-  const diffDays = Math.max(0, Math.floor((today.getTime() - start) / 86400000));
-  const wave = diffDays % 7;
+  const base = new Date("2026-05-10T00:00:00+03:00").getTime();
+  const now = new Date();
+  const diffDays = Math.max(0, Math.floor((now.getTime() - base) / 86400000));
+  const halfDaySlot = Math.max(0, Math.floor((now.getTime() - base) / 43200000));
+
   return {
-    readings: 50022 + diffDays * 4 + wave,
-    clients: 13120 + diffDays * 3 + (diffDays % 4),
+    readings: 50027 + sumSeededRange(diffDays, 1000, 30, 100),
+    clients: 13124 + sumSeededRange(diffDays, 2000, 10, 50),
     satisfaction: 98.7,
-    todayDelivered: 139 + wave
+    todayDelivered: seededRange(halfDaySlot + 3000, 30, 100)
   };
 }

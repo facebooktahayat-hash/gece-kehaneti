@@ -52,85 +52,10 @@ type RegisterForm = {
 };
 
 const storedCustomersKey = "gece-kehaneti-registered-customers";
-const activeCustomerKey = "gece-kehaneti-customer";
+const activeCustomerKey = "gece-kehaneti-customer-v2";
+const legacyActiveCustomerKey = "gece-kehaneti-customer";
 
-const registeredCustomers: PanelCustomer[] = [
-  {
-    id: "demo",
-    username: "demo",
-    password: "demo123",
-    fullName: "Demo Kullanıcı",
-    email: "demo@gecekehaneti.com",
-    membership: "Demo",
-    joinDate: "09.05.2026",
-    lastLogin: "Bugün, 11:22",
-    orders: [
-      {
-        id: "GK-2041",
-        title: "Tarot Falı",
-        detail: "Derin Yorum",
-        date: "12.05.2026",
-        price: 299,
-        status: "Tamamlandı",
-        readerNote: "Kart açılımınız tamamlandı. Aşk ve karar enerjisi için özel notlar panelinize işlendi."
-      },
-      {
-        id: "GK-2042",
-        title: "Kahve Falı",
-        detail: "Kısa Yorum",
-        date: "12.05.2026",
-        price: 149,
-        status: "Hazırlanıyor"
-      },
-      {
-        id: "GK-2043",
-        title: "Aşk Falı",
-        detail: "Acil Kehanet",
-        date: "13.05.2026",
-        price: 699,
-        status: "Yeni"
-      },
-      {
-        id: "GK-2044",
-        title: "Premium Ritüel",
-        detail: "Premium Ritüel Yorum",
-        date: "10.05.2026",
-        price: 999,
-        status: "Tamamlandı",
-        readerNote: "Ritüel yorumunuz teslim edildi. Enerji bağı ve kapanış tavsiyeleri profil notlarınızda görünecek."
-      }
-    ]
-  },
-  {
-    id: "aylin",
-    username: "aylin",
-    password: "gece123",
-    fullName: "Aylin Kaya",
-    email: "aylin@example.com",
-    membership: "Kayıtlı Kullanıcı",
-    joinDate: "02.05.2026",
-    lastLogin: "Dün, 20:18",
-    orders: [
-      {
-        id: "GK-3017",
-        title: "Astroloji Yorumu",
-        detail: "Derin Yorum",
-        date: "08.05.2026",
-        price: 596,
-        status: "Tamamlandı",
-        readerNote: "Doğum haritası yorumunuz tamamlandı. Yakın dönem fırsatları için zamanlama notu eklendi."
-      },
-      {
-        id: "GK-3021",
-        title: "Rüya Yorumu",
-        detail: "Kısa Yorum",
-        date: "11.05.2026",
-        price: 249,
-        status: "İncelemede"
-      }
-    ]
-  }
-];
+const registeredCustomers: PanelCustomer[] = [];
 
 const tabLabels: Record<PanelTab, string> = {
   orders: "Siparişlerim",
@@ -183,8 +108,8 @@ export default function PanelPage() {
   const [activeTab, setActiveTab] = useState<PanelTab>("orders");
   const [authMode, setAuthMode] = useState<AuthMode>("login");
   const [customers, setCustomers] = useState<PanelCustomer[]>(registeredCustomers);
-  const [username, setUsername] = useState("demo");
-  const [password, setPassword] = useState("demo123");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [registerForm, setRegisterForm] = useState<RegisterForm>({
     fullName: "",
     username: "",
@@ -197,13 +122,19 @@ export default function PanelPage() {
   const [success, setSuccess] = useState("");
 
   useEffect(() => {
+    setUsername("");
+    setPassword("");
     const savedCustomers = getStoredCustomers();
     const mergedCustomers = [...registeredCustomers, ...savedCustomers];
     setCustomers(mergedCustomers);
 
+    window.localStorage.removeItem(legacyActiveCustomerKey);
+
     const savedCustomer = window.localStorage.getItem(activeCustomerKey);
     if (savedCustomer && mergedCustomers.some((customer) => customer.id === savedCustomer)) {
       setCustomerId(savedCustomer);
+    } else if (savedCustomer) {
+      window.localStorage.removeItem(activeCustomerKey);
     }
   }, []);
 
@@ -245,7 +176,7 @@ export default function PanelPage() {
     );
 
     if (!foundCustomer) {
-      setError("Kullanıcı adı veya parola hatalı. Demo giriş için demo / demo123 kullanabilirsiniz.");
+      setError("Kullanıcı adı veya parola hatalı.");
       setSuccess("");
       return;
     }
@@ -322,7 +253,7 @@ export default function PanelPage() {
       fullName: "",
       username: "",
       email: "",
-        password: "",
+      password: "",
       passwordConfirm: ""
     });
     setError("");
@@ -331,6 +262,7 @@ export default function PanelPage() {
 
   function handleLogout() {
     window.localStorage.removeItem(activeCustomerKey);
+    window.localStorage.removeItem(legacyActiveCustomerKey);
     setCustomerId(null);
     setActiveTab("orders");
     setAuthMode("login");
@@ -341,10 +273,6 @@ export default function PanelPage() {
     return (
       <section className="px-4 py-14 md:px-6 md:py-20">
         <div className="mx-auto max-w-5xl">
-          <div className="mb-5 rounded-[1rem] border border-gold/42 bg-gold/10 px-5 py-3 text-[11px] font-semibold uppercase tracking-[0.24em] text-gold shadow-[0_0_24px_rgba(247,200,107,.08)]">
-            Kayıtlı kullanıcı paneli — giriş yapan müşteri kendi siparişlerini ve profil bilgilerini görür.
-          </div>
-
           <div className="occult-panel p-6 md:p-10">
             <div className="relative z-10 grid gap-8 lg:grid-cols-[1.05fr_.95fr] lg:items-center">
               <div>
@@ -358,15 +286,12 @@ export default function PanelPage() {
                 <p className="eyebrow-rune mb-4">Hoş geldin</p>
                 <h1 className="font-display text-[2.2rem] font-black leading-none text-bone md:text-[4.2rem]">Panelim</h1>
                 <p className="mt-5 max-w-2xl text-sm leading-7 text-mourning md:text-base">
-                  Müşteri önce hesap oluşturur, sonra kullanıcı adı ve parolasıyla giriş yaparak sipariş durumunu, tamamlanan yorumlarını ve profil bilgilerini bu ekranda görür.
+                  Hesabını oluştur, kullanıcı adı ve parolanla giriş yap, sipariş durumunu ve profil bilgilerini bu ekrandan takip et.
                 </p>
-                <div className="mt-6 rounded-[1rem] border border-violet/18 bg-black/20 p-4 text-xs leading-6 text-mourning">
-                  Demo inceleme için <strong className="text-bone">demo / demo123</strong> kullanabilirsiniz. Yeni kayıt olan müşteriler tarayıcıya kaydedilir ve tekrar giriş yapabilir.
-                </div>
               </div>
 
-              <div className="rounded-[1.35rem] border border-violet/24 bg-black/24 p-5 shadow-[inset_0_1px_0_rgba(255,255,255,.04)] md:p-6">
-                <div className="mb-5 flex rounded-full border border-violet/18 bg-black/24 p-1">
+              <div className="rounded-[1.35rem] border border-violet/24 bg-black/25 p-5 shadow-[inset_0_1px_0_rgba(255,255,255,.04)] md:p-6">
+                <div className="mb-5 flex rounded-full border border-violet/18 bg-black/25 p-1">
                   <button
                     onClick={() => switchAuthMode("login")}
                     className={`flex-1 rounded-full px-4 py-2.5 text-[11px] font-semibold uppercase tracking-[0.16em] transition ${
@@ -392,11 +317,13 @@ export default function PanelPage() {
                 </div>
 
                 {authMode === "login" ? (
-                  <form onSubmit={handleLogin}>
+                  <form onSubmit={handleLogin} autoComplete="new-password">
+                    <input aria-hidden="true" className="pointer-events-none absolute h-0 w-0 opacity-0" tabIndex={-1} name="username" autoComplete="username" />
+                    <input aria-hidden="true" className="pointer-events-none absolute h-0 w-0 opacity-0" tabIndex={-1} name="password" type="password" autoComplete="current-password" />
                     <div className="mb-5 flex items-center justify-between gap-4">
                       <div>
                         <h2 className="font-display text-2xl font-black text-bone">Giriş Yap</h2>
-                        <p className="mt-1 text-xs text-mourning">Demo: demo / demo123</p>
+                        <p className="mt-1 text-xs text-mourning">Hesabına kullanıcı adı veya e-posta ile gir.</p>
                       </div>
                       <ShieldCheck className="h-7 w-7 text-frost drop-shadow-[0_0_14px_rgba(0,215,255,.35)]" />
                     </div>
@@ -407,8 +334,9 @@ export default function PanelPage() {
                         value={username}
                         onChange={(event) => setUsername(event.target.value)}
                         className="occult-input"
-                        placeholder="demo"
-                        autoComplete="username"
+                        placeholder="Kullanıcı adınızı yazın"
+                        name="gece-kehaneti-panel-kimlik"
+                        autoComplete="new-password"
                       />
                     </label>
 
@@ -418,9 +346,10 @@ export default function PanelPage() {
                         value={password}
                         onChange={(event) => setPassword(event.target.value)}
                         className="occult-input"
-                        placeholder="••••••••"
+                        placeholder="Parolanızı yazın"
                         type="password"
-                        autoComplete="current-password"
+                        name="gece-kehaneti-panel-gizli-anahtar"
+                        autoComplete="new-password"
                       />
                     </label>
 
@@ -437,14 +366,14 @@ export default function PanelPage() {
 
                     <button
                       onClick={() => switchAuthMode("register")}
-                      className="mt-4 w-full text-center text-xs font-semibold uppercase tracking-[0.16em] text-mourning transition hover:text-bone"
+                      className="mt-4 w-full rounded-full border border-ember/45 bg-ember/10 px-7 py-3 text-center text-xs font-semibold uppercase tracking-[0.16em] text-white shadow-[0_0_18px_rgba(255,0,184,.12)] transition hover:border-ember/80 hover:bg-ember/16"
                       type="button"
                     >
-                      Hesabın yok mu? Kayıt ol
+                      Kayıt Ol
                     </button>
                   </form>
                 ) : (
-                  <form onSubmit={handleRegister}>
+                  <form onSubmit={handleRegister} autoComplete="off">
                     <div className="mb-5 flex items-center justify-between gap-4">
                       <div>
                         <h2 className="font-display text-2xl font-black text-bone">Kayıt Ol</h2>
@@ -472,7 +401,7 @@ export default function PanelPage() {
                           onChange={(event) => setRegisterForm({ ...registerForm, username: event.target.value })}
                           className="occult-input"
                           placeholder="ornek_kullanici"
-                          autoComplete="username"
+                          autoComplete="off"
                         />
                       </label>
 
@@ -496,7 +425,7 @@ export default function PanelPage() {
                           value={registerForm.password}
                           onChange={(event) => setRegisterForm({ ...registerForm, password: event.target.value })}
                           className="occult-input"
-                          placeholder="••••••••"
+                          placeholder="Parolanızı yazın"
                           type="password"
                           autoComplete="new-password"
                         />
@@ -508,7 +437,7 @@ export default function PanelPage() {
                           value={registerForm.passwordConfirm}
                           onChange={(event) => setRegisterForm({ ...registerForm, passwordConfirm: event.target.value })}
                           className="occult-input"
-                          placeholder="••••••••"
+                          placeholder="Parolayı tekrar yazın"
                           type="password"
                           autoComplete="new-password"
                         />
@@ -546,25 +475,19 @@ export default function PanelPage() {
   return (
     <section className="px-4 py-10 md:px-6 md:py-14">
       <div className="mx-auto max-w-5xl">
-        <div className="mb-5 flex items-center justify-between rounded-[1rem] border border-gold/42 bg-gold/10 px-5 py-3 text-[11px] font-semibold uppercase tracking-[0.20em] text-gold shadow-[0_0_24px_rgba(247,200,107,.08)]">
-          <span>
-            {activeCustomer.membership === "Demo"
-              ? "Demo panel - örnek veri gösteriliyor, gerçek müşteri bilgisi değildir."
-              : "Müşteri paneli - bilgiler kayıtlı kullanıcı hesabına göre gösteriliyor."}
-          </span>
-          <button onClick={handleLogout} className="text-gold/90 transition hover:text-white" type="button">
-            Çıkış
-          </button>
-        </div>
-
         <div className="mb-7 flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
           <div>
             <p className="eyebrow-rune mb-4">Hoş geldin</p>
             <h1 className="font-display text-[2.35rem] font-black leading-none text-bone md:text-[4rem]">Panelim</h1>
           </div>
-          <div className="flex items-center gap-3 text-xs text-mourning">
-            <UserRound className="h-4 w-4 text-frost" />
-            <span>Üyelik: <strong className="font-semibold text-bone">{activeCustomer.membership}</strong></span>
+          <div className="flex flex-wrap items-center gap-3 text-xs text-mourning">
+            <div className="flex items-center gap-3">
+              <UserRound className="h-4 w-4 text-frost" />
+              <span>Üyelik: <strong className="font-semibold text-bone">{activeCustomer.membership}</strong></span>
+            </div>
+            <button onClick={handleLogout} className="rounded-full border border-violet/22 bg-black/18 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-mourning transition hover:border-ember/50 hover:text-bone" type="button">
+              Çıkış
+            </button>
           </div>
         </div>
 
@@ -634,7 +557,7 @@ function OrdersPanel({ orders, title }: { orders: CustomerOrder[]; title: string
         </div>
       ) : (
         <div className="relative z-10 overflow-hidden rounded-[1.1rem] border border-violet/16">
-          <div className="hidden grid-cols-[1fr_1.5fr_.95fr_.8fr_.95fr] border-b border-violet/14 bg-black/26 px-4 py-3 text-[10px] font-semibold uppercase tracking-[0.18em] text-mourning md:grid">
+          <div className="hidden grid-cols-[1fr_1.5fr_.95fr_.8fr_.95fr] border-b border-violet/14 bg-black/30 px-4 py-3 text-[10px] font-semibold uppercase tracking-[0.18em] text-mourning md:grid">
             <span>No</span>
             <span>Hizmet</span>
             <span>Tarih</span>

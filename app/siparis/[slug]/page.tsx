@@ -16,12 +16,11 @@ export default function OrderPage({ params }: { params: { slug: string } }) {
         <div className="occult-panel p-7 md:p-10">
           <p className="eyebrow-rune mb-4">Bilgilerini bırak</p>
           <h1 className="mt-3 font-display text-[2.25rem] font-black text-bone md:text-[3.7rem]">Sipariş Formu</h1>
-          <p className="mt-4 text-mourning">{item.name} · {item.price} TL · {c?.title}</p>
+          <p className="mt-4 text-mourning">{item.name} · {item.price.toLocaleString("tr-TR")} TL · {c?.title}</p>
           <form className="mt-10 grid gap-5">
             <div className="grid gap-5 md:grid-cols-2">
               <Field label="Ad Soyad" placeholder="Adınız Soyadınız" />
               <Field label="E-posta" placeholder="ornek@mail.com" type="email" />
-              <Field label="Telefon" placeholder="+90..." />
               <Field label="Doğum tarihi" placeholder="GG/AA/YYYY" />
             </div>
             <label className="grid gap-2">

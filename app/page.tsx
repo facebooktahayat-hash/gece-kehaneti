@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { categories, testimonials, trustBadges } from "@/lib/data";
-import { CategoryCard } from "@/components/Cards";
+import { categories, legendaryPackage, testimonials, trustBadges } from "@/lib/data";
+import { CategoryCard, PackageCard } from "@/components/Cards";
 import { Section } from "@/components/Section";
 import { Stats } from "@/components/Stats";
 import { HeroEffects } from "@/components/HeroEffects";
@@ -78,6 +78,25 @@ export default function HomePage() {
         </div>
       </section>
 
+
+      <Section eyebrow="En Efsane Ürün" title="Kehanet" text="Rüya eşiğinin ardındaki en gizli, en ürkütücü ve en premium kapı.">
+        <div className="grid gap-6 lg:grid-cols-[.95fr_1.05fr] lg:items-stretch">
+          <div className="occult-panel p-7 md:p-9">
+            <div className="relative z-10">
+              <p className="eyebrow-rune mb-4">Karanlık eşik</p>
+              <h3 className="font-display text-[2rem] font-black leading-tight text-bone md:text-[3rem]">Rüyada sorulan sorular uyanınca yankılanır.</h3>
+              <p className="mt-5 text-sm leading-7 text-mourning md:text-base">
+                Kehanet, sıradan bir fal ürünü gibi gösterilmedi; sitenin en gizemli ürünü olarak öne çıkarıldı. Geleneksel Hint kıyafetli yaşlı rehber anlatısı, rüya boyunca soru sorma teması ve karanlık premium atmosfer tek üründe toplandı.
+              </p>
+              <div className="mt-7 rounded-[1.1rem] border border-ember/20 bg-ember/10 px-5 py-4 text-xs uppercase tracking-[0.22em] text-gold shadow-[0_0_24px_rgba(255,0,184,.10)]">
+                sadece cesaret edenlerin açtığı kapı
+              </div>
+            </div>
+          </div>
+          <PackageCard item={legendaryPackage} />
+        </div>
+      </Section>
+
       <Section eyebrow="Süreç" title="Nasıl çalışır?" text="Karanlık ama net. Süreç basit; yorum ise sana özel.">
         <div className="grid gap-5 md:grid-cols-3">
           {[
@@ -94,7 +113,7 @@ export default function HomePage() {
         </div>
       </Section>
 
-      <Section eyebrow="Sayılar" title="Gece boyunca açılan kapılar" text="Bu sayılar yaşayan demo veridir; sonradan gerçek sistem verisine bağlanabilir.">
+      <Section eyebrow="Sayılar" title="Gece boyunca açılan kapılar" text="Bu sayılar gece boyunca yenilenen canlı sayaçlardır.">
         <Stats />
       </Section>
 

@@ -1,3 +1,4 @@
+
 "use client";
 
 import { FormEvent, useEffect, useMemo, useState } from "react";
@@ -9,15 +10,16 @@ import {
   LockKeyhole,
   LogOut,
   Mail,
-  Phone,
   ShieldCheck,
   Sparkles,
+  UserPlus,
   UserRound,
   WalletCards
 } from "lucide-react";
 
 type OrderStatus = "Tamamlandı" | "Hazırlanıyor" | "Yeni" | "İncelemede";
 type PanelTab = "orders" | "completed" | "profile";
+type AuthMode = "login" | "register";
 
 type CustomerOrder = {
   id: string;
@@ -35,12 +37,22 @@ type PanelCustomer = {
   password: string;
   fullName: string;
   email: string;
-  phone: string;
   membership: string;
   joinDate: string;
   lastLogin: string;
   orders: CustomerOrder[];
 };
+
+type RegisterForm = {
+  fullName: string;
+  username: string;
+  email: string;
+  password: string;
+  passwordConfirm: string;
+};
+
+const storedCustomersKey = "gece-kehaneti-registered-customers";
+const activeCustomerKey = "gece-kehaneti-customer";
 
 const registeredCustomers: PanelCustomer[] = [
   {
@@ -49,7 +61,6 @@ const registeredCustomers: PanelCustomer[] = [
     password: "demo123",
     fullName: "Demo Kullanıcı",
     email: "demo@gecekehaneti.com",
-    phone: "+90 555 000 00 00",
     membership: "Demo",
     joinDate: "09.05.2026",
     lastLogin: "Bugün, 11:22",
@@ -96,7 +107,6 @@ const registeredCustomers: PanelCustomer[] = [
     password: "gece123",
     fullName: "Aylin Kaya",
     email: "aylin@example.com",
-    phone: "+90 532 111 22 33",
     membership: "Kayıtlı Kullanıcı",
     joinDate: "02.05.2026",
     lastLogin: "Dün, 20:18",
@@ -139,23 +149,67 @@ function formatPrice(price: number) {
   return new Intl.NumberFormat("tr-TR", { maximumFractionDigits: 0 }).format(price) + " TL";
 }
 
+function getTodayForPanel() {
+  return new Intl.DateTimeFormat("tr-TR", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric"
+  }).format(new Date());
+}
+
+function getStoredCustomers(): PanelCustomer[] {
+  if (typeof window === "undefined") return [];
+
+  try {
+    const rawCustomers = window.localStorage.getItem(storedCustomersKey);
+    if (!rawCustomers) return [];
+    const parsedCustomers = JSON.parse(rawCustomers) as PanelCustomer[];
+    if (!Array.isArray(parsedCustomers)) return [];
+
+    return parsedCustomers.filter(
+      (customer) =>
+        customer &&
+        typeof customer.id === "string" &&
+        typeof customer.username === "string" &&
+        typeof customer.password === "string" &&
+        typeof customer.email === "string"
+    );
+  } catch {
+    return [];
+  }
+}
+
 export default function PanelPage() {
   const [activeTab, setActiveTab] = useState<PanelTab>("orders");
+  const [authMode, setAuthMode] = useState<AuthMode>("login");
+  const [customers, setCustomers] = useState<PanelCustomer[]>(registeredCustomers);
   const [username, setUsername] = useState("demo");
   const [password, setPassword] = useState("demo123");
+  const [registerForm, setRegisterForm] = useState<RegisterForm>({
+    fullName: "",
+    username: "",
+    email: "",
+    password: "",
+    passwordConfirm: ""
+  });
   const [customerId, setCustomerId] = useState<string | null>(null);
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
   useEffect(() => {
-    const savedCustomer = window.localStorage.getItem("gece-kehaneti-customer");
-    if (savedCustomer && registeredCustomers.some((customer) => customer.id === savedCustomer)) {
+    const savedCustomers = getStoredCustomers();
+    const mergedCustomers = [...registeredCustomers, ...savedCustomers];
+    setCustomers(mergedCustomers);
+
+    const savedCustomer = window.localStorage.getItem(activeCustomerKey);
+    if (savedCustomer && mergedCustomers.some((customer) => customer.id === savedCustomer)) {
       setCustomerId(savedCustomer);
     }
   }, []);
 
   const activeCustomer = useMemo(
-    () => registeredCustomers.find((customer) => customer.id === customerId) ?? null,
-    [customerId]
+    () => customers.find((customer) => customer.id === customerId) ?? null,
+    [customerId, customers]
   );
 
   const totals = useMemo(() => {
@@ -171,10 +225,20 @@ export default function PanelPage() {
 
   const visibleOrders = activeTab === "completed" ? totals.completed : activeCustomer?.orders ?? [];
 
+  function resetMessages() {
+    setError("");
+    setSuccess("");
+  }
+
+  function switchAuthMode(mode: AuthMode) {
+    setAuthMode(mode);
+    resetMessages();
+  }
+
   function handleLogin(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const normalizedUsername = username.trim().toLowerCase();
-    const foundCustomer = registeredCustomers.find(
+    const foundCustomer = customers.find(
       (customer) =>
         (customer.username.toLowerCase() === normalizedUsername || customer.email.toLowerCase() === normalizedUsername) &&
         customer.password === password
@@ -182,19 +246,95 @@ export default function PanelPage() {
 
     if (!foundCustomer) {
       setError("Kullanıcı adı veya parola hatalı. Demo giriş için demo / demo123 kullanabilirsiniz.");
+      setSuccess("");
       return;
     }
 
-    window.localStorage.setItem("gece-kehaneti-customer", foundCustomer.id);
+    window.localStorage.setItem(activeCustomerKey, foundCustomer.id);
     setCustomerId(foundCustomer.id);
     setActiveTab("orders");
+    resetMessages();
+  }
+
+  function handleRegister(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    const fullName = registerForm.fullName.trim();
+    const normalizedUsername = registerForm.username.trim().toLowerCase();
+    const email = registerForm.email.trim().toLowerCase();
+    const passwordValue = registerForm.password;
+
+    if (!fullName || !normalizedUsername || !email || !passwordValue || !registerForm.passwordConfirm) {
+      setError("Kayıt için ad soyad, kullanıcı adı, e-posta ve parola alanlarını doldurun.");
+      setSuccess("");
+      return;
+    }
+
+    if (!email.includes("@") || !email.includes(".")) {
+      setError("Geçerli bir e-posta adresi yazın.");
+      setSuccess("");
+      return;
+    }
+
+    if (passwordValue.length < 6) {
+      setError("Parola en az 6 karakter olmalı.");
+      setSuccess("");
+      return;
+    }
+
+    if (passwordValue !== registerForm.passwordConfirm) {
+      setError("Parola tekrarı eşleşmiyor.");
+      setSuccess("");
+      return;
+    }
+
+    const alreadyExists = customers.some(
+      (customer) =>
+        customer.username.toLowerCase() === normalizedUsername || customer.email.toLowerCase() === email
+    );
+
+    if (alreadyExists) {
+      setError("Bu kullanıcı adı veya e-posta zaten kayıtlı. Giriş yapmayı deneyin.");
+      setSuccess("");
+      return;
+    }
+
+    const newCustomer: PanelCustomer = {
+      id: `musteri-${Date.now()}`,
+      username: normalizedUsername,
+      password: passwordValue,
+      fullName,
+      email,
+      membership: "Kayıtlı Kullanıcı",
+      joinDate: getTodayForPanel(),
+      lastLogin: "Şimdi",
+      orders: []
+    };
+
+    const storedCustomers = [...getStoredCustomers(), newCustomer];
+    window.localStorage.setItem(storedCustomersKey, JSON.stringify(storedCustomers));
+    window.localStorage.setItem(activeCustomerKey, newCustomer.id);
+
+    setCustomers([...registeredCustomers, ...storedCustomers]);
+    setCustomerId(newCustomer.id);
+    setActiveTab("profile");
+    setRegisterForm({
+      fullName: "",
+      username: "",
+      email: "",
+        password: "",
+      passwordConfirm: ""
+    });
     setError("");
+    setSuccess("Hesap oluşturuldu. Artık bu kullanıcı adı ve parolayla panele giriş yapılabilir.");
   }
 
   function handleLogout() {
-    window.localStorage.removeItem("gece-kehaneti-customer");
+    window.localStorage.removeItem(activeCustomerKey);
     setCustomerId(null);
     setActiveTab("orders");
+    setAuthMode("login");
+    resetMessages();
   }
 
   if (!activeCustomer) {
@@ -209,55 +349,193 @@ export default function PanelPage() {
             <div className="relative z-10 grid gap-8 lg:grid-cols-[1.05fr_.95fr] lg:items-center">
               <div>
                 <div className="mb-5 grid h-14 w-14 place-items-center rounded-full border border-ember/28 bg-ember/10 shadow-[0_0_28px_rgba(255,0,184,.18)]">
-                  <LockKeyhole className="h-7 w-7 text-ember drop-shadow-[0_0_14px_rgba(255,0,184,.45)]" />
+                  {authMode === "login" ? (
+                    <LockKeyhole className="h-7 w-7 text-ember drop-shadow-[0_0_14px_rgba(255,0,184,.45)]" />
+                  ) : (
+                    <UserPlus className="h-7 w-7 text-ember drop-shadow-[0_0_14px_rgba(255,0,184,.45)]" />
+                  )}
                 </div>
                 <p className="eyebrow-rune mb-4">Hoş geldin</p>
                 <h1 className="font-display text-[2.2rem] font-black leading-none text-bone md:text-[4.2rem]">Panelim</h1>
                 <p className="mt-5 max-w-2xl text-sm leading-7 text-mourning md:text-base">
-                  Kullanıcı adı ve parolasıyla giriş yapan gerçek müşteri; sipariş durumunu, tamamlanan yorumlarını ve profil bilgilerini bu ekranda görür.
+                  Müşteri önce hesap oluşturur, sonra kullanıcı adı ve parolasıyla giriş yaparak sipariş durumunu, tamamlanan yorumlarını ve profil bilgilerini bu ekranda görür.
                 </p>
+                <div className="mt-6 rounded-[1rem] border border-violet/18 bg-black/20 p-4 text-xs leading-6 text-mourning">
+                  Demo inceleme için <strong className="text-bone">demo / demo123</strong> kullanabilirsiniz. Yeni kayıt olan müşteriler tarayıcıya kaydedilir ve tekrar giriş yapabilir.
+                </div>
               </div>
 
-              <form onSubmit={handleLogin} className="rounded-[1.35rem] border border-violet/24 bg-black/24 p-5 shadow-[inset_0_1px_0_rgba(255,255,255,.04)] md:p-6">
-                <div className="mb-5 flex items-center justify-between gap-4">
-                  <div>
-                    <h2 className="font-display text-2xl font-black text-bone">Giriş Yap</h2>
-                    <p className="mt-1 text-xs text-mourning">Demo: demo / demo123</p>
-                  </div>
-                  <ShieldCheck className="h-7 w-7 text-frost drop-shadow-[0_0_14px_rgba(0,215,255,.35)]" />
+              <div className="rounded-[1.35rem] border border-violet/24 bg-black/24 p-5 shadow-[inset_0_1px_0_rgba(255,255,255,.04)] md:p-6">
+                <div className="mb-5 flex rounded-full border border-violet/18 bg-black/24 p-1">
+                  <button
+                    onClick={() => switchAuthMode("login")}
+                    className={`flex-1 rounded-full px-4 py-2.5 text-[11px] font-semibold uppercase tracking-[0.16em] transition ${
+                      authMode === "login"
+                        ? "bg-ember/14 text-white shadow-[0_0_18px_rgba(255,0,184,.16)]"
+                        : "text-mourning hover:text-bone"
+                    }`}
+                    type="button"
+                  >
+                    Giriş Yap
+                  </button>
+                  <button
+                    onClick={() => switchAuthMode("register")}
+                    className={`flex-1 rounded-full px-4 py-2.5 text-[11px] font-semibold uppercase tracking-[0.16em] transition ${
+                      authMode === "register"
+                        ? "bg-ember/14 text-white shadow-[0_0_18px_rgba(255,0,184,.16)]"
+                        : "text-mourning hover:text-bone"
+                    }`}
+                    type="button"
+                  >
+                    Kayıt Ol
+                  </button>
                 </div>
 
-                <label className="mb-4 block">
-                  <span className="mb-2 block text-[10px] font-semibold uppercase tracking-[0.22em] text-mourning">Kullanıcı adı veya e-posta</span>
-                  <input
-                    value={username}
-                    onChange={(event) => setUsername(event.target.value)}
-                    className="occult-input"
-                    placeholder="demo"
-                    autoComplete="username"
-                  />
-                </label>
+                {authMode === "login" ? (
+                  <form onSubmit={handleLogin}>
+                    <div className="mb-5 flex items-center justify-between gap-4">
+                      <div>
+                        <h2 className="font-display text-2xl font-black text-bone">Giriş Yap</h2>
+                        <p className="mt-1 text-xs text-mourning">Demo: demo / demo123</p>
+                      </div>
+                      <ShieldCheck className="h-7 w-7 text-frost drop-shadow-[0_0_14px_rgba(0,215,255,.35)]" />
+                    </div>
 
-                <label className="block">
-                  <span className="mb-2 block text-[10px] font-semibold uppercase tracking-[0.22em] text-mourning">Parola</span>
-                  <input
-                    value={password}
-                    onChange={(event) => setPassword(event.target.value)}
-                    className="occult-input"
-                    placeholder="••••••••"
-                    type="password"
-                    autoComplete="current-password"
-                  />
-                </label>
+                    <label className="mb-4 block">
+                      <span className="mb-2 block text-[10px] font-semibold uppercase tracking-[0.22em] text-mourning">Kullanıcı adı veya e-posta</span>
+                      <input
+                        value={username}
+                        onChange={(event) => setUsername(event.target.value)}
+                        className="occult-input"
+                        placeholder="demo"
+                        autoComplete="username"
+                      />
+                    </label>
 
-                {error && (
-                  <p className="mt-4 rounded-xl border border-ember/28 bg-ember/10 px-4 py-3 text-sm text-[#ff8bdc]">{error}</p>
+                    <label className="block">
+                      <span className="mb-2 block text-[10px] font-semibold uppercase tracking-[0.22em] text-mourning">Parola</span>
+                      <input
+                        value={password}
+                        onChange={(event) => setPassword(event.target.value)}
+                        className="occult-input"
+                        placeholder="••••••••"
+                        type="password"
+                        autoComplete="current-password"
+                      />
+                    </label>
+
+                    {error && (
+                      <p className="mt-4 rounded-xl border border-ember/28 bg-ember/10 px-4 py-3 text-sm text-[#ff8bdc]">{error}</p>
+                    )}
+                    {success && (
+                      <p className="mt-4 rounded-xl border border-frost/28 bg-frost/10 px-4 py-3 text-sm text-frost">{success}</p>
+                    )}
+
+                    <button className="occult-button mt-6 w-full px-7 py-4 text-sm font-semibold uppercase tracking-[0.18em] text-white" type="submit">
+                      <span className="relative z-10">Panele Gir</span>
+                    </button>
+
+                    <button
+                      onClick={() => switchAuthMode("register")}
+                      className="mt-4 w-full text-center text-xs font-semibold uppercase tracking-[0.16em] text-mourning transition hover:text-bone"
+                      type="button"
+                    >
+                      Hesabın yok mu? Kayıt ol
+                    </button>
+                  </form>
+                ) : (
+                  <form onSubmit={handleRegister}>
+                    <div className="mb-5 flex items-center justify-between gap-4">
+                      <div>
+                        <h2 className="font-display text-2xl font-black text-bone">Kayıt Ol</h2>
+                        <p className="mt-1 text-xs text-mourning">Yeni müşteri hesabı oluştur</p>
+                      </div>
+                      <UserPlus className="h-7 w-7 text-frost drop-shadow-[0_0_14px_rgba(0,215,255,.35)]" />
+                    </div>
+
+                    <label className="mb-4 block">
+                      <span className="mb-2 block text-[10px] font-semibold uppercase tracking-[0.22em] text-mourning">Ad Soyad</span>
+                      <input
+                        value={registerForm.fullName}
+                        onChange={(event) => setRegisterForm({ ...registerForm, fullName: event.target.value })}
+                        className="occult-input"
+                        placeholder="Adınız Soyadınız"
+                        autoComplete="name"
+                      />
+                    </label>
+
+                    <div className="grid gap-4 md:grid-cols-2">
+                      <label className="block">
+                        <span className="mb-2 block text-[10px] font-semibold uppercase tracking-[0.22em] text-mourning">Kullanıcı Adı</span>
+                        <input
+                          value={registerForm.username}
+                          onChange={(event) => setRegisterForm({ ...registerForm, username: event.target.value })}
+                          className="occult-input"
+                          placeholder="ornek_kullanici"
+                          autoComplete="username"
+                        />
+                      </label>
+
+                      <label className="block">
+                        <span className="mb-2 block text-[10px] font-semibold uppercase tracking-[0.22em] text-mourning">E-posta</span>
+                        <input
+                          value={registerForm.email}
+                          onChange={(event) => setRegisterForm({ ...registerForm, email: event.target.value })}
+                          className="occult-input"
+                          placeholder="mail@ornek.com"
+                          type="email"
+                          autoComplete="email"
+                        />
+                      </label>
+                    </div>
+
+                    <div className="mt-4 grid gap-4 md:grid-cols-2">
+                      <label className="block">
+                        <span className="mb-2 block text-[10px] font-semibold uppercase tracking-[0.22em] text-mourning">Parola</span>
+                        <input
+                          value={registerForm.password}
+                          onChange={(event) => setRegisterForm({ ...registerForm, password: event.target.value })}
+                          className="occult-input"
+                          placeholder="••••••••"
+                          type="password"
+                          autoComplete="new-password"
+                        />
+                      </label>
+
+                      <label className="block">
+                        <span className="mb-2 block text-[10px] font-semibold uppercase tracking-[0.22em] text-mourning">Parola Tekrarı</span>
+                        <input
+                          value={registerForm.passwordConfirm}
+                          onChange={(event) => setRegisterForm({ ...registerForm, passwordConfirm: event.target.value })}
+                          className="occult-input"
+                          placeholder="••••••••"
+                          type="password"
+                          autoComplete="new-password"
+                        />
+                      </label>
+                    </div>
+
+                    {error && (
+                      <p className="mt-4 rounded-xl border border-ember/28 bg-ember/10 px-4 py-3 text-sm text-[#ff8bdc]">{error}</p>
+                    )}
+                    {success && (
+                      <p className="mt-4 rounded-xl border border-frost/28 bg-frost/10 px-4 py-3 text-sm text-frost">{success}</p>
+                    )}
+
+                    <button className="occult-button mt-6 w-full px-7 py-4 text-sm font-semibold uppercase tracking-[0.18em] text-white" type="submit">
+                      <span className="relative z-10">Hesap Oluştur</span>
+                    </button>
+
+                    <button
+                      onClick={() => switchAuthMode("login")}
+                      className="mt-4 w-full text-center text-xs font-semibold uppercase tracking-[0.16em] text-mourning transition hover:text-bone"
+                      type="button"
+                    >
+                      Zaten hesabın var mı? Giriş yap
+                    </button>
+                  </form>
                 )}
-
-                <button className="occult-button mt-6 w-full px-7 py-4 text-sm font-semibold uppercase tracking-[0.18em] text-white" type="submit">
-                  <span className="relative z-10">Panele Gir</span>
-                </button>
-              </form>
+              </div>
             </div>
           </div>
         </div>
@@ -347,34 +625,43 @@ function OrdersPanel({ orders, title }: { orders: CustomerOrder[]; title: string
         <span className="text-xs text-mourning">{orders.length} kayıt</span>
       </div>
 
-      <div className="relative z-10 overflow-hidden rounded-[1.1rem] border border-violet/16">
-        <div className="hidden grid-cols-[1fr_1.5fr_.95fr_.8fr_.95fr] border-b border-violet/14 bg-black/26 px-4 py-3 text-[10px] font-semibold uppercase tracking-[0.18em] text-mourning md:grid">
-          <span>No</span>
-          <span>Hizmet</span>
-          <span>Tarih</span>
-          <span>Tutar</span>
-          <span className="text-right">Durum</span>
+      {orders.length === 0 ? (
+        <div className="relative z-10 rounded-[1.1rem] border border-violet/16 bg-black/22 px-5 py-8 text-center">
+          <p className="font-display text-2xl font-black text-bone">Henüz sipariş yok</p>
+          <p className="mx-auto mt-3 max-w-xl text-sm leading-7 text-mourning">
+            Müşteri yeni kayıt olduysa sipariş geçmişi boş görünür. Ödeme veya sipariş sistemi bağlandığında müşterinin siparişleri bu alana otomatik düşer.
+          </p>
         </div>
+      ) : (
+        <div className="relative z-10 overflow-hidden rounded-[1.1rem] border border-violet/16">
+          <div className="hidden grid-cols-[1fr_1.5fr_.95fr_.8fr_.95fr] border-b border-violet/14 bg-black/26 px-4 py-3 text-[10px] font-semibold uppercase tracking-[0.18em] text-mourning md:grid">
+            <span>No</span>
+            <span>Hizmet</span>
+            <span>Tarih</span>
+            <span>Tutar</span>
+            <span className="text-right">Durum</span>
+          </div>
 
-        <div className="divide-y divide-violet/12">
-          {orders.map((order) => (
-            <div key={order.id} className="grid gap-4 px-4 py-4 text-sm text-bone md:grid-cols-[1fr_1.5fr_.95fr_.8fr_.95fr] md:items-center">
-              <div className="font-mono text-xs text-cold">{order.id}</div>
-              <div>
-                <p className="font-semibold text-bone">{order.title} <span className="font-normal text-mourning">- {order.detail}</span></p>
-                {order.readerNote && <p className="mt-2 max-w-xl text-xs leading-5 text-mourning">{order.readerNote}</p>}
+          <div className="divide-y divide-violet/12">
+            {orders.map((order) => (
+              <div key={order.id} className="grid gap-4 px-4 py-4 text-sm text-bone md:grid-cols-[1fr_1.5fr_.95fr_.8fr_.95fr] md:items-center">
+                <div className="font-mono text-xs text-cold">{order.id}</div>
+                <div>
+                  <p className="font-semibold text-bone">{order.title} <span className="font-normal text-mourning">- {order.detail}</span></p>
+                  {order.readerNote && <p className="mt-2 max-w-xl text-xs leading-5 text-mourning">{order.readerNote}</p>}
+                </div>
+                <div className="text-xs text-mourning">{order.date}</div>
+                <div className="font-semibold text-bone">{formatPrice(order.price)}</div>
+                <div className="md:text-right">
+                  <span className={`inline-flex rounded-full border px-3 py-1.5 text-[10px] font-black uppercase tracking-[0.12em] ${statusStyle[order.status]}`}>
+                    {order.status}
+                  </span>
+                </div>
               </div>
-              <div className="text-xs text-mourning">{order.date}</div>
-              <div className="font-semibold text-bone">{formatPrice(order.price)}</div>
-              <div className="md:text-right">
-                <span className={`inline-flex rounded-full border px-3 py-1.5 text-[10px] font-black uppercase tracking-[0.12em] ${statusStyle[order.status]}`}>
-                  {order.status}
-                </span>
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }
@@ -384,7 +671,6 @@ function ProfilePanel({ customer }: { customer: PanelCustomer }) {
     { icon: <UserRound className="h-4 w-4" />, label: "Ad Soyad", value: customer.fullName },
     { icon: <UserRound className="h-4 w-4" />, label: "Kullanıcı Adı", value: customer.username },
     { icon: <Mail className="h-4 w-4" />, label: "E-posta", value: customer.email },
-    { icon: <Phone className="h-4 w-4" />, label: "Telefon", value: customer.phone },
     { icon: <ShieldCheck className="h-4 w-4" />, label: "Üyelik", value: customer.membership },
     { icon: <CalendarDays className="h-4 w-4" />, label: "Kayıt Tarihi", value: customer.joinDate },
     { icon: <Clock3 className="h-4 w-4" />, label: "Son Giriş", value: customer.lastLogin },

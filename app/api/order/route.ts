@@ -38,6 +38,7 @@ export async function POST(request: Request) {
     const fullName = clean(formData.get("fullName"));
     const email = clean(formData.get("email")).toLowerCase();
     const birthDate = clean(formData.get("birthDate"));
+    const phone = clean(formData.get("phone"));
     const topic = clean(formData.get("topic"));
     const notes = clean(formData.get("notes"));
     const consent = clean(formData.get("consent"));
@@ -50,9 +51,10 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Geçerli bir e-posta adresi girin." }, { status: 400 });
     }
 
-    const files = formData
-      .getAll("coffeeImages")
-      .filter((entry): entry is File => entry instanceof File && entry.size > 0);
+    const files = [
+      ...formData.getAll("orderImages"),
+      ...formData.getAll("coffeeImages")
+    ].filter((entry): entry is File => entry instanceof File && entry.size > 0);
 
     if (isCoffee && files.length === 0) {
       return NextResponse.json({ error: "Kahve falı için fincan fotoğrafı yükleyin." }, { status: 400 });
@@ -73,10 +75,11 @@ export async function POST(request: Request) {
       `Fiyat: ${item.price.toLocaleString("tr-TR")} TL`,
       `Ad Soyad: ${fullName}`,
       `E-posta: ${email}`,
+      `Telefon: ${phone || "-"}`,
       `Doğum tarihi: ${birthDate}`,
       `Ana konu / soru: ${topic}`,
       `Ek not: ${notes || "-"}`,
-      `Kahve falı görsel sayısı: ${attachments.length}`
+      `Görsel sayısı: ${attachments.length}`
     ].join("\n");
 
     const html = `
@@ -88,12 +91,13 @@ export async function POST(request: Request) {
       <hr />
       <p><strong>Ad Soyad:</strong> ${escapeHtml(fullName)}</p>
       <p><strong>E-posta:</strong> ${escapeHtml(email)}</p>
+      <p><strong>Telefon:</strong> ${escapeHtml(phone || "-")}</p>
       <p><strong>Doğum tarihi:</strong> ${escapeHtml(birthDate)}</p>
       <p><strong>Ana konu / soru:</strong></p>
       <p style="white-space:pre-wrap">${escapeHtml(topic)}</p>
       <p><strong>Ek not:</strong></p>
       <p style="white-space:pre-wrap">${escapeHtml(notes || "-")}</p>
-      <p><strong>Kahve falı görsel sayısı:</strong> ${attachments.length}</p>
+      <p><strong>Görsel sayısı:</strong> ${attachments.length}</p>
     `;
 
     await sendMail({

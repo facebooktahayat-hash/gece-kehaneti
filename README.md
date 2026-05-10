@@ -161,3 +161,8 @@ ORDER_TO_EMAIL=gecekehaneti@gmail.com
 ```
 
 Not: `CONTACT_FROM_EMAIL` için Resend üzerinde doğrulanmış domain kullanılması önerilir. API anahtarı eklenmeden iletişim ve sipariş e-postaları gönderilemez.
+
+## v17 Global Ödeme Popup
+
+Siteye ilk kez giren ziyaretçilere mobil uyumlu global ödeme bilgilendirme popup'ı eklendi. Popup, kullanıcı kapatana kadar ekranın ortasında görünür; kapatıldıktan sonra aynı tarayıcıda tekrar gösterilmez.
+

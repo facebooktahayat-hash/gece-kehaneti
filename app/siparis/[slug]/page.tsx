@@ -12,7 +12,9 @@ export default function OrderPage({ params }: { params: { slug: string } }) {
   return (
     <section className="px-4 py-16 md:px-6">
       <div className="mx-auto max-w-5xl">
-        <Link href={`/urun/${item.slug}`} className="mb-8 inline-flex items-center gap-2 text-sm text-ember transition hover:text-[#ff6bd2] hover:drop-shadow-[0_0_14px_rgba(255,0,184,.7)]"><ArrowLeft className="h-4 w-4" /> Pakete dön</Link>
+        <Link href={`/urun/${item.slug}`} className="mb-8 inline-flex items-center gap-2 text-sm text-ember transition hover:text-[#ff6bd2] hover:drop-shadow-[0_0_14px_rgba(255,0,184,.7)]">
+          <ArrowLeft className="h-4 w-4" /> Pakete dön
+        </Link>
         <div className="occult-panel p-7 md:p-10">
           <p className="eyebrow-rune mb-4">Ödeme öncesi zorunlu form</p>
           <h1 className="mt-3 font-display text-[2.25rem] font-black text-bone md:text-[3.7rem]">Sipariş Formu</h1>
@@ -20,7 +22,7 @@ export default function OrderPage({ params }: { params: { slug: string } }) {
           <p className="mt-3 text-sm leading-6 text-mourning-dim">
             Soruların, kişisel bilgilerin ve varsa kahve falı görsellerin bu formdan alınır. Form gönderilmeden ödeme penceresi açılmaz.
           </p>
-          <OrderForm item={item} category={c} />
+          <OrderForm item={item} categoryTitle={c?.title} />
         </div>
       </div>
     </section>

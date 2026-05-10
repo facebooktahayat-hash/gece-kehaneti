@@ -3,11 +3,11 @@
 import { useRef, useState } from "react";
 import { UploadCloud } from "lucide-react";
 import { DePayPaymentButton } from "@/components/DePayPaymentButton";
-import type { Category, Package } from "@/lib/data";
+import type { Package } from "@/lib/data";
 
 type OrderFormProps = {
   item: Package;
-  category?: Category;
+  categoryTitle?: string;
 };
 
 type OrderResponse = {
@@ -20,7 +20,7 @@ function createOrderId() {
   return `GK-${Date.now()}-${Math.random().toString(16).slice(2, 8).toUpperCase()}`;
 }
 
-export function OrderForm({ item, category }: OrderFormProps) {
+export function OrderForm({ item, categoryTitle }: OrderFormProps) {
   const formRef = useRef<HTMLFormElement>(null);
   const orderIdRef = useRef(createOrderId());
   const sentOrderIdRef = useRef("");
@@ -79,27 +79,36 @@ export function OrderForm({ item, category }: OrderFormProps) {
       <div className="grid gap-5 md:grid-cols-2">
         <Field label="Ad Soyad" name="fullName" placeholder="Adınız Soyadınız" required />
         <Field label="E-posta" name="email" placeholder="ornek@mail.com" type="email" required />
+        <Field label="Telefon" name="phone" placeholder="05xx xxx xx xx" />
         <Field label="Doğum tarihi" name="birthDate" placeholder="GG/AA/YYYY" required />
-        <Field label="Paket" name="packageName" value={`${item.name} · ${category?.title || item.categorySlug}`} readOnly />
+        <Field label="Paket" name="packageName" value={`${item.name} · ${categoryTitle || item.categorySlug}`} readOnly />
       </div>
 
-      {isCoffee && (
-        <label className="grid gap-2">
-          <span className="text-sm text-mourning">Kahve fincanı fotoğrafları <span className="text-ember">*</span></span>
-          <div className="occult-card p-5 text-mourning">
-            <div className="mb-3 flex items-center gap-2 text-sm"><UploadCloud className="h-5 w-5 text-[#c9a6df]" /> Fincan ve tabak görsellerini yükleyin.</div>
-            <input
-              className="block w-full text-sm text-mourning file:mr-4 file:rounded-full file:border-0 file:bg-frost/10 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-frost hover:file:bg-frost/20"
-              name="coffeeImages"
-              type="file"
-              accept="image/*"
-              multiple
-              required
-            />
-            <p className="mt-3 text-xs leading-5 text-mourning-dim">Toplam dosya sınırı 10 MB. Net ışıkta çekilmiş fincan ve tabak fotoğrafları önerilir.</p>
+      <label className="grid gap-2">
+        <span className="text-sm text-mourning">
+          {isCoffee ? "Kahve fincanı fotoğrafları" : "Fotoğraf yükle"}
+          {isCoffee && <span className="text-ember"> *</span>}
+        </span>
+        <div className="occult-card p-5 text-mourning">
+          <div className="mb-3 flex items-center gap-2 text-sm">
+            <UploadCloud className="h-5 w-5 text-[#c9a6df]" />
+            {isCoffee ? "Fincan ve tabak görsellerini yükleyin." : "İsteğe bağlı görsel ekleyebilirsiniz."}
           </div>
-        </label>
-      )}
+          <input
+            className="block w-full text-sm text-mourning file:mr-4 file:rounded-full file:border-0 file:bg-frost/10 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-frost hover:file:bg-frost/20"
+            name="orderImages"
+            type="file"
+            accept="image/*"
+            multiple
+            required={isCoffee}
+          />
+          <p className="mt-3 text-xs leading-5 text-mourning-dim">
+            {isCoffee
+              ? "Kahve falı için fincan ve tabak görselleri zorunludur. Toplam dosya sınırı 10 MB."
+              : "Bu yorum için zorunlu değildir. İstersen net bir fotoğraf veya ekran görüntüsü ekleyebilirsin. Toplam dosya sınırı 10 MB."}
+          </p>
+        </div>
+      </label>
 
       <label className="grid gap-2">
         <span className="text-sm text-mourning">{isCoffee ? "Fal için sormak istediğin konu" : "Sormak istediğin ana konu / sorular"} <span className="text-ember">*</span></span>

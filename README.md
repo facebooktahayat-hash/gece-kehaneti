@@ -124,3 +124,8 @@ Header, referanstaki gibi sadeleştirildi: sadece ay logosu ve GECE KEHANETİ ka
 ## v19 Mobile Glow Hero Logo
 
 Hover glow tema renklerinde daha görünür yapıldı. Mobilde hareketli metin animasyonları zorlandı. Hero ritüel çemberi daha belirgin hale getirildi ve mobilde üst menü ile arası sıkılaştırıldı. Header ay logosunun içi daha dolu, buğulu ve yazı tonlarına yakın pembe-mor hale getirildi.
+
+
+## v20 Mobile Sphere Tuned
+
+Mobilde hero ritüel küresi küçültüldü, opaklığı azaltıldı ve yazılarla daha az çakışacak şekilde geri çekildi. Desktop görünüm korunur.

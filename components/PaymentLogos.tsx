@@ -3,8 +3,8 @@ import type { ReactNode } from "react";
 
 function CompactLogoPill({ children }: { children: ReactNode }) {
   return (
-    <div className="flex h-11 w-[96px] shrink-0 items-center justify-center rounded-xl border border-white/12 bg-white px-3 shadow-[0_8px_20px_rgba(0,0,0,.22)] sm:w-[104px]">
-      <div className="max-w-full scale-[0.95] sm:scale-100">{children}</div>
+    <div className="flex h-10 w-[84px] shrink-0 items-center justify-center rounded-xl border border-white/12 bg-white px-2.5 shadow-[0_8px_20px_rgba(0,0,0,.22)] sm:h-11 sm:w-[96px] sm:px-3">
+      <div className="max-w-full scale-[0.88] sm:scale-[0.95]">{children}</div>
     </div>
   );
 }
@@ -102,22 +102,22 @@ type PaymentLogosProps = {
 export function PaymentLogos({ compact = false }: PaymentLogosProps) {
   if (compact) {
     return (
-      <div className="rounded-[1.1rem] border border-white/10 bg-black/35 px-4 pb-3 pt-3 shadow-[0_0_24px_rgba(124,28,255,.08)] lg:pt-2.5">
+      <div className="rounded-[1.1rem] border border-white/10 bg-black/35 px-3.5 pb-3 pt-3 shadow-[0_0_24px_rgba(124,28,255,.08)] sm:px-4 lg:pt-2.5">
         <div className="mb-3 flex items-center gap-2.5">
           <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-frost/20 bg-frost/10 shadow-[0_0_16px_rgba(0,215,255,.14)]">
             <ShieldCheck className="h-4.5 w-4.5 text-frost" />
           </span>
           <div>
-            <h3 className="font-display text-[13px] font-semibold uppercase tracking-[0.14em] text-bone sm:text-sm sm:tracking-[0.16em]">Güvenli Alışveriş</h3>
-            <p className="mt-0.5 text-[10px] leading-4 text-mourning sm:text-[11px]">Ödeme altyapısı destek logoları.</p>
+            <h3 className="font-display text-[12px] font-semibold uppercase tracking-[0.13em] text-bone sm:text-sm sm:tracking-[0.16em]">Güvenli Alışveriş</h3>
+            <p className="mt-0.5 text-[9px] leading-4 text-mourning sm:text-[11px]">Ödeme altyapısı destek logoları.</p>
           </div>
         </div>
 
         <div className="relative md:hidden">
-          <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-8 bg-gradient-to-r from-black/70 to-transparent" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-8 bg-gradient-to-l from-black/70 to-transparent" />
-          <div className="overflow-hidden">
-            <div className="payment-logo-marquee flex w-max gap-2.5">
+          <div className="mx-auto max-w-[268px] overflow-hidden">
+            <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-8 bg-gradient-to-r from-black/75 to-transparent" />
+            <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-8 bg-gradient-to-l from-black/75 to-transparent" />
+            <div className="payment-logo-marquee flex w-max gap-2">
               {[...mobileLogoItems, ...mobileLogoItems].map((item, index) => (
                 <CompactLogoPill key={`${item.key}-${index}`}>{item.node}</CompactLogoPill>
               ))}
@@ -125,13 +125,13 @@ export function PaymentLogos({ compact = false }: PaymentLogosProps) {
           </div>
         </div>
 
-        <div className="hidden flex-wrap gap-2.5 md:flex">
+        <div className="hidden flex-wrap gap-2 md:flex">
           {mobileLogoItems.map((item) => (
             <CompactLogoPill key={item.key}>{item.node}</CompactLogoPill>
           ))}
         </div>
 
-        <div className="mt-3 flex flex-wrap items-center gap-2 text-[10px] uppercase tracking-[0.16em] text-mourning-dim">
+        <div className="mt-2.5 flex flex-wrap items-center gap-2 text-[9px] uppercase tracking-[0.14em] text-mourning-dim sm:mt-3 sm:text-[10px] sm:tracking-[0.16em]">
           <LockKeyhole className="h-3.5 w-3.5 text-ember" />
           Güvenli ödeme bildirimi
         </div>

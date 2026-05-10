@@ -240,7 +240,7 @@ body {
   100% { transform: translateX(calc(-50% - 0.3125rem)); }
 }
 
-.payment-logo-marquee { animation: paymentLogoMarquee 16s linear infinite; }
+.payment-logo-marquee { animation: paymentLogoMarquee 14s linear infinite; }
 
 @keyframes cursedGlitch {
   0%, 100% { transform: translate(0,0); opacity: .92; }

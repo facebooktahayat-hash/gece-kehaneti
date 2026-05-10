@@ -118,6 +118,11 @@ const packageTemplates = [
   { key: "premium-rituel-yorum", name: "Premium Ritüel Yorum", price: 3996, delivery: "48-72 saat", level: "Premium", description: "Kapsamlı, katmanlı ve kişiye özel hazırlanmış premium yorum.", includes: ["7 ana soru", "Kapsamlı analiz", "Özel kapanış yorumu", "Premium rapor"] }
 ];
 
+
+export const gumroadLinks = {
+  kehanet: "https://2883749444859.gumroad.com/l/kehanet?wanted=true"
+};
+
 export const legendaryPackage: Package = {
   slug: "kehanet",
   categorySlug: "gece-kehaneti",

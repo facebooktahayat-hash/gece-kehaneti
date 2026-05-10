@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Category, Package } from "@/lib/data";
+import { Category, Package, gumroadLinks } from "@/lib/data";
 import { ArrowRight, Clock3, Gem, Star } from "lucide-react";
 
 const categoryIconStyles: Record<string, { icon: string; shell: string; glow: string }> = {
@@ -77,9 +77,9 @@ export function CategoryCard({ category }: { category: Category }) {
 
 export function PackageCard({ item }: { item: Package }) {
   const isLegendary = item.slug === "kehanet";
-
-  return (
-    <Link href={`/urun/${item.slug}`} className={`occult-card group flex h-full flex-col p-6 ${isLegendary ? "legendary-product-card" : ""}`}>
+  const cardClassName = `occult-card group flex h-full flex-col p-6 ${isLegendary ? "legendary-product-card" : ""}`;
+  const cardContent = (
+    <>
       <div className={`absolute -right-10 -top-10 h-32 w-32 rounded-full blur-3xl opacity-70 transition group-hover:opacity-100 ${isLegendary ? "bg-ember/28" : "bg-ember/12"}`} />
       {isLegendary && (
         <>
@@ -105,8 +105,22 @@ export function PackageCard({ item }: { item: Package }) {
         ))}
       </ul>
       <span className="occult-button mt-auto px-5 py-3 text-center text-sm font-semibold text-bone">
-        <span className="relative z-10">{isLegendary ? "Kehanet Kapısını Aç" : "Şimdi Fal Baktır"}</span>
+        <span className="relative z-10">{isLegendary ? "Kehanet Ödemesine Geç" : "Şimdi Fal Baktır"}</span>
       </span>
+    </>
+  );
+
+  if (isLegendary) {
+    return (
+      <a href={gumroadLinks.kehanet} target="_blank" rel="noopener noreferrer" className={cardClassName}>
+        {cardContent}
+      </a>
+    );
+  }
+
+  return (
+    <Link href={`/urun/${item.slug}`} className={cardClassName}>
+      {cardContent}
     </Link>
   );
 }

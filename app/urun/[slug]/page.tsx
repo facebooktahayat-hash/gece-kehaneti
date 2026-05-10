@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getCategory, getPackage } from "@/lib/data";
+import { getCategory, getPackage, gumroadLinks } from "@/lib/data";
 import { ArrowLeft, CheckCircle2, Clock3 } from "lucide-react";
 
 export default function ProductPage({ params }: { params: { slug: string } }) {
@@ -37,7 +37,11 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
           <aside className="occult-panel h-fit p-7">
             <div className="text-sm text-mourning-dim">Paket fiyatı</div>
             <div className="mt-2 font-display text-5xl font-black text-ember drop-shadow-[0_0_16px_rgba(255,0,184,.35)]">{item.price.toLocaleString("tr-TR")} TL</div>
-            <Link href={`/siparis/${item.slug}`} className="occult-button mt-7 flex px-6 py-4 text-center font-semibold text-white"><span className="relative z-10">{isLegendary ? "Kehanet İçin Sipariş Ver" : "Şimdi Sipariş Ver"}</span></Link>
+            {isLegendary ? (
+              <a href={gumroadLinks.kehanet} target="_blank" rel="noopener noreferrer" className="occult-button mt-7 flex px-6 py-4 text-center font-semibold text-white"><span className="relative z-10">Kehanet İçin Ödeme Yap</span></a>
+            ) : (
+              <Link href={`/siparis/${item.slug}`} className="occult-button mt-7 flex px-6 py-4 text-center font-semibold text-white"><span className="relative z-10">Şimdi Sipariş Ver</span></Link>
+            )}
             <p className="mt-5 text-xs leading-6 text-mourning-dim">Fal hizmeti eğlence ve kişisel farkındalık amaçlıdır. Kesin sonuç, sağlık, hukuk veya yatırım danışmanlığı sunmaz.</p>
           </aside>
         </div>

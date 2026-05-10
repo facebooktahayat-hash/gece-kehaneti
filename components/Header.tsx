@@ -18,10 +18,10 @@ export function Header() {
     <header className="sticky top-0 z-50 border-b border-white/[0.05] bg-black/88 backdrop-blur-xl">
       <div className="mx-auto flex h-[68px] max-w-7xl items-center justify-between px-4 md:h-[76px] md:px-6">
         <Link href="/" className="group flex items-center gap-3">
-          <span className="relative grid h-10 w-10 place-items-center overflow-hidden rounded-full border border-frost/20 bg-[#0a0118] shadow-[0_0_18px_rgba(0,215,255,.24),0_0_34px_rgba(162,35,255,.18)] transition duration-300 group-hover:shadow-[0_0_24px_rgba(0,215,255,.34),0_0_42px_rgba(162,35,255,.24)] md:h-12 md:w-12">
-            <span className="absolute inset-[2px] rounded-full bg-[radial-gradient(circle_at_35%_30%,rgba(0,215,255,.35),transparent_32%),radial-gradient(circle_at_60%_58%,rgba(177,58,255,.28),transparent_42%),linear-gradient(180deg,rgba(15,3,35,.95),rgba(7,0,18,.98))]" />
-            <span className="absolute inset-0 rounded-full bg-frost/12 blur-[10px]" />
-            <span className="absolute left-[7px] top-[8px] h-4 w-4 rounded-full bg-frost/30 blur-[8px] md:left-[9px] md:top-[10px] md:h-5 md:w-5" />
+          <span className="relative grid h-10 w-10 place-items-center overflow-hidden rounded-full border border-frost/20 bg-[#0a0118] shadow-[0_0_20px_rgba(255,0,184,.18),0_0_34px_rgba(136,32,255,.22)] transition duration-300 group-hover:shadow-[0_0_28px_rgba(255,0,184,.28),0_0_46px_rgba(136,32,255,.28)] md:h-12 md:w-12">
+            <span className="absolute inset-[2px] rounded-full bg-[radial-gradient(circle_at_34%_30%,rgba(255,0,184,.28),transparent_30%),radial-gradient(circle_at_62%_60%,rgba(168,61,255,.30),transparent_44%),radial-gradient(circle_at_50%_52%,rgba(255,0,184,.10),transparent_52%),linear-gradient(180deg,rgba(34,4,52,.98),rgba(11,0,24,.98))]" />
+            <span className="absolute inset-0 rounded-full bg-ember/14 blur-[12px]" />
+            <span className="absolute left-[7px] top-[8px] h-4 w-4 rounded-full bg-ember/30 blur-[8px] md:left-[9px] md:top-[10px] md:h-5 md:w-5" />
             <Moon className="relative z-10 h-6 w-6 text-frost drop-shadow-[0_0_12px_rgba(0,215,255,.92)] md:h-7 md:w-7" strokeWidth={2.2} />
           </span>
 

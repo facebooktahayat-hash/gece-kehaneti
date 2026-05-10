@@ -119,3 +119,8 @@ Buton ve tıklanabilir kart hover efektleri pembe yerine koyu mor/lacivert/cyan 
 ## v18 Header Logo Match
 
 Header, referanstaki gibi sadeleştirildi: sadece ay logosu ve GECE KEHANETİ kaldı. Alt küçük slogan kaldırıldı. Ay logosunun içi buğulu, renk dolu ve daha premium glowlu hale getirildi.
+
+
+## v19 Mobile Glow Hero Logo
+
+Hover glow tema renklerinde daha görünür yapıldı. Mobilde hareketli metin animasyonları zorlandı. Hero ritüel çemberi daha belirgin hale getirildi ve mobilde üst menü ile arası sıkılaştırıldı. Header ay logosunun içi daha dolu, buğulu ve yazı tonlarına yakın pembe-mor hale getirildi.

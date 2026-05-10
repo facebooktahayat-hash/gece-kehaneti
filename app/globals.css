@@ -731,3 +731,73 @@ body {
     0 0 12px rgba(0,215,255,.22),
     0 0 18px rgba(74,31,160,.35) !important;
 }
+
+
+/* v19 visible theme hover glow */
+.occult-button,
+.occult-button-ghost { overflow: visible !important; isolation: isolate; }
+
+.occult-button::after,
+.occult-button-ghost::after {
+  inset: -16px !important;
+  z-index: -1 !important;
+  border-radius: 9999px !important;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(255,0,184,.22), transparent 28%),
+    radial-gradient(circle at 50% 50%, rgba(120,32,255,.34), transparent 46%),
+    radial-gradient(circle at 50% 50%, rgba(0,215,255,.14), transparent 60%) !important;
+  filter: blur(24px) !important;
+  opacity: 0 !important;
+  transition: opacity .22s ease, transform .22s ease, filter .22s ease !important;
+}
+
+.occult-button:hover {
+  border-color: rgba(255,0,184,.52) !important;
+  background: linear-gradient(90deg, rgba(89,0,154,.98), rgba(255,0,184,.93)) !important;
+  box-shadow:
+    0 0 22px rgba(255,0,184,.24),
+    0 0 46px rgba(136,32,255,.28),
+    0 0 68px rgba(0,215,255,.12),
+    inset 0 1px 0 rgba(255,255,255,.10) !important;
+}
+.occult-button-ghost:hover {
+  border-color: rgba(255,0,184,.44) !important;
+  color: rgba(255,255,255,.96) !important;
+  background: linear-gradient(90deg, rgba(23,0,42,.92), rgba(56,10,88,.86), rgba(8,12,38,.88)) !important;
+  box-shadow:
+    0 0 18px rgba(255,0,184,.18),
+    0 0 42px rgba(136,32,255,.24),
+    0 0 64px rgba(0,215,255,.10),
+    inset 0 1px 0 rgba(255,255,255,.08) !important;
+}
+.occult-button:hover::after,
+.occult-button-ghost:hover::after {
+  opacity: 1 !important;
+  transform: scale(1.12) !important;
+  filter: blur(30px) !important;
+}
+
+/* stronger ritual ring visibility */
+.ritual-purple { stroke: rgba(146, 76, 255, .82); filter: drop-shadow(0 0 8px rgba(146,76,255,.22)); }
+.ritual-pink { stroke: rgba(255, 35, 191, .82); filter: drop-shadow(0 0 8px rgba(255,35,191,.22)); }
+.ritual-cyan { stroke: rgba(0, 215, 255, .82); filter: drop-shadow(0 0 8px rgba(0,215,255,.18)); }
+
+/* mobile: force animations to continue */
+@media (max-width: 640px) {
+  .omen-shock {
+    animation: omenShock 3.1s steps(2,end) infinite !important;
+    animation-play-state: running !important;
+  }
+  .ghost-line {
+    animation: ghostPulse 5.8s ease-in-out infinite !important;
+    animation-play-state: running !important;
+  }
+  .horror-whisper {
+    animation: hauntedWhisper 8s ease-in-out infinite alternate !important;
+    animation-play-state: running !important;
+  }
+  .horror-crawl-track {
+    animation: crawlWhisper 22s linear infinite !important;
+    animation-play-state: running !important;
+  }
+}

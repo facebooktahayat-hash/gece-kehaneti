@@ -1,53 +1,86 @@
-import { LockKeyhole, ShieldCheck } from "lucide-react";
+import { Bitcoin, LockKeyhole, ShieldCheck } from "lucide-react";
+import type { ReactNode } from "react";
 
-function LogoCard({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+function CompactLogoPill({ children }: { children: ReactNode }) {
   return (
-    <div
-      className={`flex h-[56px] items-center justify-center rounded-[12px] border border-white/15 bg-white px-3 shadow-[0_10px_26px_rgba(0,0,0,.25)] ${className}`}
-    >
+    <div className="flex h-11 min-w-[70px] items-center justify-center rounded-xl border border-white/12 bg-white px-3 shadow-[0_8px_20px_rgba(0,0,0,.22)]">
       {children}
     </div>
   );
 }
 
-function MastercardLogo() {
+function LogoCard({ children }: { children: ReactNode }) {
+  return (
+    <div className="flex h-[68px] items-center justify-center rounded-2xl border border-white/12 bg-white px-4 shadow-[0_12px_28px_rgba(0,0,0,.24)]">
+      {children}
+    </div>
+  );
+}
+
+function MastercardMark({ small = false }: { small?: boolean }) {
+  const circle = small ? "h-4 w-4" : "h-5 w-5";
+  const text = small ? "text-[10px]" : "text-[11px]";
   return (
     <div className="flex items-center gap-2">
-      <div className="relative h-6 w-10">
-        <span className="absolute left-0 top-0 h-6 w-6 rounded-full bg-[#EB001B]" />
-        <span className="absolute right-0 top-0 h-6 w-6 rounded-full bg-[#F79E1B] mix-blend-multiply" />
+      <div className={`relative ${small ? "w-7" : "w-8"} h-5`}>
+        <span className={`absolute left-0 top-0 ${circle} rounded-full bg-[#EB001B]`} />
+        <span className={`absolute ${small ? "left-[10px]" : "left-[12px]"} top-0 ${circle} rounded-full bg-[#F79E1B] mix-blend-multiply`} />
       </div>
-      <span className="text-[11px] font-bold tracking-tight text-[#222]">mastercard</span>
+      <span className={`${text} font-bold tracking-tight text-[#222]`}>mastercard</span>
     </div>
   );
 }
 
-function AmexLogo() {
+function AmexMark({ small = false }: { small?: boolean }) {
   return (
-    <div className="rounded-[6px] bg-[#1F72CD] px-2 py-1 text-center leading-none text-white shadow-sm">
-      <div className="text-[8px] font-black tracking-[0.08em]">AMERICAN</div>
-      <div className="mt-0.5 text-[10px] font-black tracking-[0.08em]">EXPRESS</div>
+    <div className={`rounded-md bg-[#1F72CD] ${small ? "px-2 py-1" : "px-2.5 py-1.5"} text-center text-white shadow-sm`}>
+      <div className={`${small ? "text-[7px]" : "text-[8px]"} font-black leading-none tracking-[0.08em]`}>AMERICAN</div>
+      <div className={`${small ? "mt-0.5 text-[8px]" : "mt-0.5 text-[10px]"} font-black leading-none tracking-[0.08em]`}>EXPRESS</div>
     </div>
   );
 }
 
-function VisaLogo() {
+function VisaMark({ small = false }: { small?: boolean }) {
   return (
-    <div className="flex items-center gap-0.5">
-      <span className="text-[22px] font-black italic leading-none tracking-tight text-[#1A1F71]">V</span>
-      <span className="-ml-0.5 text-[22px] font-black italic leading-none tracking-tight text-[#1A1F71]">isa</span>
-      <span className="ml-1 mt-3 block h-[3px] w-6 rounded-full bg-[#F7B600]" />
+    <div className="flex items-center">
+      <span className={`${small ? "text-[22px]" : "text-[26px]"} font-black italic leading-none tracking-tight text-[#1A1F71]`}>Visa</span>
+      <span className={`${small ? "ml-1 mt-3 w-5" : "ml-1 mt-4 w-6"} block h-[3px] rounded-full bg-[#F7B600]`} />
     </div>
   );
 }
 
-function TroyLogo() {
+function TroyMark({ small = false }: { small?: boolean }) {
   return (
-    <div className="flex items-end gap-[1px] text-[22px] font-black lowercase leading-none tracking-tight">
+    <div className={`flex items-end gap-[1px] ${small ? "text-[22px]" : "text-[26px]"} font-black lowercase leading-none tracking-tight`}>
       <span className="text-[#25A55F]">t</span>
       <span className="text-[#1690D0]">r</span>
       <span className="text-[#F4A21D]">o</span>
       <span className="text-[#5B5B5B]">y</span>
+    </div>
+  );
+}
+
+function PaypalMark({ small = false }: { small?: boolean }) {
+  return (
+    <div className="flex items-center gap-1">
+      <span className={`${small ? "text-[20px]" : "text-[24px]"} font-black italic leading-none text-[#003087]`}>P</span>
+      <span className={`${small ? "-ml-2 text-[20px]" : "-ml-2 text-[24px]"} font-black italic leading-none text-[#009CDE]`}>P</span>
+      <span className={`${small ? "ml-0.5 text-[12px]" : "ml-1 text-[14px]"} font-bold text-[#253B80]`}>PayPal</span>
+    </div>
+  );
+}
+
+function StripeMark({ small = false }: { small?: boolean }) {
+  return <span className={`${small ? "text-[18px]" : "text-[24px]"} font-black leading-none tracking-tight text-[#635BFF]`}>stripe</span>;
+}
+
+function BitcoinMark({ small = false }: { small?: boolean }) {
+  return (
+    <div className="flex items-center gap-1.5">
+      <span className={`grid ${small ? "h-6 w-6" : "h-7 w-7"} place-items-center rounded-full bg-[#F7931A]`}>
+        <Bitcoin className={`${small ? "h-3.5 w-3.5" : "h-4 w-4"} text-white`} strokeWidth={2.5} />
+      </span>
+      <span className={`${small ? "text-[12px]" : "text-[14px]"} font-bold text-[#222]`}>Bitcoin</span>
     </div>
   );
 }
@@ -57,8 +90,39 @@ type PaymentLogosProps = {
 };
 
 export function PaymentLogos({ compact = false }: PaymentLogosProps) {
+  if (compact) {
+    return (
+      <div className="rounded-[1.1rem] border border-white/10 bg-black/35 p-4 shadow-[0_0_24px_rgba(124,28,255,.08)]">
+        <div className="mb-3 flex items-center gap-2.5">
+          <span className="grid h-8 w-8 place-items-center rounded-full border border-frost/20 bg-frost/10 shadow-[0_0_16px_rgba(0,215,255,.14)]">
+            <ShieldCheck className="h-4.5 w-4.5 text-frost" />
+          </span>
+          <div>
+            <h3 className="font-display text-sm font-semibold uppercase tracking-[0.16em] text-bone">Güvenli Alışveriş</h3>
+            <p className="mt-0.5 text-[11px] leading-4 text-mourning">Ödeme altyapısı destek logoları.</p>
+          </div>
+        </div>
+
+        <div className="flex flex-wrap gap-2.5">
+          <CompactLogoPill><MastercardMark small /></CompactLogoPill>
+          <CompactLogoPill><AmexMark small /></CompactLogoPill>
+          <CompactLogoPill><VisaMark small /></CompactLogoPill>
+          <CompactLogoPill><TroyMark small /></CompactLogoPill>
+          <CompactLogoPill><PaypalMark small /></CompactLogoPill>
+          <CompactLogoPill><StripeMark small /></CompactLogoPill>
+          <CompactLogoPill><BitcoinMark small /></CompactLogoPill>
+        </div>
+
+        <div className="mt-3 flex items-center gap-2 text-[10px] uppercase tracking-[0.18em] text-mourning-dim">
+          <LockKeyhole className="h-3.5 w-3.5 text-ember" />
+          Güvenli ödeme bildirimi
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className={compact ? "rounded-[1.2rem] border border-white/10 bg-black/30 p-4" : "occult-panel p-6"}>
+    <div className="occult-panel p-6">
       <div className="relative z-10">
         <div className="mb-4 flex items-center gap-3">
           <span className="grid h-9 w-9 place-items-center rounded-full border border-frost/20 bg-frost/10 shadow-[0_0_18px_rgba(0,215,255,.16)]">
@@ -70,19 +134,15 @@ export function PaymentLogos({ compact = false }: PaymentLogosProps) {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-          <LogoCard>
-            <MastercardLogo />
-          </LogoCard>
-          <LogoCard>
-            <AmexLogo />
-          </LogoCard>
-          <LogoCard>
-            <VisaLogo />
-          </LogoCard>
-          <LogoCard>
-            <TroyLogo />
-          </LogoCard>
+        <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
+          <LogoCard><MastercardMark /></LogoCard>
+          <LogoCard><AmexMark /></LogoCard>
+          <LogoCard><VisaMark /></LogoCard>
+          <LogoCard><TroyMark /></LogoCard>
+          <LogoCard><PaypalMark /></LogoCard>
+          <LogoCard><StripeMark /></LogoCard>
+          <LogoCard><BitcoinMark /></LogoCard>
+          <div className="flex items-center justify-center rounded-2xl border border-dashed border-white/12 bg-white/5 px-4 text-center text-xs leading-5 text-mourning">Güvenli ödeme geçidi entegrasyonuna hazır</div>
         </div>
 
         <div className="mt-4 flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-mourning-dim">

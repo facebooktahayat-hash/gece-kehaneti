@@ -139,3 +139,8 @@ Mobil hero küresi biraz daha yukarı taşındı. Desktop görünüm korunur.
 ## v22 Mobile Sphere Balance
 
 Mobilde kürenin üst kısmını boğan koyu üst katman hafifletildi. Kürenin üst yarısına hafif görünürlük glowu eklendi ve ring katmanları çok az aşağı dengelendi.
+
+
+## v23 Ghost Line Reveal
+
+Hero içindeki “fısıltılar yaklaşır · semboller belirir · kapılar aralanır” satırına tüm platformlarda çalışan yavaş soyutlaşma ve tekrar belirginleşme efekti eklendi.

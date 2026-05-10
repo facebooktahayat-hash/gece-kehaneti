@@ -801,3 +801,55 @@ body {
     animation-play-state: running !important;
   }
 }
+
+
+/* v23: ghost line slow abstract/reveal effect on all platforms */
+@keyframes ghostRevealMist {
+  0%, 100% {
+    opacity: .98;
+    filter: blur(0px);
+    transform: translateY(0) scale(1);
+    letter-spacing: .22em;
+    text-shadow:
+      0 0 8px rgba(255,255,255,.24),
+      0 0 18px rgba(255,255,255,.12),
+      0 0 20px rgba(255,0,184,.14);
+  }
+  24% {
+    opacity: .86;
+    filter: blur(.25px);
+  }
+  45% {
+    opacity: .38;
+    filter: blur(2.2px);
+    transform: translateY(1px) scale(1.01);
+    letter-spacing: .34em;
+    text-shadow:
+      0 0 12px rgba(255,255,255,.08),
+      0 0 24px rgba(255,0,184,.18),
+      0 0 28px rgba(0,215,255,.12);
+  }
+  62% {
+    opacity: .58;
+    filter: blur(1.2px);
+    transform: translateY(0) scale(1.004);
+  }
+  80% {
+    opacity: .92;
+    filter: blur(.2px);
+    letter-spacing: .24em;
+  }
+}
+
+.ghost-line {
+  animation: ghostRevealMist 6.8s ease-in-out infinite !important;
+  animation-play-state: running !important;
+  will-change: opacity, filter, transform, letter-spacing, text-shadow;
+}
+
+@media (max-width: 640px) {
+  .ghost-line {
+    animation: ghostRevealMist 6.2s ease-in-out infinite !important;
+    animation-play-state: running !important;
+  }
+}

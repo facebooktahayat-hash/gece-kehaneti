@@ -134,3 +134,8 @@ Mobilde hero ritüel küresi küçültüldü, opaklığı azaltıldı ve yazıla
 ## v21 Mobile Sphere Up
 
 Mobil hero küresi biraz daha yukarı taşındı. Desktop görünüm korunur.
+
+
+## v22 Mobile Sphere Balance
+
+Mobilde kürenin üst kısmını boğan koyu üst katman hafifletildi. Kürenin üst yarısına hafif görünürlük glowu eklendi ve ring katmanları çok az aşağı dengelendi.

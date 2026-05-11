@@ -91,7 +91,7 @@ export function PaymentLogos({ compact = false }: PaymentLogosProps) {
           </span>
           <div>
             <h3 className="font-display text-[12px] font-semibold uppercase tracking-[0.13em] text-bone sm:text-sm sm:tracking-[0.16em]">Güvenli Kredi Kullanımı</h3>
-            <p className="mt-0.5 text-[9px] leading-4 text-mourning sm:text-[11px]">Gumroad üzerinden Gece Kredisi.</p>
+            <p className="mt-0.5 text-[9px] leading-4 text-mourning sm:text-[11px]">Dünya çapında kullanılan Gumroad altyapısıyla ödeme.</p>
           </div>
         </div>
 
@@ -130,7 +130,7 @@ export function PaymentLogos({ compact = false }: PaymentLogosProps) {
           </span>
           <div>
             <h3 className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-bone">Güvenli Kredi Kullanımı</h3>
-            <p className="mt-1 text-xs leading-5 text-mourning">Kredi paketleri Gumroad üzerinden alınır.</p>
+            <p className="mt-1 text-xs leading-5 text-mourning">Kredi paketleri dünya çapında kullanılan dijital ürün platformu Gumroad altyapısıyla alınır.</p>
           </div>
         </div>
 
@@ -145,7 +145,7 @@ export function PaymentLogos({ compact = false }: PaymentLogosProps) {
 
         <div className="mt-4 flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-mourning-dim">
           <LockKeyhole className="h-3.5 w-3.5 text-ember" />
-          Gumroad kredi paketi
+          Gumroad altyapısıyla güvenli ödeme
         </div>
       </div>
     </div>

@@ -186,7 +186,7 @@ export const trustBadges = [
   { title: "Tam Gizlilik", description: "Bilgilerin yalnızca yorum süreci için saklanır.", icon: LockKeyhole },
   { title: "Hızlı Teslim", description: "24-72 saat aralığında hazırlanır.", icon: Clock3 },
   { title: "Kişiye Özel", description: "Şablon değil, soruna göre özel yorum.", icon: Eye },
-  { title: "Gece Kredisi", description: "1 Gece Kredisi = 0.01 USD oranıyla Gumroad üzerinden alınır.", icon: ShieldCheck },
+  { title: "Gumroad Ödeme", description: "Dünya çapında kullanılan dijital ürün platformu Gumroad altyapısıyla güvenilir ödeme.", icon: ShieldCheck },
   { title: "Premium Deneyim", description: "Karanlık, şık ve ritüel hissi taşıyan sunum.", icon: Gem }
 ];
 

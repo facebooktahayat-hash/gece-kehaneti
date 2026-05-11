@@ -8,7 +8,7 @@ export function Stats() {
     {
       label: "Yorum Akışı",
       value: "Talep → Kredi",
-      note: "Formdan sonra Gumroad"
+      note: "Gumroad güvenli ödeme"
     },
     {
       label: "Teslim Aralığı",

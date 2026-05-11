@@ -57,7 +57,7 @@ export function OdemeClient() {
                 Kredini Gumroad üzerinden al, fal kapısını aç.
               </h1>
               <p className="mt-5 max-w-2xl text-sm leading-7 text-mourning md:text-base">
-                Gece Kredisi yalnızca Gece Kehaneti içindeki yorum taleplerinde kullanılan site içi kullanım kredisidir. Oran sabittir: <strong className="text-bone">{creditRateLabel}</strong>.
+                Gece Kredisi yalnızca Gece Kehaneti içindeki yorum taleplerinde kullanılan site içi kullanım kredisidir. Oran sabittir: <strong className="text-bone">{creditRateLabel}</strong>. Ödemeler, dünya çapında kullanılan dijital ürün platformu Gumroad altyapısıyla güvenilir şekilde tamamlanır.
               </p>
 
               <div className="mt-7 grid gap-4 sm:grid-cols-3">
@@ -68,7 +68,7 @@ export function OdemeClient() {
 
               <div className="mt-8 rounded-[1.35rem] border border-ember/22 bg-ember/8 p-5">
                 <h2 className="font-display text-[1.55rem] font-semibold text-bone">Hazır Gumroad kredi paketleri</h2>
-                <p className="mt-2 text-xs leading-6 text-mourning-dim">Paketler USD ile açılır. Örnek: 500 Gece Kredisi = 5.00 USD.</p>
+                <p className="mt-2 text-xs leading-6 text-mourning-dim">Paketler USD ile açılır. Örnek: 500 Gece Kredisi = 5.00 USD. Dünya çapında kullanılan dijital ürün platformu Gumroad altyapısıyla güvenilir ödeme imkânı sunulur.</p>
                 <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3">
                   {quickCreditPackages.map((amount) => (
                     <Link
@@ -132,7 +132,7 @@ export function OdemeClient() {
               </div>
 
               <div className="mt-6 rounded-[1.15rem] border border-[#c9a6df]/20 bg-[#7c1cff]/10 p-4 text-xs leading-6 text-mourning">
-                <strong className="text-bone">Gumroad notu:</strong> Satın alma işlemi Gumroad üzerinde tamamlanır. Gumroad hesabında veya ödeme ekranında kullandığın e-posta, yorum teslimi ve kredi eşleştirmesi için esas alınır.
+                <strong className="text-bone">Gumroad notu:</strong> Satın alma işlemi, dünya çapında kullanılan dijital ürün platformu Gumroad altyapısıyla tamamlanır. Gumroad hesabında veya ödeme ekranında kullandığın e-posta, yorum teslimi ve kredi eşleştirmesi için esas alınır.
               </div>
 
               <GumroadCheckoutButton

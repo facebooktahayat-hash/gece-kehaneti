@@ -105,6 +105,10 @@ export async function POST(request: Request) {
     const tlPerUsd = Number(process.env.DEPAY_TL_PER_USD || "40");
     const usdAmount = Number(Math.max(1, creditAmount / tlPerUsd).toFixed(2));
     const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://gece-kehaneti.vercel.app";
+    const callbackSecret = process.env.DEPAY_CALLBACK_SECRET || "";
+    const callbackUrl = callbackSecret
+      ? `${siteUrl}/api/depay/callback?secret=${encodeURIComponent(callbackSecret)}`
+      : `${siteUrl}/api/depay/callback`;
 
     const configuration = {
       amount: {
@@ -115,9 +119,13 @@ export async function POST(request: Request) {
         {
           blockchain: process.env.DEPAY_BLOCKCHAIN || DEFAULT_BLOCKCHAIN,
           token: process.env.DEPAY_TOKEN_ADDRESS || DEFAULT_USDC_POLYGON,
-          receiver
+          receiver,
+          amount: usdAmount
         }
       ],
+      whitelist: {
+        polygon: [DEFAULT_USDC_POLYGON.toLowerCase(), DEFAULT_USDC_POLYGON]
+      },
       payload: {
         source: "gece-kehaneti",
         mode: "gece-kredisi",
@@ -127,21 +135,29 @@ export async function POST(request: Request) {
         customerEmail,
         customerName,
         creditAmount,
-        priceTl: creditAmount
+        priceTl: creditAmount,
+        blockchain: process.env.DEPAY_BLOCKCHAIN || DEFAULT_BLOCKCHAIN,
+        token: "USDC"
       },
-      forward_to: `${siteUrl}/panel?odeme=basarili&talep=${encodeURIComponent(orderId)}&kredi=${encodeURIComponent(String(creditAmount))}`
+      secret_id: crypto.randomUUID(),
+      callback: callbackUrl,
+      forward_to: `${siteUrl}/panel?odeme=basarili&talep=${encodeURIComponent(orderId)}&kredi=${encodeURIComponent(String(creditAmount))}`,
+      forward_on_failure: false
     };
 
     const responseBody = JSON.stringify(configuration);
     const signature = signResponse(responseBody);
+    const headers: Record<string, string> = {
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store"
+    };
+    if (signature) {
+      headers["x-signature"] = signature;
+    }
 
     return new Response(responseBody, {
       status: 200,
-      headers: {
-        "Content-Type": "application/json",
-        "x-signature": signature,
-        "Cache-Control": "no-store"
-      }
+      headers
     });
   } catch (error) {
     return NextResponse.json(

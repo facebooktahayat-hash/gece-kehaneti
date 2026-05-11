@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Loader2, WalletCards } from "lucide-react";
-import { depayIntegrationId } from "@/lib/data";
+import { depayEndpointPath, depayIntegrationId } from "@/lib/data";
 
 declare global {
   interface Window {
@@ -14,6 +14,7 @@ declare global {
 
 const DEPAY_WIDGET_SCRIPT_ID = "depay-widget-script";
 const DEPAY_WIDGET_SCRIPT_SRC = "https://integrate.depay.com/widgets/v13.js";
+const POLYGON_USDC_TOKEN = "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174";
 
 type DePayPaymentButtonProps = {
   productSlug?: string;
@@ -59,6 +60,44 @@ function loadDePayWidget() {
   });
 }
 
+async function loadPaymentConfiguration(payload: Record<string, unknown>) {
+  const response = await fetch(depayEndpointPath, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload)
+  });
+
+  const configuration = (await response.json().catch(() => ({}))) as Record<string, unknown>;
+
+  if (!response.ok) {
+    const message = typeof configuration.error === "string" ? configuration.error : "Ödeme konfigürasyonu alınamadı.";
+    throw new Error(message);
+  }
+
+  return configuration;
+}
+
+async function reportWidgetEvent(status: "success" | "failed" | "pending", payload: Record<string, unknown>, eventData?: unknown) {
+  try {
+    await fetch("/api/depay/widget-event", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        status,
+        successful: status === "success",
+        payload,
+        payment: {
+          blockchain: "polygon",
+          token: "USDC"
+        },
+        transaction: eventData || {}
+      })
+    });
+  } catch {
+    // Müşteri akışını bozmamak için bildirim hatası kullanıcıya gösterilmez.
+  }
+}
+
 export function DePayPaymentButton({
   productSlug,
   productName = "Gece Kredisi",
@@ -85,29 +124,73 @@ export function DePayPaymentButton({
         if (!canContinue) return;
       }
 
+      const extraPayload = getPayload ? getPayload() : {};
+      const amount = creditAmount || priceTl || 500;
+      const basePayload = {
+        source: "gece-kehaneti",
+        mode: "gece-kredisi",
+        productSlug,
+        productName,
+        priceTl: priceTl || amount,
+        creditAmount: amount,
+        orderId,
+        customerEmail,
+        customerName,
+        blockchain: "polygon",
+        token: "USDC",
+        ...extraPayload
+      };
+
+      const dynamicConfiguration = await loadPaymentConfiguration(basePayload);
       await loadDePayWidget();
 
       if (!window.DePayWidgets?.Payment) {
         throw new Error("Ödeme penceresi açılamadı.");
       }
 
-      const extraPayload = getPayload ? getPayload() : {};
-      const amount = creditAmount || priceTl || 500;
+      const configurationPayload = dynamicConfiguration.payload && typeof dynamicConfiguration.payload === "object"
+        ? (dynamicConfiguration.payload as Record<string, unknown>)
+        : {};
+      const finalPayload = {
+        ...basePayload,
+        ...configurationPayload
+      };
+      let successReported = false;
+      let failureReported = false;
+
+      const reportSuccessOnce = async (eventData?: unknown) => {
+        if (successReported) return;
+        successReported = true;
+        await reportWidgetEvent("success", finalPayload, eventData);
+      };
+
+      const reportFailureOnce = async (eventData?: unknown) => {
+        if (failureReported || successReported) return;
+        failureReported = true;
+        await reportWidgetEvent("failed", finalPayload, eventData);
+      };
 
       window.DePayWidgets.Payment({
         integration: depayIntegrationId,
+        ...dynamicConfiguration,
+        payload: finalPayload,
+        whitelist: {
+          polygon: [POLYGON_USDC_TOKEN.toLowerCase(), POLYGON_USDC_TOKEN]
+        },
+        currency: "USD",
         title: `Gece Kehaneti — ${amount.toLocaleString("tr-TR")} Gece Kredisi`,
-        payload: {
-          source: "gece-kehaneti",
-          mode: "gece-kredisi",
-          productSlug,
-          productName,
-          priceTl: priceTl || amount,
-          creditAmount: amount,
-          orderId,
-          customerEmail,
-          customerName,
-          ...extraPayload
+        succeeded: async (transaction: unknown) => {
+          await reportSuccessOnce(transaction);
+        },
+        validated: async (successful: unknown) => {
+          if (successful === true) {
+            await reportSuccessOnce({ validated: true });
+          } else if (successful === false) {
+            await reportFailureOnce({ validated: false });
+          }
+        },
+        failed: async (transaction: unknown) => {
+          await reportFailureOnce(transaction);
         },
         style: {
           colors: {

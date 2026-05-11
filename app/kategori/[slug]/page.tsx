@@ -1,13 +1,11 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { categories, getCategory, packagesByCategory } from "@/lib/data";
+import { getCategory, packagesByCategory } from "@/lib/data";
 import { PackageCard } from "@/components/Cards";
 import { Section } from "@/components/Section";
 import { ArrowLeft } from "lucide-react";
 
-export function generateStaticParams() {
-  return categories.map((category) => ({ slug: category.slug }));
-}
+export const dynamic = "force-dynamic";
 
 export default function CategoryPage({ params }: { params: { slug: string } }) {
   const c = getCategory(params.slug);

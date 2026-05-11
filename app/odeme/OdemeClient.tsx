@@ -96,7 +96,7 @@ export function OdemeClient() {
               <div className="mt-8 rounded-[1.35rem] border border-[#c9a6df]/20 bg-black/25 p-5">
                 <h2 className="font-display text-[1.55rem] font-semibold text-bone">Kredi kimin adına alınacak?</h2>
                 <p className="mt-2 text-xs leading-6 text-mourning-dim">
-                  Hesap oluşturmadan da kredi alabilirsin. Ödeme, yazdığın e-posta ve varsa yorum talep numarası ile eşleşir. Panel hesabı kullanacaksan aynı e-posta ile kayıt olman önerilir.
+                  Hesap oluşturmadan da kredi alabilirsin. Ödeme, yazdığın e-posta ve varsa yorum talep numarası ile eşleşir. Satın aldığın fal yorumu, kredi aldığın e-posta adresine gönderilir.
                 </p>
                 <div className="mt-5 grid gap-4 sm:grid-cols-2">
                   <label className="grid gap-2">
@@ -105,7 +105,7 @@ export function OdemeClient() {
                   </label>
                   <label className="grid gap-2">
                     <span className="text-sm text-mourning">E-posta <span className="text-ember">*</span></span>
-                    <input value={customerEmail} onChange={(event) => setCustomerEmail(event.target.value)} className="occult-input" placeholder="ornek@mail.com" type="email" />
+                    <input value={customerEmail} onChange={(event) => setCustomerEmail(event.target.value)} className="occult-input" placeholder="yorumun bu adrese gönderilir" type="email" />
                   </label>
                 </div>
                 {talep && <p className="mt-4 text-xs leading-5 text-mourning-dim">Bu ödeme şu yorum talebine bağlanacak: <span className="font-mono text-bone">{orderId}</span></p>}
@@ -135,8 +135,13 @@ export function OdemeClient() {
 
               <div className="mt-6 grid gap-3 text-sm leading-6 text-mourning">
                 <div className="flex gap-3"><CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#c9a6df]" /> Ödeme tamamlanınca kredi talep no ve e-posta adına işlenir.</div>
+                <div className="flex gap-3"><CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#c9a6df]" /> Satın aldığın fal yorumu bu e-posta adresine gönderilir.</div>
                 <div className="flex gap-3"><CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#c9a6df]" /> Yorum talebin kredi kontrolü sonrası hazırlanma sırasına alınır.</div>
                 <div className="flex gap-3"><CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#c9a6df]" /> Yorumlar eğlence ve sembolik anlatım amaçlıdır.</div>
+              </div>
+
+              <div className="mt-6 rounded-[1.15rem] border border-[#c9a6df]/20 bg-[#7c1cff]/10 p-4 text-xs leading-6 text-mourning">
+                <strong className="text-bone">Ödeme ağı bilgisi:</strong> DePay penceresinde yalnızca <strong className="text-bone">Polygon ağı üzerindeki USDC</strong> kabul edilir. Farklı ağ/token seçmeyin; yetersiz Polygon USDC bakiyesinde işlem başarısız olur.
               </div>
 
               <DePayPaymentButton
@@ -155,7 +160,7 @@ export function OdemeClient() {
               </DePayPaymentButton>
 
               <p className="mt-3 text-xs leading-5 text-mourning-dim">
-                Ödeme penceresi açıldığında tutar, talep no ve e-posta bilgisi ödeme kaydına gönderilir. Hesap oluşturmadan ödeme yapılabilir.
+                Ödeme penceresi açıldığında tutar, talep no ve e-posta bilgisi ödeme kaydına gönderilir. Fal yorumu, kredi satın alınan e-posta adresine iletilir.
               </p>
             </div>
           </aside>

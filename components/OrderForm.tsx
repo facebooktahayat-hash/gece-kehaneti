@@ -94,7 +94,7 @@ export function OrderForm({ item, categoryTitle }: OrderFormProps) {
 
       <div className="grid gap-5 md:grid-cols-2">
         <Field label="Ad Soyad" name="fullName" placeholder="Adınız Soyadınız" required />
-        <Field label="E-posta" name="email" placeholder="ornek@mail.com" type="email" required />
+        <Field label="E-posta" name="email" placeholder="yorumun bu adrese gönderilir" type="email" required />
         <Field label="Telefon" name="phone" placeholder="İsteğe bağlı" />
         <Field label="Doğum tarihi" name="birthDate" placeholder="GG/AA/YYYY" required={needsBirthDate} />
         <Field label="Paket" name="packageName" value={`${item.name} · ${categoryTitle || item.categorySlug}`} readOnly />
@@ -155,7 +155,7 @@ export function OrderForm({ item, categoryTitle }: OrderFormProps) {
               </span>
             </div>
             <p className="mt-3 text-sm leading-7 text-mourning">
-              Bu yorum için gerekli tutar <strong className="text-bone">{formatCredits(item.price)}</strong>. Gece Kredisi yalnızca bu platformdaki eğlence amaçlı sembolik yorum taleplerinde kullanılan site içi kullanım kredisidir.
+              Bu yorum için gerekli tutar <strong className="text-bone">{formatCredits(item.price)}</strong>. Gece Kredisi yalnızca bu platformdaki eğlence amaçlı sembolik yorum taleplerinde kullanılan site içi kullanım kredisidir. Yorumun, kredi satın aldığın e-posta adresine gönderilir.
             </p>
             <div className="mt-4 grid gap-3 md:grid-cols-2">
               <div className="rounded-2xl border border-white/10 bg-black/25 p-3 text-xs leading-6 text-mourning-dim">
@@ -168,11 +168,11 @@ export function OrderForm({ item, categoryTitle }: OrderFormProps) {
                 <div className="mb-1 flex items-center gap-2 font-semibold text-mourning">
                   <Info className="h-4 w-4 text-ember" /> Kısa uyarı
                 </div>
-                Gece Kredisi yatırım aracı, elektronik para değildir.
+                Kredi yükleme adımında yalnızca Polygon ağı üzerindeki USDC kabul edilir; yanlış ağ veya yetersiz bakiye işlem başarısız olur.
               </div>
             </div>
             <p className="mt-3 text-[11px] leading-5 text-mourning-dim">
-              Yorumlar sağlık, hukuk, yatırım, psikoloji veya resmi karar danışmanlığı niteliği taşımaz.
+              Yorumlar sağlık, hukuk, yatırım, psikoloji veya resmi karar danışmanlığı niteliği taşımaz. Form e-postası ile ödeme e-postasını aynı kullanman önerilir.
             </p>
           </div>
         </div>

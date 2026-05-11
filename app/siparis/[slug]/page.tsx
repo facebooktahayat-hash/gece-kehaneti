@@ -1,12 +1,10 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { formatCredits, getCategory, getPackage, packages } from "@/lib/data";
+import { formatCredits, getCategory, getPackage } from "@/lib/data";
 import { OrderForm } from "@/components/OrderForm";
 import { ArrowLeft } from "lucide-react";
 
-export function generateStaticParams() {
-  return packages.map((item) => ({ slug: item.slug }));
-}
+export const dynamic = "force-dynamic";
 
 export default function OrderPage({ params }: { params: { slug: string } }) {
   const item = getPackage(params.slug);

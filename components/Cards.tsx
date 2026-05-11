@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Category, Package } from "@/lib/data";
+import { Category, Package, formatCredits } from "@/lib/data";
 import { ArrowRight, Clock3, Gem, Star } from "lucide-react";
 
 const categoryIconStyles: Record<string, { icon: string; shell: string; glow: string }> = {
@@ -99,7 +99,7 @@ export function PackageCard({ item }: { item: Package }) {
       </div>
       <h3 className={`font-display text-[1.55rem] font-semibold leading-tight text-bone md:text-[1.9rem] ${isLegendary ? "drop-shadow-[0_0_14px_rgba(255,0,184,.32)]" : ""}`}>{item.name}</h3>
       <p className="mt-3 min-h-14 text-sm leading-6 text-mourning">{item.description}</p>
-      <div className={`my-5 font-display text-[1.85rem] font-bold drop-shadow-[0_0_10px_rgba(124,28,255,.25)] md:text-3xl ${isLegendary ? "text-ember" : "text-[#c9a6df]"}`}>{item.price.toLocaleString("tr-TR")} TL</div>
+      <div className={`my-5 font-display text-[1.85rem] font-bold drop-shadow-[0_0_10px_rgba(124,28,255,.25)] md:text-3xl ${isLegendary ? "text-ember" : "text-[#c9a6df]"}`}>{formatCredits(item.price)}</div>
       <div className="mb-5 flex items-center gap-2 text-sm text-mourning">
         <Clock3 className="h-4 w-4 text-[#c9a6df]" /> {item.delivery}
       </div>
@@ -111,7 +111,7 @@ export function PackageCard({ item }: { item: Package }) {
         ))}
       </ul>
       <span className="occult-button mt-auto px-5 py-3 text-center text-sm font-semibold text-bone">
-        <span className="relative z-10">{isLegendary ? "Kehanet Formuna Geç" : "Önce Formu Doldur"}</span>
+        <span className="relative z-10">{isLegendary ? "Gece Kredisi ile Başlat" : "Yorum Talebi Oluştur"}</span>
       </span>
     </>
   );

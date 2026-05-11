@@ -1,4 +1,4 @@
-import { Bitcoin, LockKeyhole, ShieldCheck } from "lucide-react";
+import { LockKeyhole, ShieldCheck } from "lucide-react";
 import type { ReactNode } from "react";
 
 function CompactLogoPill({ children }: { children: ReactNode }) {
@@ -60,27 +60,11 @@ function TroyMark({ small = false }: { small?: boolean }) {
   );
 }
 
-function PaypalMark({ small = false }: { small?: boolean }) {
-  return (
-    <div className="flex items-center gap-1">
-      <span className={`${small ? "text-[20px]" : "text-[24px]"} font-black italic leading-none text-[#003087]`}>P</span>
-      <span className={`${small ? "-ml-2 text-[20px]" : "-ml-2 text-[24px]"} font-black italic leading-none text-[#009CDE]`}>P</span>
-      <span className={`${small ? "ml-0.5 text-[12px]" : "ml-1 text-[14px]"} font-bold text-[#253B80]`}>PayPal</span>
-    </div>
-  );
-}
-
-function StripeMark({ small = false }: { small?: boolean }) {
-  return <span className={`${small ? "text-[18px]" : "text-[24px]"} font-black leading-none tracking-tight text-[#635BFF]`}>stripe</span>;
-}
-
-function BitcoinMark({ small = false }: { small?: boolean }) {
+function CreditMark({ small = false }: { small?: boolean }) {
   return (
     <div className="flex items-center gap-1.5">
-      <span className={`grid ${small ? "h-6 w-6" : "h-7 w-7"} place-items-center rounded-full bg-[#F7931A]`}>
-        <Bitcoin className={`${small ? "h-3.5 w-3.5" : "h-4 w-4"} text-white`} strokeWidth={2.5} />
-      </span>
-      <span className={`${small ? "text-[12px]" : "text-[14px]"} font-bold text-[#222]`}>Bitcoin</span>
+      <span className={`grid ${small ? "h-6 w-6" : "h-7 w-7"} place-items-center rounded-full bg-[#7c1cff] text-white`}>✦</span>
+      <span className={`${small ? "text-[12px]" : "text-[14px]"} font-bold text-[#222]`}>Gece Kredisi</span>
     </div>
   );
 }
@@ -90,9 +74,7 @@ const mobileLogoItems = [
   { key: "amex", node: <AmexMark small /> },
   { key: "visa", node: <VisaMark small /> },
   { key: "troy", node: <TroyMark small /> },
-  { key: "paypal", node: <PaypalMark small /> },
-  { key: "stripe", node: <StripeMark small /> },
-  { key: "bitcoin", node: <BitcoinMark small /> },
+  { key: "credit", node: <CreditMark small /> },
 ];
 
 type PaymentLogosProps = {
@@ -108,8 +90,8 @@ export function PaymentLogos({ compact = false }: PaymentLogosProps) {
             <ShieldCheck className="h-4.5 w-4.5 text-frost" />
           </span>
           <div>
-            <h3 className="font-display text-[12px] font-semibold uppercase tracking-[0.13em] text-bone sm:text-sm sm:tracking-[0.16em]">Güvenli Alışveriş</h3>
-            <p className="mt-0.5 text-[9px] leading-4 text-mourning sm:text-[11px]">Ödeme altyapısı destek logoları.</p>
+            <h3 className="font-display text-[12px] font-semibold uppercase tracking-[0.13em] text-bone sm:text-sm sm:tracking-[0.16em]">Güvenli Kredi Kullanımı</h3>
+            <p className="mt-0.5 text-[9px] leading-4 text-mourning sm:text-[11px]">Site içi Gece Kredisi sistemi.</p>
           </div>
         </div>
 
@@ -133,7 +115,7 @@ export function PaymentLogos({ compact = false }: PaymentLogosProps) {
 
         <div className="mt-2.5 flex flex-wrap items-center gap-2 text-[9px] uppercase tracking-[0.14em] text-mourning-dim sm:mt-3 sm:text-[10px] sm:tracking-[0.16em]">
           <LockKeyhole className="h-3.5 w-3.5 text-ember" />
-          Güvenli ödeme bildirimi
+          1 TL = 1 Gece Kredisi
         </div>
       </div>
     );
@@ -147,25 +129,23 @@ export function PaymentLogos({ compact = false }: PaymentLogosProps) {
             <ShieldCheck className="h-5 w-5 text-frost drop-shadow-[0_0_10px_rgba(0,215,255,.55)]" />
           </span>
           <div>
-            <h3 className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-bone">Güvenli Alışveriş</h3>
-            <p className="mt-1 text-xs leading-5 text-mourning">Desteklenen kart ve ödeme altyapısı logoları.</p>
+            <h3 className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-bone">Güvenli Kredi Kullanımı</h3>
+            <p className="mt-1 text-xs leading-5 text-mourning">Gece Kredisi yalnızca platform içinde geçerlidir.</p>
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
+        <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
           <LogoCard><MastercardMark /></LogoCard>
           <LogoCard><AmexMark /></LogoCard>
           <LogoCard><VisaMark /></LogoCard>
           <LogoCard><TroyMark /></LogoCard>
-          <LogoCard><PaypalMark /></LogoCard>
-          <LogoCard><StripeMark /></LogoCard>
-          <LogoCard><BitcoinMark /></LogoCard>
-          <div className="flex items-center justify-center rounded-2xl border border-dashed border-white/12 bg-white/5 px-4 text-center text-xs leading-5 text-mourning">Güvenli ödeme geçidi entegrasyonuna hazır</div>
+          <LogoCard><CreditMark /></LogoCard>
+          <div className="flex items-center justify-center rounded-2xl border border-dashed border-white/12 bg-white/5 px-4 text-center text-xs leading-5 text-mourning">1 TL = 1 Gece Kredisi</div>
         </div>
 
         <div className="mt-4 flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-mourning-dim">
           <LockKeyhole className="h-3.5 w-3.5 text-ember" />
-          Güvenli ödeme bildirimi
+          Site içi kullanım kredisi
         </div>
       </div>
     </div>

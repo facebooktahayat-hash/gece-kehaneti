@@ -11,7 +11,7 @@ export function Footer() {
             <Moon className="h-7 w-7 text-frost drop-shadow-[0_0_12px_rgba(0,215,255,.7)]" />
             <span className="font-display text-sm font-bold tracking-[0.30em] text-[#c9a6df] drop-shadow-[0_0_12px_rgba(124,28,255,.3)]">GECE KEHANETİ</span>
           </div>
-          <p className="max-w-xl text-sm leading-7 text-mourning">Bu hizmet eğlence, sezgisel yorum ve kişisel farkındalık amaçlıdır. Kesin gelecek garantisi, sağlık, hukuk veya yatırım danışmanlığı sunmaz.</p>
+          <p className="max-w-xl text-sm leading-7 text-mourning">Bu hizmet eğlence, sezgisel yorum ve kişisel farkındalık amaçlıdır. Kesin gelecek garantisi, sağlık, hukuk veya yatırım danışmanlığı sunmaz. Gece Kredisi yalnızca site içinde geçerli kullanım kredisidir; nakde çevrilmez.</p>
         </div>
         <div>
           <h3 className="mb-4 font-display text-sm font-semibold tracking-[0.18em] text-bone">Sayfalar</h3>
@@ -20,7 +20,6 @@ export function Footer() {
             <Link href="/iletisim" className="transition hover:text-bone">İletişim</Link>
             <Link href="/panel" className="transition hover:text-bone">Panelim</Link>
             <Link href="/urun/kehanet" className="transition hover:text-bone">Kehanet</Link>
-            <Link href="/admin" className="transition hover:text-bone">Yönetici Paneli</Link>
           </div>
         </div>
         <div>

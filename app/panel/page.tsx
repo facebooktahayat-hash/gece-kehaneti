@@ -14,7 +14,7 @@ import {
   Sparkles,
   UserPlus,
   UserRound,
-  WalletCards
+  CreditCard
 } from "lucide-react";
 
 type OrderStatus = "Tamamlandı" | "Hazırlanıyor" | "Yeni" | "İncelemede";
@@ -58,7 +58,7 @@ const legacyActiveCustomerKey = "gece-kehaneti-customer";
 const registeredCustomers: PanelCustomer[] = [];
 
 const tabLabels: Record<PanelTab, string> = {
-  orders: "Siparişlerim",
+  orders: "Yorum Taleplerim",
   completed: "Tamamlananlar",
   profile: "Profil"
 };
@@ -70,8 +70,8 @@ const statusStyle: Record<OrderStatus, string> = {
   İncelemede: "border-violet/45 bg-violet/10 text-[#cda6ff] shadow-[0_0_14px_rgba(124,28,255,.12)]"
 };
 
-function formatPrice(price: number) {
-  return new Intl.NumberFormat("tr-TR", { maximumFractionDigits: 0 }).format(price) + " TL";
+function formatCredits(price: number) {
+  return new Intl.NumberFormat("tr-TR", { maximumFractionDigits: 0 }).format(price) + " Gece Kredisi";
 }
 
 function getTodayForPanel() {
@@ -286,7 +286,7 @@ export default function PanelPage() {
                 <p className="eyebrow-rune mb-4">Hoş geldin</p>
                 <h1 className="font-display text-[2.2rem] font-black leading-none text-bone md:text-[4.2rem]">Panelim</h1>
                 <p className="mt-5 max-w-2xl text-sm leading-7 text-mourning md:text-base">
-                  Hesabını oluştur, kullanıcı adı ve parolanla giriş yap, sipariş durumunu ve profil bilgilerini bu ekrandan takip et.
+                  Hesabını oluştur, kullanıcı adı ve parolanla giriş yap, yorum talebi durumunu ve profil bilgilerini bu ekrandan takip et.
                 </p>
               </div>
 
@@ -509,15 +509,15 @@ export default function PanelPage() {
         </div>
 
         <div className="mb-6 grid gap-4 md:grid-cols-3">
-          <StatCard icon={<Sparkles className="h-5 w-5" />} label="Toplam Sipariş" value={String(totals.orderCount)} suffix="" />
+          <StatCard icon={<Sparkles className="h-5 w-5" />} label="Toplam Talep" value={String(totals.orderCount)} suffix="" />
           <StatCard icon={<CheckCircle2 className="h-5 w-5" />} label="Tamamlanan" value={String(totals.completedCount)} suffix="" />
-          <StatCard icon={<WalletCards className="h-5 w-5" />} label="Toplam Harcama" value={formatPrice(totals.totalSpent)} suffix="" />
+          <StatCard icon={<CreditCard className="h-5 w-5" />} label="Kullanılan Kredi" value={formatCredits(totals.totalSpent)} suffix="" />
         </div>
 
         {activeTab === "profile" ? (
           <ProfilePanel customer={activeCustomer} />
         ) : (
-          <OrdersPanel orders={visibleOrders} title={activeTab === "completed" ? "Tamamlanan Siparişler" : "Siparişlerim"} />
+          <OrdersPanel orders={visibleOrders} title={activeTab === "completed" ? "Tamamlanan Yorumlar" : "Yorum Taleplerim"} />
         )}
       </div>
     </section>
@@ -550,9 +550,9 @@ function OrdersPanel({ orders, title }: { orders: CustomerOrder[]; title: string
 
       {orders.length === 0 ? (
         <div className="relative z-10 rounded-[1.1rem] border border-violet/16 bg-black/22 px-5 py-8 text-center">
-          <p className="font-display text-2xl font-black text-bone">Henüz sipariş yok</p>
+          <p className="font-display text-2xl font-black text-bone">Henüz yorum talebi yok</p>
           <p className="mx-auto mt-3 max-w-xl text-sm leading-7 text-mourning">
-            Müşteri yeni kayıt olduysa sipariş geçmişi boş görünür. Ödeme veya sipariş sistemi bağlandığında müşterinin siparişleri bu alana otomatik düşer.
+            Müşteri yeni kayıt olduysa yorum talebi geçmişi boş görünür. Gece Kredisi ve yorum talebi sistemi bağlandığında kayıtlar bu alana otomatik düşer.
           </p>
         </div>
       ) : (
@@ -561,7 +561,7 @@ function OrdersPanel({ orders, title }: { orders: CustomerOrder[]; title: string
             <span>No</span>
             <span>Hizmet</span>
             <span>Tarih</span>
-            <span>Tutar</span>
+            <span>Kredi</span>
             <span className="text-right">Durum</span>
           </div>
 
@@ -574,7 +574,7 @@ function OrdersPanel({ orders, title }: { orders: CustomerOrder[]; title: string
                   {order.readerNote && <p className="mt-2 max-w-xl text-xs leading-5 text-mourning">{order.readerNote}</p>}
                 </div>
                 <div className="text-xs text-mourning">{order.date}</div>
-                <div className="font-semibold text-bone">{formatPrice(order.price)}</div>
+                <div className="font-semibold text-bone">{formatCredits(order.price)}</div>
                 <div className="md:text-right">
                   <span className={`inline-flex rounded-full border px-3 py-1.5 text-[10px] font-black uppercase tracking-[0.12em] ${statusStyle[order.status]}`}>
                     {order.status}
@@ -597,7 +597,7 @@ function ProfilePanel({ customer }: { customer: PanelCustomer }) {
     { icon: <ShieldCheck className="h-4 w-4" />, label: "Üyelik", value: customer.membership },
     { icon: <CalendarDays className="h-4 w-4" />, label: "Kayıt Tarihi", value: customer.joinDate },
     { icon: <Clock3 className="h-4 w-4" />, label: "Son Giriş", value: customer.lastLogin },
-    { icon: <Eye className="h-4 w-4" />, label: "Panel Yetkisi", value: "Kendi siparişlerini görüntüleyebilir" }
+    { icon: <Eye className="h-4 w-4" />, label: "Panel Yetkisi", value: "Kendi yorum taleplerini görüntüleyebilir" }
   ];
 
   return (

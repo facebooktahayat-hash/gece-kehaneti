@@ -111,31 +111,34 @@ export const categories: Category[] = [
 ];
 
 const packageTemplates = [
-  { key: "kisa-yorum", name: "Kısa Yorum", price: 596, delivery: "24 saat", level: "Hızlı başlangıç", description: "Tek konuya odaklı, net ve kısa sezgisel yorum.", includes: ["1 ana soru", "Kısa enerji yorumu", "Net sonuç özeti"] },
-  { key: "derin-yorum", name: "Derin Yorum", price: 1196, delivery: "24-48 saat", level: "En çok seçilen", description: "Konuya daha derin bakan, sembol ve enerji odaklı kapsamlı yorum.", includes: ["3 ana soru", "Detaylı analiz", "Kişisel öneri notları"] },
-  { key: "kabus-gibi-detayli-yorum", name: "Kabus Gibi Detaylı Yorum", price: 1996, delivery: "48 saat", level: "Yoğun analiz", description: "Karanlık detayları, gizli işaretleri ve olası yönleri daha geniş yorumlar.", includes: ["5 ana soru", "Derin sembol okuması", "Geniş sonuç raporu"] },
-  { key: "acil-kehanet", name: "Acil Kehanet", price: 2796, delivery: "Aynı gün", level: "Öncelikli", description: "Acil cevap bekleyen konular için öncelikli hazırlanır.", includes: ["Öncelikli teslim", "Hızlı değerlendirme", "Kişisel sonuç mesajı"] },
-  { key: "premium-rituel-yorum", name: "Premium Ritüel Yorum", price: 3996, delivery: "48-72 saat", level: "Premium", description: "Kapsamlı, katmanlı ve kişiye özel hazırlanmış premium yorum.", includes: ["7 ana soru", "Kapsamlı analiz", "Özel kapanış yorumu", "Premium rapor"] }
+  { key: "kisa-yorum", name: "Kısa Yorum", price: 500, delivery: "24 saat", level: "Hızlı başlangıç", description: "Tek konuya odaklı, net ve kısa sezgisel yorum.", includes: ["1 ana soru", "Kısa enerji yorumu", "Net sonuç özeti"] },
+  { key: "derin-yorum", name: "Derin Yorum", price: 625, delivery: "24-48 saat", level: "En çok seçilen", description: "Konuya daha derin bakan, sembol ve enerji odaklı kapsamlı yorum.", includes: ["3 ana soru", "Detaylı analiz", "Kişisel öneri notları"] },
+  { key: "kabus-gibi-detayli-yorum", name: "Kabus Gibi Detaylı Yorum", price: 781, delivery: "48 saat", level: "Yoğun analiz", description: "Karanlık detayları, gizli işaretleri ve olası yönleri daha geniş yorumlar.", includes: ["5 ana soru", "Derin sembol okuması", "Geniş sonuç raporu"] },
+  { key: "acil-kehanet", name: "Acil Kehanet", price: 977, delivery: "Aynı gün", level: "Öncelikli", description: "Acil cevap bekleyen konular için öncelikli hazırlanır.", includes: ["Öncelikli teslim", "Hızlı değerlendirme", "Kişisel sonuç mesajı"] },
+  { key: "premium-rituel-yorum", name: "Premium Ritüel Yorum", price: 1221, delivery: "48-72 saat", level: "Premium", description: "Kapsamlı, katmanlı ve kişiye özel hazırlanmış premium yorum.", includes: ["7 ana soru", "Kapsamlı analiz", "Özel kapanış yorumu", "Premium rapor"] }
 ];
 
+export const creditUnitLabel = "Gece Kredisi";
+export const creditRateLabel = "1 TL = 1 Gece Kredisi";
 
-export const depayIntegrationId = "7f734e74-bf0d-43b8-bf53-1e1913dc42b5";
+export function formatCredits(amount: number) {
+  return `${amount.toLocaleString("tr-TR")} Gece Kredisi`;
+}
 
-export const depayEndpointPath = "/api/depay/payment";
 
 export const legendaryPackage: Package = {
   slug: "kehanet",
   categorySlug: "gece-kehaneti",
   name: "Kehanet",
-  price: 50000,
-  delivery: "Gece ritüeli sonrası",
+  price: 25000,
+  delivery: "Gece yorumu sonrası",
   level: "En efsane ürün",
   description:
-    "Rüyanızda belirecek kadın ya da erkek, Hintli geleneksel kıyafetli yaşlı bir rehbere; rüyadan uyanana kadar aklınızdaki soruları sorduğunuz en karanlık, en ürkütücü ve en gizemli premium deneyim.",
+    "Rüya rehberi temalı, kurgusal ve sembolik anlatımla hazırlanan en karanlık, en ürkütücü ve en gizemli premium yorum deneyimi.",
   includes: [
-    "Rüya eşiği için özel kehanet hazırlığı",
+    "Rüya eşiği için özel sembolik hazırlık",
     "Geleneksel Hint siluetli yaşlı rehber anlatısı",
-    "Uyanana kadar soru sorma temalı premium yorum",
+    "Soru sorma temalı premium yorum",
     "En gizli, en karanlık kapanış notu"
   ]
 };
@@ -164,7 +167,7 @@ export const trustBadges = [
   { title: "Tam Gizlilik", description: "Bilgilerin yalnızca yorum süreci için saklanır.", icon: LockKeyhole },
   { title: "Hızlı Teslim", description: "24-72 saat aralığında hazırlanır.", icon: Clock3 },
   { title: "Kişiye Özel", description: "Şablon değil, soruna göre özel yorum.", icon: Eye },
-  { title: "Güvenli Ödeme", description: "Güvenli ödeme altyapısına uygun.", icon: ShieldCheck },
+  { title: "Gece Kredisi", description: "1 TL = 1 Gece Kredisi oranıyla site içi kullanım.", icon: ShieldCheck },
   { title: "Premium Deneyim", description: "Karanlık, şık ve ritüel hissi taşıyan sunum.", icon: Gem }
 ];
 
@@ -178,32 +181,4 @@ export function getCategory(slug: string) {
 
 export function packagesByCategory(slug: string) {
   return packages.filter((item) => item.categorySlug === slug);
-}
-
-function seededRange(seed: number, min: number, max: number) {
-  const raw = Math.sin(seed * 9301 + 49297) * 233280;
-  const fraction = raw - Math.floor(raw);
-  return Math.floor(fraction * (max - min + 1)) + min;
-}
-
-function sumSeededRange(count: number, seedOffset: number, min: number, max: number) {
-  let total = 0;
-  for (let index = 1; index <= count; index += 1) {
-    total += seededRange(index + seedOffset, min, max);
-  }
-  return total;
-}
-
-export function dailyStats() {
-  const base = new Date("2026-05-10T00:00:00+03:00").getTime();
-  const now = new Date();
-  const diffDays = Math.max(0, Math.floor((now.getTime() - base) / 86400000));
-  const halfDaySlot = Math.max(0, Math.floor((now.getTime() - base) / 43200000));
-
-  return {
-    readings: 50027 + sumSeededRange(diffDays, 1000, 30, 100),
-    clients: 13124 + sumSeededRange(diffDays, 2000, 10, 50),
-    satisfaction: 98.7,
-    todayDelivered: seededRange(halfDaySlot + 3000, 30, 100)
-  };
 }

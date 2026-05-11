@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { AlertTriangle, Moon, Sparkles, X } from "lucide-react";
 
-const STORAGE_KEY = "gece-kehaneti-global-notice-v1";
+const STORAGE_KEY = "gece-kehaneti-global-notice-v2";
 
 export function GlobalNoticePopup() {
   const [isOpen, setIsOpen] = useState(false);
@@ -84,7 +84,7 @@ export function GlobalNoticePopup() {
           </div>
 
           <p className="mb-2 inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-white/[.04] px-3 py-1 text-[10px] font-semibold uppercase tracking-[.28em] text-frost/80">
-            <Sparkles className="h-3.5 w-3.5" /> Global Ödeme Bilgilendirmesi
+            <Sparkles className="h-3.5 w-3.5" /> Gece Kredisi Bilgilendirmesi
           </p>
 
           <h2
@@ -96,20 +96,20 @@ export function GlobalNoticePopup() {
 
           <div className="mt-4 space-y-3 text-left text-sm leading-6 text-white/74 sm:text-[15px]">
             <p>
-              Gece Kehaneti dünyanın her yerinden sipariş kabul eder. Her yorum için önce sipariş formu doldurulur; ödeme adımı formdan sonra açılır.
+              Gece Kehaneti üzerinde her yorum için önce yorum talep formu doldurulur; gerekli tutar Gece Kredisi olarak gösterilir.
             </p>
             <p>
-              Türkiye’de ikamet eden müşterilerimiz için yasal uyumluluk politikamız gereği fal, büyü ve benzeri spiritüel aktivasyonlarda yalnızca kripto para ödemesi desteklenmektedir.
+              Gece Kredisi yalnızca bu platform içinde eğlence amaçlı sembolik yorum taleplerinde kullanılabilen site içi kullanım kredisidir. 1 TL = 1 Gece Kredisi oranı esas alınır.
             </p>
             <p>
-              Kripto ödeme global ölçekte yaygın kullanılır; Türkiye’de ise bazı kullanıcılar için yeni olabilir. İlk kez işlem yapacaksanız bilen birinden destek alın ve cüzdan/adres bilgilerini dikkatle kontrol edin.
+              Yorumlar kişisel farkındalık ve sembolik anlatım amacı taşır; sağlık, hukuk, yatırım, psikoloji veya resmi karar danışmanlığı değildir.
             </p>
           </div>
 
           <div className="mt-5 rounded-2xl border border-gold/20 bg-gold/10 px-4 py-3 text-left text-xs leading-5 text-gold/80">
             <div className="flex gap-2">
               <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0" />
-              <span>Yanlış ağa veya hatalı adrese yapılan kripto transferleri geri alınamayabilir.</span>
+              <span>Gece Kredisi devredilemez, nakde çevrilemez ve yatırım aracı değildir.</span>
             </div>
           </div>
 

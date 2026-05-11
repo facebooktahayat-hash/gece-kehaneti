@@ -43,7 +43,9 @@ export async function POST(request: Request) {
     const notes = clean(formData.get("notes"));
     const consent = clean(formData.get("consent"));
 
-    if (!fullName || !email || !birthDate || !topic || consent !== "accepted") {
+    const needsBirthDate = item.categorySlug === "astroloji" || item.categorySlug === "numeroloji";
+
+    if (!fullName || !email || (needsBirthDate && !birthDate) || !topic || consent !== "accepted") {
       return NextResponse.json({ error: "Lütfen tüm zorunlu alanları doldurun ve onay kutusunu işaretleyin." }, { status: 400 });
     }
 
@@ -66,33 +68,33 @@ export async function POST(request: Request) {
     }
 
     const attachments = (await Promise.all(files.map(fileToAttachment))).filter(Boolean) as MailAttachment[];
-    const mailSubject = `Yeni Sipariş Formu: ${item.name} — ${orderId}`;
+    const mailSubject = `Yeni Yorum Talebi: ${item.name} — ${orderId}`;
     const text = [
-      "Yeni sipariş formu",
-      `Sipariş No: ${orderId}`,
+      "Yeni yorum talebi",
+      `Talep No: ${orderId}`,
       `Ürün: ${item.name}`,
       `Kategori: ${category?.title || item.categorySlug}`,
-      `Fiyat: ${item.price.toLocaleString("tr-TR")} TL`,
+      `Gerekli Gece Kredisi: ${item.price.toLocaleString("tr-TR")}`,
       `Ad Soyad: ${fullName}`,
       `E-posta: ${email}`,
       `Telefon: ${phone || "-"}`,
-      `Doğum tarihi: ${birthDate}`,
+      `Doğum tarihi: ${birthDate || "-"}`,
       `Ana konu / soru: ${topic}`,
       `Ek not: ${notes || "-"}`,
       `Görsel sayısı: ${attachments.length}`
     ].join("\n");
 
     const html = `
-      <h2>Yeni sipariş formu</h2>
-      <p><strong>Sipariş No:</strong> ${escapeHtml(orderId)}</p>
+      <h2>Yeni yorum talebi</h2>
+      <p><strong>Talep No:</strong> ${escapeHtml(orderId)}</p>
       <p><strong>Ürün:</strong> ${escapeHtml(item.name)}</p>
       <p><strong>Kategori:</strong> ${escapeHtml(category?.title || item.categorySlug)}</p>
-      <p><strong>Fiyat:</strong> ${item.price.toLocaleString("tr-TR")} TL</p>
+      <p><strong>Gerekli Gece Kredisi:</strong> ${item.price.toLocaleString("tr-TR")}</p>
       <hr />
       <p><strong>Ad Soyad:</strong> ${escapeHtml(fullName)}</p>
       <p><strong>E-posta:</strong> ${escapeHtml(email)}</p>
       <p><strong>Telefon:</strong> ${escapeHtml(phone || "-")}</p>
-      <p><strong>Doğum tarihi:</strong> ${escapeHtml(birthDate)}</p>
+      <p><strong>Doğum tarihi:</strong> ${escapeHtml(birthDate || "-")}</p>
       <p><strong>Ana konu / soru:</strong></p>
       <p style="white-space:pre-wrap">${escapeHtml(topic)}</p>
       <p><strong>Ek not:</strong></p>
@@ -113,7 +115,7 @@ export async function POST(request: Request) {
   } catch (error) {
     console.error("Order email error", error);
     return NextResponse.json(
-      { error: "Sipariş formu gönderilemedi. Lütfen daha sonra tekrar deneyin." },
+      { error: "Yorum talebi gönderilemedi. Lütfen daha sonra tekrar deneyin." },
       { status: 500 }
     );
   }

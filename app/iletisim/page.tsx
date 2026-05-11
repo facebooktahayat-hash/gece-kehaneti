@@ -74,7 +74,7 @@ export default function ContactPage() {
               </div>
               <h2 className="font-display text-3xl font-black text-bone">Gece hattı açık</h2>
               <p className="mt-4 text-sm leading-7 text-mourning">
-                Sipariş durumun, özel talebin veya aklında kalan bir işaret varsa mesajını gönder. Karanlığın içinden seçilen yanıt sana döner.
+                Yorum talebin, özel isteğin veya aklında kalan bir işaret varsa mesajını gönder. Karanlığın içinden seçilen yanıt sana döner.
               </p>
 
               <div className="mt-8 grid gap-3">
@@ -111,7 +111,7 @@ export default function ContactPage() {
 
               <label className="block">
                 <span className="mb-2 block text-[10px] font-semibold uppercase tracking-[0.22em] text-mourning">Konu</span>
-                <input name="subject" className="occult-input" placeholder="Sipariş, özel talep veya soru" required />
+                <input name="subject" className="occult-input" placeholder="Yorum talebi, özel istek veya soru" required />
               </label>
 
               <label className="block">

@@ -113,7 +113,7 @@ export default function HomePage() {
         </div>
       </Section>
 
-      <Section eyebrow="Sayılar" title="Gece boyunca açılan kapılar" text="Bu sayılar gece boyunca yenilenen canlı sayaçlardır.">
+      <Section eyebrow="Süreç Güveni" title="Karanlık atmosfer, net sınırlar" text="Gece Kredisi ve yorum süreci sade, kapalı devre ve anlaşılır tutulur.">
         <Stats />
       </Section>
 

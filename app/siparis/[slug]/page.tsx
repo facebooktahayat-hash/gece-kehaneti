@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getCategory, getPackage } from "@/lib/data";
+import { formatCredits, getCategory, getPackage } from "@/lib/data";
 import { OrderForm } from "@/components/OrderForm";
 import { ArrowLeft } from "lucide-react";
 
@@ -16,11 +16,11 @@ export default function OrderPage({ params }: { params: { slug: string } }) {
           <ArrowLeft className="h-4 w-4" /> Pakete dön
         </Link>
         <div className="occult-panel p-7 md:p-10">
-          <p className="eyebrow-rune mb-4">Ödeme öncesi zorunlu form</p>
-          <h1 className="mt-3 font-display text-[2.25rem] font-black text-bone md:text-[3.7rem]">Sipariş Formu</h1>
-          <p className="mt-4 text-mourning">{item.name} · {item.price.toLocaleString("tr-TR")} TL · {c?.title}</p>
+          <p className="eyebrow-rune mb-4">Gece Kredisi ile yorum talebi</p>
+          <h1 className="mt-3 font-display text-[2.25rem] font-black text-bone md:text-[3.7rem]">Yorum Talep Formu</h1>
+          <p className="mt-4 text-mourning">{item.name} · {formatCredits(item.price)} · {c?.title}</p>
           <p className="mt-3 text-sm leading-6 text-mourning-dim">
-            Soruların, kişisel bilgilerin ve varsa kahve falı görsellerin bu formdan alınır. Form gönderilmeden ödeme penceresi açılmaz. Ödeme yalnızca Polygon ağı üzerindeki USDC ile yapılır.
+            Soruların, gerekli kişisel bilgilerin ve varsa kahve falı görsellerin bu formdan alınır. Gece Kredisi yalnızca site içinde kullanılan dijital kullanım kredisidir; nakde çevrilmez ve devredilemez.
           </p>
           <OrderForm item={item} categoryTitle={c?.title} />
         </div>

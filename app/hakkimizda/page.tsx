@@ -2,7 +2,7 @@ import { Eye, Flame, Moon, Sparkles } from "lucide-react";
 
 const secrets = [
   "Her yorum, gece yarısından sonra açıldığı söylenen mühürlü işaret defterine göre hazırlanır.",
-  "Satın aldığınız ürünlerin karanlık son okuması, Hindistan’daki yaşlı üstadın sessiz ritüel hattından geçtiği anlatısıyla sunulur.",
+  "Seçtiğiniz yorum kapısının karanlık son okuması, Hindistan’daki yaşlı üstadın sessiz ritüel hattından geçtiği anlatısıyla sunulur.",
   "Yanıtlar şablon değil; sorunun gölgesi, niyetin ve seçtiğin kapının enerjisiyle şekillenir."
 ];
 
@@ -19,10 +19,10 @@ export default function AboutPage() {
                 Gece Kehaneti, perdenin arkasında kalan işaretleri karanlık ve premium bir yorum diliyle açığa çıkaran gizemli bir fal atölyesidir.
               </p>
               <p className="mt-5 text-base leading-8 text-mourning">
-                Anlatıya göre perdenin öte yanında, Hindistan’da bugün hâlâ yaşadığı fısıldanan efsanevi bir büyücüyle gizli bir irtibat korunur. Siteden aldığınız her ürünün yorumu, onun kadim işaretleri okuyan sessiz süzgecinden geçirilir; kelimeler son şeklini almadan önce geceye, tütsüye ve o eski bakışın gölgesine bırakılır.
+                Anlatıya göre perdenin öte yanında, Hindistan’da bugün hâlâ yaşadığı fısıldanan efsanevi bir büyücüyle gizli bir irtibat korunur. Siteden seçtiğiniz her yorumun anlatısı, onun kadim işaretleri okuyan sessiz süzgecinden geçirilir; kelimeler son şeklini almadan önce geceye, tütsüye ve o eski bakışın gölgesine bırakılır.
               </p>
               <p className="mt-5 text-base leading-8 text-mourning">
-                Bu yüzden burada yapılan her yorum, yalnızca yazılmış bir metin gibi değil; uzak bir odada yankılanan, kime ait olduğu bilinmeyen ağır bir fısıltı gibi hazırlanır. Tarot, kahve falı, aşk yorumu, astroloji, rüya ve ritüel ürünlerinde amaç; sadece cevap vermek değil, müşterinin içinden geçip uzun süre susmayan ürkütücü bir işaret bırakmaktır.
+                Bu yüzden burada yapılan her yorum, yalnızca yazılmış bir metin gibi değil; uzak bir odada yankılanan, kime ait olduğu bilinmeyen ağır bir fısıltı gibi hazırlanır. Tarot, kahve falı, aşk yorumu, astroloji, rüya ve ritüel yorumlarında amaç; sadece cevap vermek değil, müşterinin içinden geçip uzun süre susmayan ürkütücü bir işaret bırakmaktır.
               </p>
             </div>
 

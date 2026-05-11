@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getCategory, getPackage } from "@/lib/data";
+import { creditRateLabel, formatCredits, getCategory, getPackage } from "@/lib/data";
 import { ArrowLeft, ArrowRight, CheckCircle2, Clock3, MessageCircle, ShieldCheck, Sparkles } from "lucide-react";
 
 const defaultSalesCopy = {
@@ -98,8 +98,8 @@ const salesCopyByCategory: Record<string, typeof defaultSalesCopy> = {
 };
 
 const afterOrderSteps = [
-  "Sipariş formunu doldurur, sorunuzu ve gerekli bilgileri gönderirsiniz.",
-  "Kripto ödeme adımını tamamladıktan sonra bilgileriniz yorum için sıraya alınır.",
+  "Yorum talep formunu doldurur, sorunuzu ve gerekli bilgileri gönderirsiniz.",
+  "Gece Kredisi kontrolü sonrası bilgileriniz yorum için sıraya alınır.",
   "Yorumunuz belirtilen teslim süresinde size özel şekilde hazırlanır ve iletilir."
 ];
 
@@ -133,7 +133,7 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
             <p className="mt-6 text-[15px] leading-8 text-mourning md:text-lg">{item.description}</p>
             {isLegendary && (
               <div className="mt-6 rounded-[1.1rem] border border-ember/25 bg-black/30 p-5 text-sm leading-7 text-mourning shadow-[0_0_24px_rgba(255,0,184,.08)]">
-                Bu ürün sitenin en kapalı eşiği olarak tasarlandı: rüya karanlığında beliren geleneksel Hint kıyafetli yaşlı figür, uyanana kadar soruların yankılandığı ürkütücü bir rehber anlatısına dönüşür.
+                Bu ürün sitenin en kapalı eşiği olarak tasarlandı: rüya karanlığında beliren geleneksel Hint kıyafetli yaşlı figür, soruların yankılandığı ürkütücü ve sembolik bir rehber anlatısına dönüşür.
               </div>
             )}
             <div className="mt-8 grid gap-4 sm:grid-cols-2">
@@ -165,21 +165,22 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
                   <h2 className="font-display text-[1.35rem] font-semibold text-bone md:text-[1.55rem]">Örnek yorumdan kısa kesit</h2>
                 </div>
                 <p className="text-sm italic leading-8 text-mourning">“{salesCopy.sample}”</p>
-                <p className="mt-4 text-xs leading-6 text-mourning-dim">Bu metin temsili bir önizlemedir; gerçek yorum sipariş formundaki bilgilerle kişiye özel hazırlanır.</p>
+                <p className="mt-4 text-xs leading-6 text-mourning-dim">Bu metin temsili bir önizlemedir; gerçek yorum talep formundaki bilgilerle kişiye özel hazırlanır.</p>
               </div>
             </div>
           </div>
 
           <aside className="occult-panel h-fit p-5 sm:p-7 lg:sticky lg:top-28">
-            <div className="text-sm text-mourning-dim">Paket fiyatı</div>
-            <div className="mt-2 font-display text-4xl font-black text-ember drop-shadow-[0_0_16px_rgba(255,0,184,.35)] sm:text-5xl">{item.price.toLocaleString("tr-TR")} TL</div>
+            <div className="text-sm text-mourning-dim">Gerekli Gece Kredisi</div>
+            <div className="mt-2 font-display text-4xl font-black text-ember drop-shadow-[0_0_16px_rgba(255,0,184,.35)] sm:text-5xl">{formatCredits(item.price)}</div>
+            <p className="mt-2 text-xs leading-5 text-mourning-dim">{creditRateLabel}</p>
             <Link href={`/siparis/${item.slug}`} className="occult-button mt-7 flex w-full justify-center px-5 py-4 text-center font-semibold text-white">
-              <span className="relative z-10">Önce Sipariş Formu Doldur</span>
+              <span className="relative z-10">Gece Kredisi ile Başlat</span>
             </Link>
-            <p className="mt-3 text-xs leading-5 text-mourning-dim">Tüm ürünlerde ödeme öncesi sipariş formu zorunludur.</p>
+            <p className="mt-3 text-xs leading-5 text-mourning-dim">Tüm ürünlerde yorum talep formu doldurulur; gerekli kredi yalnızca site içinde kullanılır.</p>
 
             <div className="mt-7 rounded-[1.15rem] border border-white/10 bg-black/24 p-4">
-              <h2 className="font-display text-[1.35rem] font-semibold text-bone">Siparişten sonra ne olur?</h2>
+              <h2 className="font-display text-[1.35rem] font-semibold text-bone">Talep sonrası ne olur?</h2>
               <ol className="mt-4 grid gap-3">
                 {afterOrderSteps.map((step, index) => (
                   <li key={step} className="flex gap-3 text-sm leading-6 text-mourning">
@@ -192,12 +193,12 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
 
             <div className="mt-4 rounded-[1.15rem] border border-[#c9a6df]/18 bg-[#7c1cff]/10 p-4">
               <div className="mb-2 flex items-center gap-2 font-display text-[1.15rem] font-semibold text-bone">
-                <ShieldCheck className="h-5 w-5 text-[#c9a6df]" /> Polygon USDC ödeme bilgisi
+                <ShieldCheck className="h-5 w-5 text-[#c9a6df]" /> Gece Kredisi bilgisi
               </div>
-              <p className="text-xs leading-6 text-mourning-dim">Ödeme yalnızca Polygon ağı üzerindeki USDC ile alınır. İlk kez kripto ödeme yapacaksan, işlem sırasında bilen birinden destek alman önerilir.</p>
+              <p className="text-xs leading-6 text-mourning-dim">Gece Kredisi yalnızca bu platformda kullanılan site içi kullanım kredisidir; nakde çevrilmez, devredilmez ve yatırım aracı değildir.</p>
             </div>
 
-            <p className="mt-5 text-xs leading-6 text-mourning-dim">Fal hizmeti eğlence ve kişisel farkındalık amaçlıdır. Kesin sonuç, sağlık, hukuk veya yatırım danışmanlığı sunmaz.</p>
+            <p className="mt-5 text-xs leading-6 text-mourning-dim">Yorumlar eğlence, sembolik anlatım ve kişisel farkındalık amaçlıdır. Kesin gelecek bilgisi, sağlık, hukuk veya yatırım danışmanlığı sunmaz.</p>
           </aside>
         </div>
 
@@ -206,7 +207,7 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
           <h2 className="font-display text-[1.8rem] font-black leading-tight text-bone md:text-[2.55rem]">Bazen cevaplar zaten içimizdedir.</h2>
           <p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-mourning md:text-base">Doğru yorum, sadece o cevabın üzerindeki sis perdesini aralar. Hazırsan, sana özel yorum için ilk adımı at.</p>
           <Link href={`/siparis/${item.slug}`} className="occult-button mt-7 inline-flex w-full justify-center gap-2 px-7 py-4 font-semibold text-white sm:w-auto">
-            <span className="relative z-10 inline-flex items-center gap-2">Sipariş Formuna Geç <ArrowRight className="h-4 w-4" /></span>
+            <span className="relative z-10 inline-flex items-center gap-2">Yorum Talep Formuna Geç <ArrowRight className="h-4 w-4" /></span>
           </Link>
         </div>
       </div>

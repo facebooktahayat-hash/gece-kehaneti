@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { creditRateLabel, formatCredits, getCategory, getPackage } from "@/lib/data";
+import { creditRateLabel, formatCredits, getCategory, getPackage, packages } from "@/lib/data";
 import { ArrowLeft, ArrowRight, CheckCircle2, Clock3, MessageCircle, ShieldCheck, Sparkles } from "lucide-react";
 
 const defaultSalesCopy = {
@@ -102,6 +102,10 @@ const afterOrderSteps = [
   "Gece Kredisi kontrolü sonrası bilgileriniz yorum için sıraya alınır.",
   "Yorumunuz belirtilen teslim süresinde size özel şekilde hazırlanır ve iletilir."
 ];
+
+export function generateStaticParams() {
+  return packages.map((item) => ({ slug: item.slug }));
+}
 
 export default function ProductPage({ params }: { params: { slug: string } }) {
   const item = getPackage(params.slug);

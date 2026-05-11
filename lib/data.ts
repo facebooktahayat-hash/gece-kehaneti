@@ -121,6 +121,10 @@ const packageTemplates = [
 export const creditUnitLabel = "Gece Kredisi";
 export const creditRateLabel = "1 TL = 1 Gece Kredisi";
 
+export const depayIntegrationId = process.env.NEXT_PUBLIC_DEPAY_INTEGRATION_ID || "7f734e74-bf0d-43b8-bf53-1e1913dc42b5";
+export const depayEndpointPath = "/api/depay/payment";
+
+
 export function formatCredits(amount: number) {
   return `${amount.toLocaleString("tr-TR")} Gece Kredisi`;
 }

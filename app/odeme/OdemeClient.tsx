@@ -1,26 +1,16 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { ArrowLeft, CheckCircle2, CreditCard, LockKeyhole, ShieldCheck, Sparkles } from "lucide-react";
 import { creditRateLabel, formatCredits, getPackage, packages } from "@/lib/data";
+import { DePayPaymentButton } from "@/components/DePayPaymentButton";
 
 const quickCreditPackages = [500, 625, 781, 977, 1221, 25000];
 
-function buildGatewayUrl(params: { paket: string; talep: string; kredi: number }) {
-  const baseUrl = process.env.NEXT_PUBLIC_CREDIT_PAYMENT_URL;
-  if (!baseUrl) return "";
-
-  try {
-    const url = new URL(baseUrl);
-    url.searchParams.set("paket", params.paket);
-    url.searchParams.set("talep", params.talep);
-    url.searchParams.set("kredi", String(params.kredi));
-    return url.toString();
-  } catch {
-    return "";
-  }
+function normalizeEmail(value: string) {
+  return value.trim().toLowerCase();
 }
 
 export function OdemeClient() {
@@ -32,11 +22,35 @@ export function OdemeClient() {
   const item = paket ? getPackage(paket) : undefined;
   const requestedCredit = Number(krediParam || item?.price || 500);
   const creditAmount = Number.isFinite(requestedCredit) && requestedCredit > 0 ? Math.round(requestedCredit) : item?.price || 500;
-  const orderId = useMemo(() => talep || `GK-${Date.now()}`, [talep]);
+  const orderId = useMemo(() => talep || `GK-KREDI-${Date.now()}`, [talep]);
   const selectedSlug = item?.slug || "kredi-yukleme";
-  const gatewayUrl = buildGatewayUrl({ paket: selectedSlug, talep: orderId, kredi: creditAmount });
+  const [customerName, setCustomerName] = useState("");
+  const [customerEmail, setCustomerEmail] = useState("");
+  const [formError, setFormError] = useState("");
 
   const backHref = item ? `/siparis/${item.slug}` : "/";
+
+  function validateBeforePayment() {
+    const email = normalizeEmail(customerEmail);
+    if (!email || !email.includes("@") || !email.includes(".")) {
+      setFormError("Kredinin kimin adına yükleneceğini bilmemiz için geçerli bir e-posta yazın.");
+      return false;
+    }
+    setFormError("");
+    return true;
+  }
+
+  function buildPayload() {
+    return {
+      productSlug: selectedSlug,
+      productName: item?.name || "Gece Kredisi",
+      orderId,
+      customerName: customerName.trim(),
+      customerEmail: normalizeEmail(customerEmail),
+      creditAmount,
+      priceTl: creditAmount
+    };
+  }
 
   return (
     <section className="px-4 py-14 md:px-6 md:py-16">
@@ -50,21 +64,21 @@ export function OdemeClient() {
             <div className="relative z-10">
               <p className="eyebrow-rune mb-4">Gece Kredisi Yükleme</p>
               <h1 className="font-display text-[2.25rem] font-black leading-tight text-bone md:text-[3.65rem]">
-                Kredini yükle, fal baktırma kapısını aç.
+                Kredini al, fal baktırma kapısını aç.
               </h1>
               <p className="mt-5 max-w-2xl text-sm leading-7 text-mourning md:text-base">
                 Gece Kredisi yalnızca Gece Kehaneti içinde yorum taleplerinde kullanılan site içi kullanım kredisidir. Oran sabittir: <strong className="text-bone">{creditRateLabel}</strong>.
               </p>
 
               <div className="mt-7 grid gap-4 sm:grid-cols-3">
-                <InfoCard icon={<ShieldCheck className="h-5 w-5" />} title="Site içi" text="Yalnızca yorum taleplerinde kullanılır." />
+                <InfoCard icon={<ShieldCheck className="h-5 w-5" />} title="E-posta adına" text="Kredi talep no ve e-posta ile eşleşir." />
                 <InfoCard icon={<LockKeyhole className="h-5 w-5" />} title="Kapalı kullanım" text="Nakde çevrilmez, devredilmez." />
                 <InfoCard icon={<Sparkles className="h-5 w-5" />} title="Fal baktır" text="Kredinle seçili yorumu başlat." />
               </div>
 
               <div className="mt-8 rounded-[1.35rem] border border-ember/22 bg-ember/8 p-5">
                 <h2 className="font-display text-[1.55rem] font-semibold text-bone">Hazır kredi seçenekleri</h2>
-                <p className="mt-2 text-xs leading-6 text-mourning-dim">Paket bedelleri krediyle gösterilir. İstersen seçili yorum tutarı kadar kredi yükleyebilirsin.</p>
+                <p className="mt-2 text-xs leading-6 text-mourning-dim">Paket bedelleri krediyle gösterilir. İstersen seçili yorum tutarı kadar kredi alabilirsin.</p>
                 <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3">
                   {quickCreditPackages.map((amount) => (
                     <Link
@@ -78,6 +92,25 @@ export function OdemeClient() {
                   ))}
                 </div>
               </div>
+
+              <div className="mt-8 rounded-[1.35rem] border border-[#c9a6df]/20 bg-black/25 p-5">
+                <h2 className="font-display text-[1.55rem] font-semibold text-bone">Kredi kimin adına alınacak?</h2>
+                <p className="mt-2 text-xs leading-6 text-mourning-dim">
+                  Hesap oluşturmadan da kredi alabilirsin. Ödeme, yazdığın e-posta ve varsa yorum talep numarası ile eşleşir. Panel hesabı kullanacaksan aynı e-posta ile kayıt olman önerilir.
+                </p>
+                <div className="mt-5 grid gap-4 sm:grid-cols-2">
+                  <label className="grid gap-2">
+                    <span className="text-sm text-mourning">Ad Soyad</span>
+                    <input value={customerName} onChange={(event) => setCustomerName(event.target.value)} className="occult-input" placeholder="İsteğe bağlı" />
+                  </label>
+                  <label className="grid gap-2">
+                    <span className="text-sm text-mourning">E-posta <span className="text-ember">*</span></span>
+                    <input value={customerEmail} onChange={(event) => setCustomerEmail(event.target.value)} className="occult-input" placeholder="ornek@mail.com" type="email" />
+                  </label>
+                </div>
+                {talep && <p className="mt-4 text-xs leading-5 text-mourning-dim">Bu ödeme şu yorum talebine bağlanacak: <span className="font-mono text-bone">{orderId}</span></p>}
+                {formError && <p className="mt-4 rounded-xl border border-ember/28 bg-ember/10 px-4 py-3 text-sm text-[#ff8bdc]">{formError}</p>}
+              </div>
             </div>
           </div>
 
@@ -86,7 +119,7 @@ export function OdemeClient() {
               <div className="mb-5 grid h-12 w-12 place-items-center rounded-full border border-ember/30 bg-ember/12 text-ember shadow-[0_0_18px_rgba(255,0,184,.18)]">
                 <CreditCard className="h-6 w-6" />
               </div>
-              <p className="text-sm text-mourning-dim">Yüklenecek tutar</p>
+              <p className="text-sm text-mourning-dim">Alınacak kredi</p>
               <div className="mt-2 font-display text-[2.45rem] font-black leading-none text-ember drop-shadow-[0_0_16px_rgba(255,0,184,.35)] sm:text-5xl">
                 {formatCredits(creditAmount)}
               </div>
@@ -101,26 +134,29 @@ export function OdemeClient() {
               )}
 
               <div className="mt-6 grid gap-3 text-sm leading-6 text-mourning">
-                <div className="flex gap-3"><CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#c9a6df]" /> Kredi yüklendikten sonra talebin hazırlanma sırasına alınır.</div>
-                <div className="flex gap-3"><CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#c9a6df]" /> Kullanılmayan krediler kullanım şartlarına göre değerlendirilir.</div>
+                <div className="flex gap-3"><CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#c9a6df]" /> Ödeme tamamlanınca kredi talep no ve e-posta adına işlenir.</div>
+                <div className="flex gap-3"><CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#c9a6df]" /> Yorum talebin kredi kontrolü sonrası hazırlanma sırasına alınır.</div>
                 <div className="flex gap-3"><CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#c9a6df]" /> Yorumlar eğlence ve sembolik anlatım amaçlıdır.</div>
               </div>
 
-              {gatewayUrl ? (
-                <a href={gatewayUrl} className="occult-button mt-7 flex w-full justify-center px-5 py-4 text-center font-semibold text-white">
-                  <span className="relative z-10">Kartla Gece Kredisi Yükle</span>
-                </a>
-              ) : (
-                <Link href="/iletisim" className="occult-button mt-7 flex w-full justify-center px-5 py-4 text-center font-semibold text-white">
-                  <span className="relative z-10">Kredi Yükleme İçin Destek Al</span>
-                </Link>
-              )}
+              <DePayPaymentButton
+                productSlug={selectedSlug}
+                productName={item?.name || "Gece Kredisi"}
+                priceTl={creditAmount}
+                creditAmount={creditAmount}
+                orderId={orderId}
+                customerEmail={normalizeEmail(customerEmail)}
+                customerName={customerName.trim()}
+                validateBeforePayment={validateBeforePayment}
+                getPayload={buildPayload}
+                className="occult-button mt-7 flex w-full justify-center px-5 py-4 text-center font-semibold text-white"
+              >
+                {creditAmount.toLocaleString("tr-TR")} Gece Kredisi Al
+              </DePayPaymentButton>
 
-              {!gatewayUrl && (
-                <p className="mt-3 text-xs leading-5 text-mourning-dim">
-                  Kartlı ödeme sağlayıcısı bağlanınca bu buton doğrudan kredi yükleme ekranına yönlendirilir. Şimdilik destek üzerinden talep alınır.
-                </p>
-              )}
+              <p className="mt-3 text-xs leading-5 text-mourning-dim">
+                Ödeme penceresi açıldığında tutar, talep no ve e-posta bilgisi ödeme kaydına gönderilir. Hesap oluşturmadan ödeme yapılabilir.
+              </p>
             </div>
           </aside>
         </div>

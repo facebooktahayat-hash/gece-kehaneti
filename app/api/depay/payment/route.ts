@@ -6,7 +6,6 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 const DEFAULT_BLOCKCHAIN = "polygon";
-// Polygon USDC.e contract. You can override this in Vercel env with DEPAY_TOKEN_ADDRESS.
 const DEFAULT_USDC_POLYGON = "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174";
 
 type DePayRequestBody = {
@@ -15,12 +14,22 @@ type DePayRequestBody = {
   product?: string;
   productName?: string;
   priceTl?: number;
+  creditAmount?: number;
+  kredi?: number;
+  orderId?: string;
+  customerEmail?: string;
+  customerName?: string;
   payload?: {
     productSlug?: string;
     slug?: string;
     product?: string;
     productName?: string;
     priceTl?: number;
+    creditAmount?: number;
+    kredi?: number;
+    orderId?: string;
+    customerEmail?: string;
+    customerName?: string;
   };
   items?: Array<{
     id?: string | number;
@@ -70,15 +79,23 @@ function readProductSlug(body: DePayRequestBody) {
   );
 }
 
+function readCreditAmount(body: DePayRequestBody) {
+  const raw = body.creditAmount || body.kredi || body.priceTl || body.payload?.creditAmount || body.payload?.kredi || body.payload?.priceTl || body.items?.[0]?.amount;
+  const amount = Number(raw);
+  if (!Number.isFinite(amount) || amount <= 0) return 500;
+  return Math.round(amount);
+}
+
 export async function POST(request: Request) {
   try {
     const body = (await request.json().catch(() => ({}))) as DePayRequestBody;
     const productSlug = readProductSlug(body);
-
-    const item = productSlug ? getPackage(productSlug) : null;
-    if (!item) {
-      return NextResponse.json({ error: "Unknown product." }, { status: 400 });
-    }
+    const item = productSlug ? getPackage(productSlug) : undefined;
+    const creditAmount = item?.price || readCreditAmount(body);
+    const productName = item?.name || body.productName || body.payload?.productName || "Gece Kredisi";
+    const orderId = body.orderId || body.payload?.orderId || `GK-${Date.now()}`;
+    const customerEmail = body.customerEmail || body.payload?.customerEmail || "";
+    const customerName = body.customerName || body.payload?.customerName || "";
 
     const receiver = process.env.DEPAY_RECEIVER_ADDRESS;
     if (!receiver) {
@@ -86,7 +103,8 @@ export async function POST(request: Request) {
     }
 
     const tlPerUsd = Number(process.env.DEPAY_TL_PER_USD || "40");
-    const usdAmount = Number(Math.max(1, item.price / tlPerUsd).toFixed(2));
+    const usdAmount = Number(Math.max(1, creditAmount / tlPerUsd).toFixed(2));
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://gece-kehaneti.vercel.app";
 
     const configuration = {
       amount: {
@@ -101,11 +119,17 @@ export async function POST(request: Request) {
         }
       ],
       payload: {
-        productSlug: item.slug,
-        productName: item.name,
-        priceTl: item.price
+        source: "gece-kehaneti",
+        mode: "gece-kredisi",
+        productSlug: item?.slug || productSlug || "kredi-yukleme",
+        productName,
+        orderId,
+        customerEmail,
+        customerName,
+        creditAmount,
+        priceTl: creditAmount
       },
-      forward_to: `${process.env.NEXT_PUBLIC_SITE_URL || "https://gece-kehaneti.vercel.app"}/panel?odeme=basarili&urun=${encodeURIComponent(item.slug)}`
+      forward_to: `${siteUrl}/panel?odeme=basarili&talep=${encodeURIComponent(orderId)}&kredi=${encodeURIComponent(String(creditAmount))}`
     };
 
     const responseBody = JSON.stringify(configuration);

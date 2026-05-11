@@ -1,113 +1,38 @@
 "use client";
 
 import { useState } from "react";
-import { Bitcoin, Loader2 } from "lucide-react";
-import { depayIntegrationId } from "@/lib/data";
+import { CreditCard, Loader2 } from "lucide-react";
 
-declare global {
-  interface Window {
-    DePayWidgets?: {
-      Payment: (configuration: Record<string, unknown>) => void;
-    };
-  }
-}
-
-const DEPAY_WIDGET_SCRIPT_ID = "depay-widget-script";
-const DEPAY_WIDGET_SCRIPT_SRC = "https://integrate.depay.com/widgets/v13.js";
-
-type DePayPaymentButtonProps = {
-  productSlug: string;
-  productName: string;
-  priceTl: number;
+type LegacyCreditButtonProps = {
+  productSlug?: string;
+  productName?: string;
+  priceTl?: number;
   className?: string;
   children?: React.ReactNode;
   validateBeforePayment?: () => boolean | Promise<boolean>;
   getPayload?: () => Record<string, unknown>;
 };
 
-function loadDePayWidget() {
-  if (typeof window === "undefined") {
-    return Promise.reject(new Error("Tarayıcı ortamı bulunamadı."));
-  }
-
-  if (window.DePayWidgets?.Payment) {
-    return Promise.resolve();
-  }
-
-  const existingScript = document.getElementById(DEPAY_WIDGET_SCRIPT_ID) as HTMLScriptElement | null;
-  if (existingScript) {
-    return new Promise<void>((resolve, reject) => {
-      existingScript.addEventListener("load", () => resolve(), { once: true });
-      existingScript.addEventListener("error", () => reject(new Error("DePay widget yüklenemedi.")), { once: true });
-      if (window.DePayWidgets?.Payment) resolve();
-    });
-  }
-
-  return new Promise<void>((resolve, reject) => {
-    const script = document.createElement("script");
-    script.id = DEPAY_WIDGET_SCRIPT_ID;
-    script.src = DEPAY_WIDGET_SCRIPT_SRC;
-    script.async = true;
-    script.defer = true;
-    script.onload = () => resolve();
-    script.onerror = () => reject(new Error("DePay widget yüklenemedi."));
-    document.body.appendChild(script);
-  });
-}
-
 export function DePayPaymentButton({
-  productSlug,
-  productName,
-  priceTl,
   className = "",
   children,
-  validateBeforePayment,
-  getPayload
-}: DePayPaymentButtonProps) {
+  validateBeforePayment
+}: LegacyCreditButtonProps) {
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
 
-  async function openPayment() {
+  async function startCreditFlow() {
     setLoading(true);
-    setError("");
+    setMessage("");
 
     try {
       if (validateBeforePayment) {
         const canContinue = await validateBeforePayment();
-        if (!canContinue) {
-          return;
-        }
+        if (!canContinue) return;
       }
-
-      await loadDePayWidget();
-
-      if (!window.DePayWidgets?.Payment) {
-        throw new Error("DePay ödeme penceresi açılamadı.");
-      }
-
-      const extraPayload = getPayload ? getPayload() : {};
-
-      window.DePayWidgets.Payment({
-        integration: depayIntegrationId,
-        title: "Gece Kehaneti — Polygon USDC Ödemesi",
-        style: {
-          colors: {
-            primary: "#c71967",
-            text: "#f8eaff",
-            buttonText: "#ffffff",
-            icons: "#d9c4ff"
-          }
-        },
-        payload: {
-          productSlug,
-          productName,
-          priceTl,
-          source: "gece-kehaneti",
-          ...extraPayload
-        }
-      });
-    } catch (paymentError) {
-      setError(paymentError instanceof Error ? paymentError.message : "Ödeme başlatılamadı.");
+      setMessage("Yorum talebin alındı. Gece Kredisi kontrolü sonrası hazırlanma sırasına alınır.");
+    } catch (error) {
+      setMessage(error instanceof Error ? error.message : "Yorum talebi başlatılamadı.");
     } finally {
       setLoading(false);
     }
@@ -115,13 +40,13 @@ export function DePayPaymentButton({
 
   return (
     <div className="grid gap-2">
-      <button type="button" onClick={openPayment} disabled={loading} className={`${className} disabled:cursor-not-allowed disabled:opacity-70`}>
+      <button type="button" onClick={startCreditFlow} disabled={loading} className={`${className} disabled:cursor-not-allowed disabled:opacity-70`}>
         <span className="relative z-10 inline-flex items-center justify-center gap-2">
-          {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Bitcoin className="h-4 w-4" />}
-          {children || "DePay ile Kripto Öde"}
+          {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <CreditCard className="h-4 w-4" />}
+          {children || "Gece Kredisi ile Başlat"}
         </span>
       </button>
-      {error && <p className="text-xs leading-5 text-ember">{error}</p>}
+      {message && <p className="text-xs leading-5 text-mourning">{message}</p>}
     </div>
   );
 }

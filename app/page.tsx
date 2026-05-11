@@ -38,8 +38,8 @@ export default function HomePage() {
               <Link href="#kategoriler" className="occult-button px-10 py-4 text-[12px] font-semibold uppercase tracking-[0.22em] text-white">
                 <span className="relative z-10">Fal Baktır →</span>
               </Link>
-              <Link href="/#kategoriler" className="occult-button-ghost px-10 py-4 text-[12px] font-semibold uppercase tracking-[0.20em] text-mourning">
-                <span className="relative z-10">Karanlık Kategorileri Keşfet</span>
+              <Link href="/odeme" className="occult-button-ghost px-10 py-4 text-[12px] font-semibold uppercase tracking-[0.20em] text-mourning">
+                <span className="relative z-10">Kredi Yükle</span>
               </Link>
             </div>
 
@@ -100,9 +100,9 @@ export default function HomePage() {
       <Section eyebrow="Süreç" title="Nasıl çalışır?" text="Karanlık ama net. Süreç basit; yorum ise sana özel.">
         <div className="grid gap-5 md:grid-cols-3">
           {[
-            ["01", "Kapıyı seç", "Sana yakın olan alanı seç. Tarot, kahve, aşk veya gizli sezgiler."],
-            ["02", "İz bırak", "Formu doldur, enerjini aktar ve istersen görselini ya da sorunu ekle."],
-            ["03", "Mesajı al", "Belirtilen sürede sana özel hazırlanan kehanet yorumunu teslim al."]
+            ["01", "Fal kapısını seç", "Sana yakın olan alanı seç. Tarot, kahve, aşk veya gizli sezgiler."],
+            ["02", "İz bırak", "Formu doldur, enerjini aktar ve Gece Kredisi yükleme adımına geç."],
+            ["03", "Mesajı al", "Kredi kontrolü sonrası sana özel hazırlanan kehanet yorumunu teslim al."]
           ].map(([no, title, text]) => (
             <div key={no} className="occult-card p-7 text-center">
               <div className="mx-auto mb-5 grid h-12 w-12 place-items-center rounded-full border border-ember/22 bg-ember/10 text-ember shadow-[0_0_14px_rgba(255,0,184,.22)]">{no}</div>
@@ -152,9 +152,14 @@ export default function HomePage() {
           <Eye className="mx-auto mb-5 h-12 w-12 text-ember drop-shadow-[0_0_18px_rgba(255,0,184,.35)]" />
           <h2 className="font-display text-[2.35rem] font-black text-bone md:text-[2.85rem]">Perdenin Ardındakini Görmeye Hazır mısın?</h2>
           <p className="mx-auto mt-5 max-w-2xl text-mourning">Sorunu seç, enerjini gönder ve karanlıkta parlayan yorumu bekle.</p>
-          <Link href="#kategoriler" className="occult-button mt-8 gap-2 px-7 py-4 font-semibold text-white">
-            <span className="relative z-10 inline-flex items-center gap-2">Kategorileri Keşfet <ArrowRight className="h-4 w-4" /></span>
-          </Link>
+          <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+            <Link href="#kategoriler" className="occult-button gap-2 px-7 py-4 font-semibold text-white">
+              <span className="relative z-10 inline-flex items-center gap-2">Fal Baktır <ArrowRight className="h-4 w-4" /></span>
+            </Link>
+            <Link href="/odeme" className="occult-button-ghost px-7 py-4 font-semibold text-mourning">
+              <span className="relative z-10">Kredi Yükle</span>
+            </Link>
+          </div>
         </div>
       </section>
     </>

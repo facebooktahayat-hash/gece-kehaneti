@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { CreditCard, Loader2 } from "lucide-react";
 
 type LegacyCreditButtonProps = {
@@ -14,10 +15,13 @@ type LegacyCreditButtonProps = {
 };
 
 export function DePayPaymentButton({
+  productSlug,
+  priceTl,
   className = "",
   children,
   validateBeforePayment
 }: LegacyCreditButtonProps) {
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
@@ -30,7 +34,10 @@ export function DePayPaymentButton({
         const canContinue = await validateBeforePayment();
         if (!canContinue) return;
       }
-      setMessage("Yorum talebin alındı. Gece Kredisi kontrolü sonrası hazırlanma sırasına alınır.");
+      const params = new URLSearchParams();
+      if (productSlug) params.set("paket", productSlug);
+      if (priceTl) params.set("kredi", String(priceTl));
+      router.push(`/odeme${params.toString() ? `?${params.toString()}` : ""}`);
     } catch (error) {
       setMessage(error instanceof Error ? error.message : "Yorum talebi başlatılamadı.");
     } finally {

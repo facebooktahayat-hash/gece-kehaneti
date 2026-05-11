@@ -10,6 +10,7 @@ const nav = [
   { href: "/hakkimizda", label: "Hakkımızda" },
   { href: "/urun/kehanet", label: "Kehanet" },
   { href: "/panel", label: "Panelim" },
+  { href: "/odeme", label: "Kredi Yükle" },
   { href: "/iletisim", label: "İletişim" }
 ];
 
@@ -64,6 +65,14 @@ export function Header() {
                 {item.label}
               </Link>
             ))}
+            <div className="mt-2 grid grid-cols-2 gap-2">
+              <Link href="/#kategoriler" onClick={() => setOpen(false)} className="occult-button px-3 py-3 text-center text-xs font-semibold text-white">
+                <span className="relative z-10">Fal Baktır</span>
+              </Link>
+              <Link href="/odeme" onClick={() => setOpen(false)} className="occult-button-ghost px-3 py-3 text-center text-xs font-semibold text-mourning">
+                <span className="relative z-10">Kredi Yükle</span>
+              </Link>
+            </div>
           </div>
         </div>
       )}

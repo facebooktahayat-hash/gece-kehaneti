@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import { Info, ShieldCheck, UploadCloud, CreditCard } from "lucide-react";
 import { creditRateLabel, formatCredits, type Package } from "@/lib/data";
 
@@ -20,6 +21,7 @@ function createOrderId() {
 }
 
 export function OrderForm({ item, categoryTitle }: OrderFormProps) {
+  const router = useRouter();
   const formRef = useRef<HTMLFormElement>(null);
   const orderIdRef = useRef(createOrderId());
   const sentOrderIdRef = useRef("");
@@ -27,6 +29,15 @@ export function OrderForm({ item, categoryTitle }: OrderFormProps) {
   const [message, setMessage] = useState("");
   const isCoffee = item.categorySlug === "kahve-fali";
   const needsBirthDate = item.categorySlug === "astroloji" || item.categorySlug === "numeroloji";
+
+  function goToCreditPage(orderId: string) {
+    const params = new URLSearchParams({
+      paket: item.slug,
+      talep: orderId,
+      kredi: String(item.price)
+    });
+    router.push(`/odeme?${params.toString()}`);
+  }
 
   async function sendOrderForm() {
     const form = formRef.current;
@@ -40,7 +51,8 @@ export function OrderForm({ item, categoryTitle }: OrderFormProps) {
 
     if (sentOrderIdRef.current) {
       setStatus("sent");
-      setMessage("Yorum talebin daha önce alındı. Gece Kredisi kontrolü sonrası hazırlanma sırasına alınır.");
+      setMessage("Yorum talebin daha önce alındı. Kredi yükleme sayfasına yönlendiriliyorsun...");
+      goToCreditPage(sentOrderIdRef.current);
       return true;
     }
 
@@ -64,7 +76,8 @@ export function OrderForm({ item, categoryTitle }: OrderFormProps) {
 
       sentOrderIdRef.current = payload.orderId || orderIdRef.current;
       setStatus("sent");
-      setMessage("Yorum talebin alındı. Gece Kredisi bakiyesi/kredi yükleme kontrolü sonrası hazırlanma sırasına alınır.");
+      setMessage("Yorum talebin alındı. Kredi yükleme sayfasına yönlendiriliyorsun...");
+      goToCreditPage(sentOrderIdRef.current);
       return true;
     } catch (error) {
       setStatus("error");
@@ -171,7 +184,7 @@ export function OrderForm({ item, categoryTitle }: OrderFormProps) {
         disabled={status === "sending"}
         className="occult-button px-8 py-4 text-center font-semibold text-white disabled:cursor-not-allowed disabled:opacity-70"
       >
-        <span className="relative z-10">{status === "sending" ? "Gönderiliyor..." : "Gece Kredisi ile Talebi Başlat"}</span>
+        <span className="relative z-10">{status === "sending" ? "Gönderiliyor..." : "Formu Gönder ve Kredi Yüklemeye Geç"}</span>
       </button>
 
       {message && (

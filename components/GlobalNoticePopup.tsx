@@ -99,7 +99,7 @@ export function GlobalNoticePopup() {
               Gece Kehaneti üzerinde her yorum için önce yorum talep formu doldurulur; gerekli tutar Gece Kredisi olarak gösterilir.
             </p>
             <p>
-              Gece Kredisi yalnızca bu platform içinde eğlence amaçlı sembolik yorum taleplerinde kullanılabilen site içi kullanım kredisidir. 1 TL = 1 Gece Kredisi oranı esas alınır.
+              Gece Kredisi yalnızca bu platform içinde eğlence amaçlı sembolik yorum taleplerinde kullanılabilen site içi kullanım kredisidir. 1 Gece Kredisi = 0.01 USD oranı esas alınır; kredi paketleri Gumroad üzerinden satın alınır.
             </p>
             <p>
               Yorumlar kişisel farkındalık ve sembolik anlatım amacı taşır; sağlık, hukuk, yatırım, psikoloji veya resmi karar danışmanlığı değildir.
@@ -109,7 +109,7 @@ export function GlobalNoticePopup() {
           <div className="mt-5 rounded-2xl border border-gold/20 bg-gold/10 px-4 py-3 text-left text-xs leading-5 text-gold/80">
             <div className="flex gap-2">
               <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0" />
-              <span>Gece Kredisi devredilemez, nakde çevrilemez ve yatırım aracı değildir.</span>
+              <span>Gece Kredisi devredilemez, nakde çevrilemez ve yatırım aracı değildir. Yorum teslimi, Gumroad satın alma e-postası üzerinden takip edilir.</span>
             </div>
           </div>
 

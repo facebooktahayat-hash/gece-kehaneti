@@ -101,8 +101,8 @@ export default function HomePage() {
         <div className="grid gap-5 md:grid-cols-3">
           {[
             ["01", "Fal kapısını seç", "Sana yakın olan alanı seç. Tarot, kahve, aşk veya gizli sezgiler."],
-            ["02", "İz bırak", "Formu doldur, enerjini aktar ve Gece Kredisi yükleme adımına geç."],
-            ["03", "Mesajı al", "Kredi kontrolü sonrası sana özel hazırlanan kehanet yorumunu teslim al."]
+            ["02", "İz bırak", "Formu doldur, enerjini aktar ve Gumroad kredi satın alma adımına geç."],
+            ["03", "Mesajı al", "Gumroad kredi kontrolü sonrası sana özel hazırlanan yorumu e-postanda teslim al."]
           ].map(([no, title, text]) => (
             <div key={no} className="occult-card p-7 text-center">
               <div className="mx-auto mb-5 grid h-12 w-12 place-items-center rounded-full border border-ember/22 bg-ember/10 text-ember shadow-[0_0_14px_rgba(255,0,184,.22)]">{no}</div>
@@ -113,7 +113,7 @@ export default function HomePage() {
         </div>
       </Section>
 
-      <Section eyebrow="Süreç Güveni" title="Karanlık atmosfer, net sınırlar" text="Gece Kredisi ve yorum süreci sade, kapalı devre ve anlaşılır tutulur.">
+      <Section eyebrow="Süreç Güveni" title="Karanlık atmosfer, net sınırlar" text="Gece Kredisi ve Gumroad ödeme süreci sade, kapalı devre ve anlaşılır tutulur.">
         <Stats />
       </Section>
 

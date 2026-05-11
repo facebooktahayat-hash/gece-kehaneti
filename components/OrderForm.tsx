@@ -31,11 +31,17 @@ export function OrderForm({ item, categoryTitle }: OrderFormProps) {
   const needsBirthDate = item.categorySlug === "astroloji" || item.categorySlug === "numeroloji";
 
   function goToCreditPage(orderId: string) {
+    const form = formRef.current;
+    const formData = form ? new FormData(form) : undefined;
     const params = new URLSearchParams({
       paket: item.slug,
       talep: orderId,
       kredi: String(item.price)
     });
+    const email = String(formData?.get("email") || "").trim();
+    const fullName = String(formData?.get("fullName") || "").trim();
+    if (email) params.set("eposta", email);
+    if (fullName) params.set("isim", fullName);
     router.push(`/odeme?${params.toString()}`);
   }
 
@@ -51,7 +57,7 @@ export function OrderForm({ item, categoryTitle }: OrderFormProps) {
 
     if (sentOrderIdRef.current) {
       setStatus("sent");
-      setMessage("Yorum talebin daha önce alındı. Kredi yükleme sayfasına yönlendiriliyorsun...");
+      setMessage("Yorum talebin daha önce alındı. Gumroad kredi adımına yönlendiriliyorsun...");
       goToCreditPage(sentOrderIdRef.current);
       return true;
     }
@@ -76,7 +82,7 @@ export function OrderForm({ item, categoryTitle }: OrderFormProps) {
 
       sentOrderIdRef.current = payload.orderId || orderIdRef.current;
       setStatus("sent");
-      setMessage("Yorum talebin alındı. Kredi yükleme sayfasına yönlendiriliyorsun...");
+      setMessage("Yorum talebin alındı. Gumroad kredi adımına yönlendiriliyorsun...");
       goToCreditPage(sentOrderIdRef.current);
       return true;
     } catch (error) {
@@ -155,7 +161,7 @@ export function OrderForm({ item, categoryTitle }: OrderFormProps) {
               </span>
             </div>
             <p className="mt-3 text-sm leading-7 text-mourning">
-              Bu yorum için gerekli tutar <strong className="text-bone">{formatCredits(item.price)}</strong>. Gece Kredisi yalnızca bu platformdaki eğlence amaçlı sembolik yorum taleplerinde kullanılan site içi kullanım kredisidir. Yorumun, kredi satın aldığın e-posta adresine gönderilir.
+              Bu yorum için gerekli tutar <strong className="text-bone">{formatCredits(item.price)}</strong>. Gece Kredisi yalnızca bu platformdaki eğlence amaçlı sembolik yorum taleplerinde kullanılan site içi kullanım kredisidir. Kredi satın alma işlemi Gumroad üzerinden yapılır; yorumun, Gumroad satın alma e-postasına gönderilir.
             </p>
             <div className="mt-4 grid gap-3 md:grid-cols-2">
               <div className="rounded-2xl border border-white/10 bg-black/25 p-3 text-xs leading-6 text-mourning-dim">
@@ -168,11 +174,11 @@ export function OrderForm({ item, categoryTitle }: OrderFormProps) {
                 <div className="mb-1 flex items-center gap-2 font-semibold text-mourning">
                   <Info className="h-4 w-4 text-ember" /> Kısa uyarı
                 </div>
-                Kredi yükleme adımında yalnızca Polygon ağı üzerindeki USDC kabul edilir; yanlış ağ veya yetersiz bakiye işlem başarısız olur.
+                Kredi satın alma adımında Gumroad açılır. Form e-postası ile Gumroad ödeme e-postasını aynı kullanman gerekir.
               </div>
             </div>
             <p className="mt-3 text-[11px] leading-5 text-mourning-dim">
-              Yorumlar sağlık, hukuk, yatırım, psikoloji veya resmi karar danışmanlığı niteliği taşımaz. Form e-postası ile ödeme e-postasını aynı kullanman önerilir.
+              Yorumlar sağlık, hukuk, yatırım, psikoloji veya resmi karar danışmanlığı niteliği taşımaz. Form e-postası ile Gumroad ödeme e-postasını aynı kullanman gerekir; yorum bu e-posta adresine gönderilir.
             </p>
           </div>
         </div>
@@ -184,7 +190,7 @@ export function OrderForm({ item, categoryTitle }: OrderFormProps) {
         disabled={status === "sending"}
         className="occult-button px-8 py-4 text-center font-semibold text-white disabled:cursor-not-allowed disabled:opacity-70"
       >
-        <span className="relative z-10">{status === "sending" ? "Gönderiliyor..." : "Formu Gönder ve Kredi Yüklemeye Geç"}</span>
+        <span className="relative z-10">{status === "sending" ? "Gönderiliyor..." : "Formu Gönder ve Gumroad Kredi Adımına Geç"}</span>
       </button>
 
       {message && (

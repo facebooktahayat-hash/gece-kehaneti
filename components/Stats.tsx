@@ -3,12 +3,12 @@ export function Stats() {
     {
       label: "Kredi Kapısı",
       value: "Gece Kredisi",
-      note: "1 TL = 1 kredi"
+      note: "1 kredi = 0.01 USD"
     },
     {
       label: "Yorum Akışı",
       value: "Talep → Kredi",
-      note: "Formdan sonra ödeme"
+      note: "Formdan sonra Gumroad"
     },
     {
       label: "Teslim Aralığı",

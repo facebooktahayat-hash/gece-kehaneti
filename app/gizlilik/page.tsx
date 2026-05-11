@@ -8,8 +8,8 @@ export default function PrivacyPage() {
           <div className="mt-6 space-y-5 text-[16px] leading-8 text-mourning">
             <p>Paylaştığın bilgiler yalnızca yorum talebi, iletişim, teslim ve destek süreçlerinin yürütülmesi için kullanılır.</p>
             <p>Formlarda ad soyad, e-posta, isteğe bağlı telefon, konu/not alanları ve yalnızca gerekli paketlerde görsel veya doğum tarihi bilgisi alınabilir.</p>
-            <p>Gece Kredisi bilgileri yalnızca platform içindeki kullanım takibi için değerlendirilir. Gece Kredisi nakde çevrilemez, devredilemez ve yatırım aracı değildir.</p>
-            <p>Bilgiler, teknik zorunluluklar ve hizmetin yürütülmesi dışında üçüncü taraflarla izinsiz paylaşılmaz. İletişim kanallarımız üzerinden veri güncelleme veya silme talebinde bulunabilirsin.</p>
+            <p>Gece Kredisi bilgileri ve Gumroad satın alma e-postası yalnızca yorum talebi, teslim ve destek eşleştirmesi için değerlendirilir. Gece Kredisi nakde çevrilemez, devredilemez ve yatırım aracı değildir.</p>
+            <p>Bilgiler, teknik zorunluluklar, Gumroad satın alma süreci ve hizmetin yürütülmesi dışında üçüncü taraflarla izinsiz paylaşılmaz. İletişim kanallarımız üzerinden veri güncelleme veya silme talebinde bulunabilirsin.</p>
           </div>
         </div>
       </div>

@@ -4,8 +4,8 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { ArrowLeft, CheckCircle2, CreditCard, LockKeyhole, ShieldCheck, Sparkles } from "lucide-react";
-import { creditRateLabel, formatCredits, getPackage, packages } from "@/lib/data";
-import { DePayPaymentButton } from "@/components/DePayPaymentButton";
+import { creditRateLabel, formatCredits, formatUsdFromCredits, getGumroadCreditLink, getPackage } from "@/lib/data";
+import { GumroadCheckoutButton } from "@/components/GumroadCheckoutButton";
 
 const quickCreditPackages = [500, 625, 781, 977, 1221, 25000];
 
@@ -18,38 +18,28 @@ export function OdemeClient() {
   const paket = searchParams.get("paket") || "";
   const talep = searchParams.get("talep") || "";
   const krediParam = searchParams.get("kredi") || "";
+  const emailParam = searchParams.get("eposta") || "";
+  const nameParam = searchParams.get("isim") || "";
 
   const item = paket ? getPackage(paket) : undefined;
   const requestedCredit = Number(krediParam || item?.price || 500);
   const creditAmount = Number.isFinite(requestedCredit) && requestedCredit > 0 ? Math.round(requestedCredit) : item?.price || 500;
   const orderId = useMemo(() => talep || `GK-KREDI-${Date.now()}`, [talep]);
-  const selectedSlug = item?.slug || "kredi-yukleme";
-  const [customerName, setCustomerName] = useState("");
-  const [customerEmail, setCustomerEmail] = useState("");
+  const [customerName, setCustomerName] = useState(nameParam);
+  const [customerEmail, setCustomerEmail] = useState(emailParam);
   const [formError, setFormError] = useState("");
 
   const backHref = item ? `/siparis/${item.slug}` : "/";
+  const gumroadUrl = getGumroadCreditLink(creditAmount);
 
   function validateBeforePayment() {
     const email = normalizeEmail(customerEmail);
     if (!email || !email.includes("@") || !email.includes(".")) {
-      setFormError("Kredinin kimin adına yükleneceğini bilmemiz için geçerli bir e-posta yazın.");
+      setFormError("Yorumun hangi e-posta adresine gönderileceğini bilmemiz için geçerli bir e-posta yazın.");
       return false;
     }
     setFormError("");
     return true;
-  }
-
-  function buildPayload() {
-    return {
-      productSlug: selectedSlug,
-      productName: item?.name || "Gece Kredisi",
-      orderId,
-      customerName: customerName.trim(),
-      customerEmail: normalizeEmail(customerEmail),
-      creditAmount,
-      priceTl: creditAmount
-    };
   }
 
   return (
@@ -62,32 +52,33 @@ export function OdemeClient() {
         <div className="grid gap-6 lg:grid-cols-[1.08fr_.92fr] lg:items-start">
           <div className="occult-panel p-6 sm:p-8 md:p-10">
             <div className="relative z-10">
-              <p className="eyebrow-rune mb-4">Gece Kredisi Yükleme</p>
+              <p className="eyebrow-rune mb-4">Gece Kredisi Al</p>
               <h1 className="font-display text-[2.25rem] font-black leading-tight text-bone md:text-[3.65rem]">
-                Kredini al, fal baktırma kapısını aç.
+                Kredini Gumroad üzerinden al, fal kapısını aç.
               </h1>
               <p className="mt-5 max-w-2xl text-sm leading-7 text-mourning md:text-base">
-                Gece Kredisi yalnızca Gece Kehaneti içinde yorum taleplerinde kullanılan site içi kullanım kredisidir. Oran sabittir: <strong className="text-bone">{creditRateLabel}</strong>.
+                Gece Kredisi yalnızca Gece Kehaneti içindeki yorum taleplerinde kullanılan site içi kullanım kredisidir. Oran sabittir: <strong className="text-bone">{creditRateLabel}</strong>.
               </p>
 
               <div className="mt-7 grid gap-4 sm:grid-cols-3">
-                <InfoCard icon={<ShieldCheck className="h-5 w-5" />} title="E-posta adına" text="Kredi talep no ve e-posta ile eşleşir." />
+                <InfoCard icon={<ShieldCheck className="h-5 w-5" />} title="E-posta eşleşmesi" text="Gumroad e-postan yorum talebinle eşleşir." />
                 <InfoCard icon={<LockKeyhole className="h-5 w-5" />} title="Kapalı kullanım" text="Nakde çevrilmez, devredilmez." />
                 <InfoCard icon={<Sparkles className="h-5 w-5" />} title="Fal baktır" text="Kredinle seçili yorumu başlat." />
               </div>
 
               <div className="mt-8 rounded-[1.35rem] border border-ember/22 bg-ember/8 p-5">
-                <h2 className="font-display text-[1.55rem] font-semibold text-bone">Hazır kredi seçenekleri</h2>
-                <p className="mt-2 text-xs leading-6 text-mourning-dim">Paket bedelleri krediyle gösterilir. İstersen seçili yorum tutarı kadar kredi alabilirsin.</p>
+                <h2 className="font-display text-[1.55rem] font-semibold text-bone">Hazır Gumroad kredi paketleri</h2>
+                <p className="mt-2 text-xs leading-6 text-mourning-dim">Paketler USD ile açılır. Örnek: 500 Gece Kredisi = 5.00 USD.</p>
                 <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3">
                   {quickCreditPackages.map((amount) => (
                     <Link
                       key={amount}
-                      href={`/odeme?kredi=${amount}`}
+                      href={`/odeme?kredi=${amount}${item ? `&paket=${encodeURIComponent(item.slug)}` : ""}${talep ? `&talep=${encodeURIComponent(talep)}` : ""}${customerEmail ? `&eposta=${encodeURIComponent(customerEmail)}` : ""}`}
                       className={`rounded-2xl border px-3 py-4 text-center transition hover:-translate-y-0.5 hover:border-ember/45 hover:bg-ember/10 ${amount === creditAmount ? "border-ember/50 bg-ember/12 shadow-[0_0_22px_rgba(255,0,184,.10)]" : "border-white/10 bg-black/25"}`}
                     >
                       <div className="font-display text-lg font-bold text-bone sm:text-xl">{amount.toLocaleString("tr-TR")}</div>
                       <div className="mt-1 text-[10px] uppercase tracking-[0.16em] text-mourning-dim">Gece Kredisi</div>
+                      <div className="mt-2 text-xs text-[#d9c4ff]">{formatUsdFromCredits(amount)}</div>
                     </Link>
                   ))}
                 </div>
@@ -96,7 +87,7 @@ export function OdemeClient() {
               <div className="mt-8 rounded-[1.35rem] border border-[#c9a6df]/20 bg-black/25 p-5">
                 <h2 className="font-display text-[1.55rem] font-semibold text-bone">Kredi kimin adına alınacak?</h2>
                 <p className="mt-2 text-xs leading-6 text-mourning-dim">
-                  Hesap oluşturmadan da kredi alabilirsin. Ödeme, yazdığın e-posta ve varsa yorum talep numarası ile eşleşir. Satın aldığın fal yorumu, kredi aldığın e-posta adresine gönderilir.
+                  Hesap oluşturmadan da kredi alabilirsin. Gumroad satın alma e-postası ile yorum talep formundaki e-posta aynı olmalı. Satın aldığın fal yorumu, kredi satın aldığın e-posta adresine gönderilir.
                 </p>
                 <div className="mt-5 grid gap-4 sm:grid-cols-2">
                   <label className="grid gap-2">
@@ -105,10 +96,10 @@ export function OdemeClient() {
                   </label>
                   <label className="grid gap-2">
                     <span className="text-sm text-mourning">E-posta <span className="text-ember">*</span></span>
-                    <input value={customerEmail} onChange={(event) => setCustomerEmail(event.target.value)} className="occult-input" placeholder="yorumun bu adrese gönderilir" type="email" />
+                    <input value={customerEmail} onChange={(event) => setCustomerEmail(event.target.value)} className="occult-input" placeholder="Gumroad'da aynı e-postayı kullan" type="email" />
                   </label>
                 </div>
-                {talep && <p className="mt-4 text-xs leading-5 text-mourning-dim">Bu ödeme şu yorum talebine bağlanacak: <span className="font-mono text-bone">{orderId}</span></p>}
+                {talep && <p className="mt-4 text-xs leading-5 text-mourning-dim">Bu satın alma şu yorum talebine bağlanacak: <span className="font-mono text-bone">{orderId}</span></p>}
                 {formError && <p className="mt-4 rounded-xl border border-ember/28 bg-ember/10 px-4 py-3 text-sm text-[#ff8bdc]">{formError}</p>}
               </div>
             </div>
@@ -123,7 +114,7 @@ export function OdemeClient() {
               <div className="mt-2 font-display text-[2.45rem] font-black leading-none text-ember drop-shadow-[0_0_16px_rgba(255,0,184,.35)] sm:text-5xl">
                 {formatCredits(creditAmount)}
               </div>
-              <p className="mt-2 text-sm text-mourning">Ödenecek tutar: <strong className="text-bone">{creditAmount.toLocaleString("tr-TR")} TL</strong></p>
+              <p className="mt-2 text-sm text-mourning">Gumroad tutarı: <strong className="text-bone">{formatUsdFromCredits(creditAmount)}</strong></p>
 
               {item && (
                 <div className="mt-6 rounded-[1.15rem] border border-white/10 bg-black/25 p-4">
@@ -134,50 +125,29 @@ export function OdemeClient() {
               )}
 
               <div className="mt-6 grid gap-3 text-sm leading-6 text-mourning">
-                <div className="flex gap-3"><CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#c9a6df]" /> Ödeme tamamlanınca kredi talep no ve e-posta adına işlenir.</div>
+                <div className="flex gap-3"><CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#c9a6df]" /> Gumroad ödeme ekranında aynı e-posta adresini kullan.</div>
                 <div className="flex gap-3"><CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#c9a6df]" /> Satın aldığın fal yorumu bu e-posta adresine gönderilir.</div>
                 <div className="flex gap-3"><CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#c9a6df]" /> Yorum talebin kredi kontrolü sonrası hazırlanma sırasına alınır.</div>
                 <div className="flex gap-3"><CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#c9a6df]" /> Yorumlar eğlence ve sembolik anlatım amaçlıdır.</div>
               </div>
 
               <div className="mt-6 rounded-[1.15rem] border border-[#c9a6df]/20 bg-[#7c1cff]/10 p-4 text-xs leading-6 text-mourning">
-                <strong className="text-bone">Ödeme ağı bilgisi:</strong> DePay penceresinde yalnızca <strong className="text-bone">Polygon ağı üzerindeki USDC</strong> kabul edilir. Farklı ağ/token seçmeyin; yetersiz Polygon USDC bakiyesinde işlem başarısız olur.
+                <strong className="text-bone">Gumroad notu:</strong> Satın alma işlemi Gumroad üzerinde tamamlanır. Gumroad hesabında veya ödeme ekranında kullandığın e-posta, yorum teslimi ve kredi eşleştirmesi için esas alınır.
               </div>
 
-              <DePayPaymentButton
-                productSlug={selectedSlug}
-                productName={item?.name || "Gece Kredisi"}
-                priceTl={creditAmount}
-                creditAmount={creditAmount}
-                orderId={orderId}
-                customerEmail={normalizeEmail(customerEmail)}
-                customerName={customerName.trim()}
+              <GumroadCheckoutButton
+                href={gumroadUrl}
                 validateBeforePayment={validateBeforePayment}
-                getPayload={buildPayload}
                 className="occult-button mt-7 flex w-full justify-center px-5 py-4 text-center font-semibold text-white"
               >
-                {creditAmount.toLocaleString("tr-TR")} Gece Kredisi Al
-              </DePayPaymentButton>
+                Gumroad üzerinden {creditAmount.toLocaleString("tr-TR")} Gece Kredisi Al
+              </GumroadCheckoutButton>
 
               <p className="mt-3 text-xs leading-5 text-mourning-dim">
-                Ödeme penceresi açıldığında tutar, talep no ve e-posta bilgisi ödeme kaydına gönderilir. Fal yorumu, kredi satın alınan e-posta adresine iletilir.
+                Gumroad ödeme penceresi yeni sekmede açılır. Satın alma sonrası aynı e-postayla gönderilen yorum talebi kontrol edilir ve yorum bu adrese iletilir.
               </p>
             </div>
           </aside>
-        </div>
-
-        <div className="mt-8 occult-panel p-5 sm:p-7">
-          <div className="relative z-10">
-            <h2 className="font-display text-[1.55rem] font-semibold text-bone">Popüler fal kapıları</h2>
-            <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-              {packages.slice(0, 4).map((pack) => (
-                <Link key={pack.slug} href={`/urun/${pack.slug}`} className="rounded-2xl border border-white/10 bg-black/25 p-4 transition hover:border-ember/35 hover:bg-ember/8">
-                  <div className="font-display text-lg font-semibold text-bone">{pack.name}</div>
-                  <div className="mt-2 text-sm text-ember">{formatCredits(pack.price)}</div>
-                </Link>
-              ))}
-            </div>
-          </div>
         </div>
       </div>
     </section>
@@ -187,9 +157,11 @@ export function OdemeClient() {
 function InfoCard({ icon, title, text }: { icon: React.ReactNode; title: string; text: string }) {
   return (
     <div className="rounded-2xl border border-white/10 bg-black/25 p-4">
-      <div className="mb-3 text-ember">{icon}</div>
-      <div className="font-display text-lg font-semibold text-bone">{title}</div>
-      <p className="mt-1 text-xs leading-5 text-mourning-dim">{text}</p>
+      <div className="mb-3 grid h-10 w-10 place-items-center rounded-full border border-[#c9a6df]/20 bg-[#7c1cff]/12 text-[#d9c4ff]">
+        {icon}
+      </div>
+      <h3 className="font-display text-lg font-semibold text-bone">{title}</h3>
+      <p className="mt-2 text-xs leading-6 text-mourning-dim">{text}</p>
     </div>
   );
 }

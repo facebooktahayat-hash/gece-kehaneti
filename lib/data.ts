@@ -119,10 +119,25 @@ const packageTemplates = [
 ];
 
 export const creditUnitLabel = "Gece Kredisi";
-export const creditRateLabel = "1 TL = 1 Gece Kredisi";
+export const creditRateLabel = "1 Gece Kredisi = 0.01 USD";
+export const creditUsdRate = 0.01;
 
-export const depayIntegrationId = process.env.NEXT_PUBLIC_DEPAY_INTEGRATION_ID || "7f734e74-bf0d-43b8-bf53-1e1913dc42b5";
-export const depayEndpointPath = "/api/depay/payment";
+export const gumroadCreditLinks: Record<number, string> = {
+  500: process.env.NEXT_PUBLIC_GUMROAD_500_URL || "https://gecekehanet.gumroad.com/l/kredi500",
+  625: process.env.NEXT_PUBLIC_GUMROAD_625_URL || "https://gecekehanet.gumroad.com/l/kredi625",
+  781: process.env.NEXT_PUBLIC_GUMROAD_781_URL || "https://gecekehanet.gumroad.com/l/kredi781",
+  977: process.env.NEXT_PUBLIC_GUMROAD_977_URL || "https://gecekehanet.gumroad.com/l/kredi977",
+  1221: process.env.NEXT_PUBLIC_GUMROAD_1221_URL || "https://gecekehanet.gumroad.com/l/kredi1221",
+  25000: process.env.NEXT_PUBLIC_GUMROAD_25000_URL || "https://gecekehanet.gumroad.com/l/kredi25000"
+};
+
+export function getGumroadCreditLink(amount: number) {
+  return gumroadCreditLinks[amount] || gumroadCreditLinks[500];
+}
+
+export function formatUsdFromCredits(amount: number) {
+  return `${(amount * creditUsdRate).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} USD`;
+}
 
 
 export function formatCredits(amount: number) {
@@ -171,7 +186,7 @@ export const trustBadges = [
   { title: "Tam Gizlilik", description: "Bilgilerin yalnızca yorum süreci için saklanır.", icon: LockKeyhole },
   { title: "Hızlı Teslim", description: "24-72 saat aralığında hazırlanır.", icon: Clock3 },
   { title: "Kişiye Özel", description: "Şablon değil, soruna göre özel yorum.", icon: Eye },
-  { title: "Gece Kredisi", description: "1 TL = 1 Gece Kredisi oranıyla site içi kullanım.", icon: ShieldCheck },
+  { title: "Gece Kredisi", description: "1 Gece Kredisi = 0.01 USD oranıyla Gumroad üzerinden alınır.", icon: ShieldCheck },
   { title: "Premium Deneyim", description: "Karanlık, şık ve ritüel hissi taşıyan sunum.", icon: Gem }
 ];
 

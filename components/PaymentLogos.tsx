@@ -91,7 +91,7 @@ export function PaymentLogos({ compact = false }: PaymentLogosProps) {
           </span>
           <div>
             <h3 className="font-display text-[12px] font-semibold uppercase tracking-[0.13em] text-bone sm:text-sm sm:tracking-[0.16em]">Güvenli Kredi Kullanımı</h3>
-            <p className="mt-0.5 text-[9px] leading-4 text-mourning sm:text-[11px]">Site içi Gece Kredisi sistemi.</p>
+            <p className="mt-0.5 text-[9px] leading-4 text-mourning sm:text-[11px]">Gumroad üzerinden Gece Kredisi.</p>
           </div>
         </div>
 
@@ -115,7 +115,7 @@ export function PaymentLogos({ compact = false }: PaymentLogosProps) {
 
         <div className="mt-2.5 flex flex-wrap items-center gap-2 text-[9px] uppercase tracking-[0.14em] text-mourning-dim sm:mt-3 sm:text-[10px] sm:tracking-[0.16em]">
           <LockKeyhole className="h-3.5 w-3.5 text-ember" />
-          1 TL = 1 Gece Kredisi
+          1 Kredi = 0.01 USD
         </div>
       </div>
     );
@@ -130,7 +130,7 @@ export function PaymentLogos({ compact = false }: PaymentLogosProps) {
           </span>
           <div>
             <h3 className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-bone">Güvenli Kredi Kullanımı</h3>
-            <p className="mt-1 text-xs leading-5 text-mourning">Gece Kredisi yalnızca platform içinde geçerlidir.</p>
+            <p className="mt-1 text-xs leading-5 text-mourning">Kredi paketleri Gumroad üzerinden alınır.</p>
           </div>
         </div>
 
@@ -140,12 +140,12 @@ export function PaymentLogos({ compact = false }: PaymentLogosProps) {
           <LogoCard><VisaMark /></LogoCard>
           <LogoCard><TroyMark /></LogoCard>
           <LogoCard><CreditMark /></LogoCard>
-          <div className="flex items-center justify-center rounded-2xl border border-dashed border-white/12 bg-white/5 px-4 text-center text-xs leading-5 text-mourning">1 TL = 1 Gece Kredisi</div>
+          <div className="flex items-center justify-center rounded-2xl border border-dashed border-white/12 bg-white/5 px-4 text-center text-xs leading-5 text-mourning">1 Kredi = 0.01 USD</div>
         </div>
 
         <div className="mt-4 flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-mourning-dim">
           <LockKeyhole className="h-3.5 w-3.5 text-ember" />
-          Site içi kullanım kredisi
+          Gumroad kredi paketi
         </div>
       </div>
     </div>

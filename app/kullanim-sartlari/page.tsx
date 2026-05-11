@@ -8,8 +8,8 @@ export default function TermsPage() {
           <div className="mt-6 space-y-5 text-[16px] leading-8 text-mourning">
             <p>Bu platform eğlence, sembolik anlatım, sezgisel yorum ve kişisel farkındalık amacı taşır. Kesin gelecek bilgisi veya sonuç garantisi vermez.</p>
             <p>Yorumlar sağlık, hukuk, yatırım, psikoloji, resmi karar veya benzeri profesyonel danışmanlık yerine geçmez.</p>
-            <p>Gece Kredisi yalnızca Gece Kehaneti platformundaki yorum taleplerinde kullanılabilen site içi kullanım kredisidir. Devredilemez, nakde çevrilemez, yatırım aracı, elektronik para değildir.</p>
-            <p>Siteyi kullanan herkes bu çerçeveyi, Gece Kredisi kullanım koşullarını ve yorumların eğlence amaçlı olduğunu kabul etmiş sayılır.</p>
+            <p>Gece Kredisi yalnızca Gece Kehaneti platformundaki yorum taleplerinde kullanılabilen site içi kullanım kredisidir. Kredi paketleri Gumroad üzerinden satın alınır; devredilemez, nakde çevrilemez, yatırım aracı veya elektronik para değildir.</p>
+            <p>Siteyi kullanan herkes bu çerçeveyi, Gece Kredisi kullanım koşullarını, Gumroad satın alma e-postası ile yorum talebi e-postasının eşleşeceğini ve yorumların eğlence amaçlı olduğunu kabul etmiş sayılır.</p>
           </div>
         </div>
       </div>

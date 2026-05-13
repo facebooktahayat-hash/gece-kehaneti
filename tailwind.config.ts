@@ -5,28 +5,29 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        abyss: "#020006",
-        night: "#07000d",
-        void: "#000000",
-        ritual: "#12001e",
-        violet: "#7c1cff",
-        frost: "#00d7ff",
-        ember: "#ff00b8",
-        poison: "#b000ff",
-        blood: "#5a0024",
-        gold: "#f7c86b"
+        skywash: "#f8fbff",
+        paper: "#ffffff",
+        skyglow: "#eafaff",
+        studio: "#ecfeff",
+        violet: "#8b5cf6",
+        aqua: "#06b6d4",
+        coral: "#ec4899",
+        mint: "#10b981",
+        rose: "#fb7185",
+        sun: "#f59e0b"
       },
       boxShadow: {
-        cyan: "0 0 24px rgba(0, 215, 255, 0.40)",
-        pink: "0 0 26px rgba(255, 0, 184, 0.42)",
-        ritual: "0 0 80px rgba(130, 0, 220, 0.28)",
-        card: "0 0 34px rgba(255, 0, 184, 0.18)"
+        cyan: "0 20px 60px rgba(6, 182, 212, 0.18)",
+        pink: "0 20px 60px rgba(236, 72, 153, 0.18)",
+        studio: "0 30px 90px rgba(14, 165, 233, 0.18)",
+        card: "0 18px 46px rgba(15, 23, 42, 0.10)"
       },
       fontFamily: {
-        display: ["Georgia", "Times New Roman", "serif"]
+        display: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"]
       },
       backgroundImage: {
-        "page-dark": "radial-gradient(circle at 50% 10%, rgba(70,0,110,.30), transparent 32%), linear-gradient(180deg, #020006 0%, #07000d 48%, #020006 100%)"
+        "page-bright": "radial-gradient(circle at 12% 18%, rgba(6,182,212,.18), transparent 26%), radial-gradient(circle at 86% 10%, rgba(236,72,153,.16), transparent 24%), linear-gradient(180deg, #ffffff 0%, #f8fbff 46%, #eefcff 100%)",
+        "radial-studio": "radial-gradient(circle at 20% 12%, rgba(6,182,212,.18), transparent 26%), radial-gradient(circle at 82% 18%, rgba(236,72,153,.16), transparent 24%), radial-gradient(circle at 50% 72%, rgba(16,185,129,.12), transparent 30%), linear-gradient(180deg, #ffffff 0%, #f8fbff 52%, #ecfeff 100%)"
       }
     }
   },

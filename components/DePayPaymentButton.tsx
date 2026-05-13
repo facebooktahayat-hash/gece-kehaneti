@@ -1,52 +1,23 @@
 "use client";
 
-import { GumroadCheckoutButton } from "@/components/GumroadCheckoutButton";
-import { getGumroadCreditLink } from "@/lib/data";
+import { PaymentCheckoutButton } from "@/components/PaymentCheckoutButton";
+import { buildPaymentCheckoutUrl } from "@/lib/data";
 
-type LegacyDePayPaymentButtonProps = {
-  productSlug?: string;
-  productName?: string;
-  priceTl?: number;
-  creditAmount?: number;
+type DePayPaymentButtonProps = {
+  amount: number;
   orderId?: string;
   customerEmail?: string;
   customerName?: string;
   className?: string;
   children?: React.ReactNode;
-  validateBeforePayment?: () => boolean | Promise<boolean>;
-  getPayload?: () => Record<string, unknown>;
+  validateBeforePayment?: () => Promise<boolean> | boolean;
 };
 
-function buildGumroadFallbackUrl(creditAmount: number, orderId?: string, customerEmail?: string, customerName?: string) {
-  const base = getGumroadCreditLink(creditAmount);
-  const params = new URLSearchParams();
-  if (orderId) params.set("talep", orderId);
-  if (customerEmail) params.set("eposta", customerEmail);
-  if (customerName) params.set("isim", customerName);
-  const query = params.toString();
-  return query ? `${base}?${query}` : base;
+function buildPaymentUrl(amount: number, orderId?: string, customerEmail?: string, customerName?: string) {
+  return buildPaymentCheckoutUrl(amount, { orderId, email: customerEmail, customerName, amount });
 }
 
-export function DePayPaymentButton({
-  priceTl,
-  creditAmount,
-  orderId,
-  customerEmail,
-  customerName,
-  className = "",
-  children,
-  validateBeforePayment
-}: LegacyDePayPaymentButtonProps) {
-  const amount = creditAmount || priceTl || 500;
-  const href = buildGumroadFallbackUrl(amount, orderId, customerEmail, customerName);
-
-  return (
-    <GumroadCheckoutButton
-      href={href}
-      className={className}
-      validateBeforePayment={validateBeforePayment}
-    >
-      {children || `${amount.toLocaleString("tr-TR")} Gece Kredisi Al`}
-    </GumroadCheckoutButton>
-  );
+export function DePayPaymentButton({ amount, orderId, customerEmail, customerName, className = "", children, validateBeforePayment }: DePayPaymentButtonProps) {
+  const href = buildPaymentUrl(amount, orderId, customerEmail, customerName);
+  return <PaymentCheckoutButton href={href} className={className} validateBeforePayment={validateBeforePayment}>{children || `${amount.toLocaleString("tr-TR")} TL Öde`}</PaymentCheckoutButton>;
 }

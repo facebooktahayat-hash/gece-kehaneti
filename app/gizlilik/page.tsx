@@ -1,18 +1,17 @@
+import type { Metadata } from "next";
+import { buildPageMetadata } from "@/lib/seo";
+
+export const metadata: Metadata = buildPageMetadata({ title: "Gizlilik Politikası", description: "VivaMotion AI panelde teslim edilen OpenAI destekli dijital paketler için gizlilik ve veri işleme bilgileri.", path: "/gizlilik" });
+
+const sections = [
+  { title: "1. Toplanan bilgiler", body: ["Üretim dosyası talebi oluştururken ad/rumuz, e-posta, seçilen ürün, brief metni, isteğe bağlı notlar ve isteğe bağlı görseller alınabilir.", "Doğum tarihi, doğum saati, dini inanç, sağlık bilgisi, cinsel hayat, kimlik belgesi veya gereksiz özel nitelikli veri talep edilmez. Kullanıcıdan bu tür bilgileri göndermemesi beklenir."] },
+  { title: "2. Kullanım amacı", body: ["Bilgiler; talep kaydı oluşturmak, ödeme eşleştirmek, OpenAI destekli AI medya paketini üretmek, panelde göstermek ve destek taleplerini yanıtlamak için kullanılır.", "Paketler e-posta gövdesine gönderilmez; satın alma e-postası ve 6 haneli dosya anahtarıyla erişilen Panelim alanında görüntülenir."] },
+  { title: "3. OpenAI kullanımı", body: ["Kullanıcının yazdığı brief ve gerekli bağlam, üretim dosyası üretimi için OpenAI API'ye gönderilebilir. Gönderilen içerik üretim dosyası üretimi amacıyla sınırlı tutulur.", "OpenAI adı yalnızca kullanılan AI altyapısını açıklamak için geçer; VivaMotion AI, OpenAI'nin resmi ürünü, ortağı veya temsilcisi değildir.", "Görseller varsa yalnızca ürün sahnesi ve marka bağlamı için işlenir; kimlik, sağlık, yaş, din, etnik köken veya hassas nitelik çıkarımı amaçlanmaz."] },
+  { title: "4. Saklama", body: ["Sipariş ve panel kayıtları teknik gereklilikler, destek ve kullanıcı erişimi için sınırlı süreyle saklanabilir. Redis/benzeri veri deposu kullanılıyorsa kayıtlar belirlenen süre sonunda silinecek şekilde yapılandırılabilir.", "Kullanıcı destek üzerinden makul silme veya düzeltme taleplerini iletebilir."] },
+  { title: "5. Üçüncü taraflar", body: ["Ödeme işlemleri seçilen ödeme sağlayıcının altyapısı üzerinden yürütülür. Kart bilgileri VivaMotion AI tarafından alınmaz veya saklanmaz.", "E-posta bildirimleri için e-posta servis sağlayıcısı, veri saklama için barındırma/veritabanı sağlayıcısı ve üretim dosyası üretimi için OpenAI kullanılabilir."] },
+  { title: "6. Sınırlar", body: ["VivaMotion AI profesyonel danışmanlık veya sonuç garantisi sunmaz. Kişisel veriler bu amaçlarla işlenmez.", "Kullanıcı, üçüncü kişilere ait özel veya hassas bilgileri izinsiz paylaşmamalıdır."] }
+];
+
 export default function PrivacyPage() {
-  return (
-    <section className="px-4 py-16 md:px-6">
-      <div className="mx-auto max-w-5xl">
-        <div className="occult-panel p-8 md:p-12">
-          <p className="eyebrow-rune mb-4">Korunan alan</p>
-          <h1 className="font-display text-[2.25rem] font-black text-bone md:text-[3.7rem]">Gizlilik Politikası</h1>
-          <div className="mt-6 space-y-5 text-[16px] leading-8 text-mourning">
-            <p>Paylaştığın bilgiler yalnızca yorum talebi, iletişim, teslim ve destek süreçlerinin yürütülmesi için kullanılır.</p>
-            <p>Formlarda ad soyad, e-posta, isteğe bağlı telefon, konu/not alanları ve yalnızca gerekli paketlerde görsel veya doğum tarihi bilgisi alınabilir.</p>
-            <p>Gece Kredisi bilgileri ve Gumroad satın alma e-postası yalnızca yorum talebi, teslim ve destek eşleştirmesi için değerlendirilir. Gece Kredisi nakde çevrilemez, devredilemez ve yatırım aracı değildir.</p>
-            <p>Bilgiler, teknik zorunluluklar, Gumroad satın alma süreci ve hizmetin yürütülmesi dışında üçüncü taraflarla izinsiz paylaşılmaz. İletişim kanallarımız üzerinden veri güncelleme veya silme talebinde bulunabilirsin.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
+  return <section className="px-4 py-16 md:px-6"><div className="mx-auto max-w-5xl"><div className="studio-panel p-6 md:p-10 lg:p-12"><p className="eyebrow-chip mb-4">Gizlilik</p><h1 className="font-display text-[2.25rem] font-black text-ink md:text-[3.7rem]">Gizlilik Politikası</h1><p className="mt-5 max-w-3xl text-sm leading-7 text-soft md:text-base">Bu politika; VivaMotion AI’nde OpenAI destekli AI medya üretim paketi talebi, ödeme eşleştirme ve panel teslim sürecinde işlenen verileri açıklar.</p><div className="mt-8 space-y-7 text-[15px] leading-8 text-soft md:text-[16px]">{sections.map((section) => <section key={section.title} className="rounded-[1.3rem] border border-cyan-100 bg-white/70 p-5 md:p-6"><h2 className="font-display text-[1.45rem] font-bold text-ink md:text-[1.75rem]">{section.title}</h2><div className="mt-4 space-y-4">{section.body.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}</div></section>)}</div></div></div></section>;
 }

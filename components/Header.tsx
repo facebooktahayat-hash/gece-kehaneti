@@ -2,77 +2,41 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { Menu, X, Moon } from "lucide-react";
+import { Menu, Sparkles, X } from "lucide-react";
 
 const nav = [
   { href: "/", label: "Ana Sayfa" },
-  { href: "/#kategoriler", label: "Kategoriler" },
+  { href: "/paketler", label: "Paketler" },
+  { href: "/ai-medya-uretimi", label: "AI Medya" },
   { href: "/hakkimizda", label: "Hakkımızda" },
-  { href: "/urun/kehanet", label: "Kehanet" },
+  { href: "/urun/ultimate-ai-kampanya", label: "Premium" },
   { href: "/panel", label: "Panelim" },
-  { href: "/odeme", label: "Kredi Yükle" },
   { href: "/iletisim", label: "İletişim" }
 ];
 
 export function Header() {
   const [open, setOpen] = useState(false);
-
   return (
-    <header className="sticky top-0 z-50 border-b border-white/[0.05] bg-black/88 backdrop-blur-xl">
+    <header className="sticky top-0 z-50 border-b border-sky-100/80 bg-white/86 backdrop-blur-xl">
       <div className="mx-auto flex h-[68px] max-w-7xl items-center justify-between px-4 md:h-[76px] md:px-6">
         <Link href="/" className="group flex items-center gap-3">
-          <span className="relative grid h-10 w-10 place-items-center overflow-hidden rounded-full border border-frost/20 bg-[#0a0118] shadow-[0_0_20px_rgba(255,0,184,.18),0_0_34px_rgba(136,32,255,.22)] transition duration-300 group-hover:shadow-[0_0_28px_rgba(255,0,184,.28),0_0_46px_rgba(136,32,255,.28)] md:h-12 md:w-12">
-            <span className="absolute inset-[2px] rounded-full bg-[radial-gradient(circle_at_34%_30%,rgba(255,0,184,.28),transparent_30%),radial-gradient(circle_at_62%_60%,rgba(168,61,255,.30),transparent_44%),radial-gradient(circle_at_50%_52%,rgba(255,0,184,.10),transparent_52%),linear-gradient(180deg,rgba(34,4,52,.98),rgba(11,0,24,.98))]" />
-            <span className="absolute inset-0 rounded-full bg-ember/14 blur-[12px]" />
-            <span className="absolute left-[7px] top-[8px] h-4 w-4 rounded-full bg-ember/30 blur-[8px] md:left-[9px] md:top-[10px] md:h-5 md:w-5" />
-            <Moon className="relative z-10 h-6 w-6 text-frost drop-shadow-[0_0_12px_rgba(0,215,255,.92)] md:h-7 md:w-7" strokeWidth={2.2} />
+          <span className="relative grid h-10 w-10 place-items-center overflow-hidden rounded-full border border-cyan-200 bg-white shadow-[0_12px_34px_rgba(14,165,233,.20)] transition duration-300 group-hover:scale-105 md:h-12 md:w-12">
+            <span className="absolute inset-[2px] rounded-full bg-[radial-gradient(circle_at_30%_25%,rgba(255,96,165,.38),transparent_30%),radial-gradient(circle_at_72%_68%,rgba(45,212,191,.42),transparent_42%),linear-gradient(135deg,#ffffff,#eafaff)]" />
+            <Sparkles className="relative z-10 h-6 w-6 text-cyan-600 drop-shadow-[0_0_10px_rgba(14,165,233,.45)] md:h-7 md:w-7" strokeWidth={2.2} />
           </span>
-
-          <span className="block font-display text-[14px] font-black tracking-[0.22em] text-ember drop-shadow-[0_0_16px_rgba(255,0,184,.68)] md:text-[17px] md:tracking-[0.30em]">
-            GECE KEHANETİ
-          </span>
+          <span className="block font-display text-[14px] font-black tracking-[0.16em] text-slate-950 md:text-[17px] md:tracking-[0.22em]">VIVAMOTION AI</span>
         </Link>
-
         <nav className="hidden items-center gap-5 md:flex lg:gap-7">
-          {nav.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="relative text-[14px] text-mourning transition duration-200 hover:text-bone hover:drop-shadow-[0_0_14px_rgba(255,0,184,.45)] after:absolute after:-bottom-[10px] after:left-0 after:h-px after:w-0 after:bg-gradient-to-r after:from-frost/60 after:to-ember after:transition-all hover:after:w-full"
-            >
-              {item.label}
-            </Link>
-          ))}
-          <Link href="/#kategoriler" className="occult-button px-7 py-3 text-[14px] font-semibold text-white/92">
-            <span className="relative z-10 animate-occult-flicker">FAL BAKTIR</span>
-          </Link>
+          {nav.map((item) => <Link key={item.href} href={item.href} className="relative text-[14px] font-medium text-slate-600 transition duration-200 hover:text-cyan-700 after:absolute after:-bottom-[10px] after:left-0 after:h-px after:w-0 after:bg-gradient-to-r after:from-cyan-400 after:to-pink-400 after:transition-all hover:after:w-full">{item.label}</Link>)}
+          <Link href="/paketler" className="studio-button px-7 py-3 text-[14px] font-semibold text-white"><span className="relative z-10">ÜRETİME BAŞLA</span></Link>
         </nav>
-
-        <button
-          aria-label="Mobil menüyü aç"
-          onClick={() => setOpen((value) => !value)}
-          className="grid h-10 w-10 place-items-center rounded-xl border border-ember/18 bg-white/[0.035] text-ember shadow-[0_0_18px_rgba(255,0,184,.12)] md:hidden"
-        >
-          {open ? <X /> : <Menu />}
-        </button>
+        <button aria-label="Mobil menüyü aç" onClick={() => setOpen((value) => !value)} className="grid h-10 w-10 place-items-center rounded-xl border border-cyan-200 bg-white text-cyan-700 shadow-sm md:hidden">{open ? <X /> : <Menu />}</button>
       </div>
-
       {open && (
-        <div className="border-t border-white/10 bg-black/96 px-4 py-4 md:hidden">
+        <div className="border-t border-sky-100 bg-white/96 px-4 py-4 md:hidden">
           <div className="grid gap-2">
-            {nav.map((item) => (
-              <Link key={item.href} href={item.href} onClick={() => setOpen(false)} className="occult-panel px-4 py-3 text-white/82">
-                {item.label}
-              </Link>
-            ))}
-            <div className="mt-2 grid grid-cols-2 gap-2">
-              <Link href="/#kategoriler" onClick={() => setOpen(false)} className="occult-button px-3 py-3 text-center text-xs font-semibold text-white">
-                <span className="relative z-10">Fal Baktır</span>
-              </Link>
-              <Link href="/odeme" onClick={() => setOpen(false)} className="occult-button-ghost px-3 py-3 text-center text-xs font-semibold text-mourning">
-                <span className="relative z-10">Kredi Yükle</span>
-              </Link>
-            </div>
+            {nav.map((item) => <Link key={item.href} href={item.href} onClick={() => setOpen(false)} className="studio-panel px-4 py-3 text-slate-700">{item.label}</Link>)}
+            <Link href="/paketler" onClick={() => setOpen(false)} className="studio-button px-4 py-3 text-center text-white"><span className="relative z-10">Üretime Başla</span></Link>
           </div>
         </div>
       )}

@@ -8,15 +8,16 @@ type SendMailInput = {
   subject: string;
   text: string;
   html: string;
+  from?: string;
   replyTo?: string;
   attachments?: MailAttachment[];
 };
 
 const RESEND_ENDPOINT = "https://api.resend.com/emails";
 
-export async function sendMail({ to, subject, text, html, replyTo, attachments = [] }: SendMailInput) {
+export async function sendMail({ to, subject, text, html, from: explicitFrom, replyTo, attachments = [] }: SendMailInput) {
   const apiKey = process.env.RESEND_API_KEY;
-  const from = process.env.CONTACT_FROM_EMAIL || "Gece Kehaneti <onboarding@resend.dev>";
+  const from = explicitFrom || process.env.CONTACT_FROM_EMAIL || "VivaMotion AI <onboarding@resend.dev>";
 
   if (!apiKey) {
     throw new Error("RESEND_API_KEY environment variable is missing.");

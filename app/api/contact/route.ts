@@ -4,7 +4,7 @@ import { escapeHtml, sendMail } from "@/lib/mail";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-const TO_EMAIL = process.env.CONTACT_TO_EMAIL || "gecekehaneti@gmail.com";
+const TO_EMAIL = process.env.CONTACT_TO_EMAIL || "destek@example.com";
 
 function clean(value: unknown) {
   return typeof value === "string" ? value.trim() : "";
@@ -26,7 +26,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Geçerli bir e-posta adresi girin." }, { status: 400 });
     }
 
-    const mailSubject = `Gece Kehaneti İletişim: ${subject}`;
+    const mailSubject = `VivaMotion AI İletişim: ${subject}`;
     const text = [
       "Yeni iletişim mesajı",
       `Ad Soyad: ${fullName}`,
